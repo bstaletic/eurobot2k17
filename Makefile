@@ -34,6 +34,6 @@ dodoc:
 	doxygen $(DOXYFILE)
 
 clean:
-	rm -rf main.* generated.*.ld main.map
+	rm -rf main.{o,elf,bin,} generated.*.ld main.map
 
 .PHONY: clean dodoc flash
