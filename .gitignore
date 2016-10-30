@@ -34,3 +34,6 @@
 
 # Embedded devices' map files
 *.map
+
+# Vim swapfiles
+*.sw?
