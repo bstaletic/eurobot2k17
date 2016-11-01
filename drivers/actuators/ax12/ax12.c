@@ -86,7 +86,8 @@ void factory_reset(int8_t id)
 
 void set_baudrate(int8_t id, int32_t baudrate)
 {
-	int8_t out_data[8], checksum = ~(id + BAUDRATE_LENGTH + WRITE_DATA + BAUDRATE + ((2000000/baudrate)-1));
+	int8_t out_data[8], checksum = ~(id + BAUDRATE_LENGTH + WRITE_DATA
+				+ BAUDRATE + ((2000000/baudrate)-1));
 
 	out_data[0] = out_data[1] = START;
 	out_data[2] = id;
@@ -113,5 +114,26 @@ void set_id(int8_t id, int8_t new_id)
 	out_data[7] = checksum;
 
 	for (int8_t i = 0; int8_t i < 8; ++int8_t i)
+		usart_send_blocking(AX12, out_data[i]);
+}
+
+void set_angle_limit(int8_t id, int16_t cw_limit, int16_t ccw_limit)
+{
+	int8_t out_data[11], checksum = ~(id + AL_LENGTH + WRITE_DATA
+		       		+ ANGLE_LIMIT + cw_limit&0xff + ccw_limit>>8
+				+ ccw_limit&0xff + ccw_limit>>8);
+
+	out_data[0]  = out_data[1] = START;
+	out_data[2]  = id;
+	out_data[3]  = AL_LENGTH;
+	out_data[4]  = WRITE_DATA;
+	out_data[5]  = ANGLE_LIMIT;
+	out_data[6]  = cw_limit&0xff;
+	out_data[7]  = cw_limit>>8;
+	out_data[8]  = ccw_limit&0xff;
+	out_data[9]  = ccw_limit>>8;
+	out_data[10] = checksum;
+
+	for (int8_t i = 0; int8_t i < 11; ++int8_t i)
 		usart_send_blocking(AX12, out_data[i]);
 }

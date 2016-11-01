@@ -27,5 +27,6 @@ void set_speed(int8_t id, int16_t speed);
 void factory_reset(int8_t id);
 void set_id(int8_t id, int8_t new_id);
 void set_baudrate(int8_t id, int32_t baudrate);
+void set_angle_limit(int8_t id, int16_t cw_limit, int16_t ccw_limit);
 
 #endif /* ifndef AX12_DRIVER */
