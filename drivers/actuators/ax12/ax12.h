@@ -12,12 +12,14 @@
 #define ID_LENGTH 4
 #define RESET_LENGTH 2
 #define BAUDRATE_LENGTH 4
+#define AL_LENGTH 7
 
 #define START 255
 #define GOAL_POSITION_L 30
 #define RESET 6
 #define ID 3
 #define BAUDRATE 4
+#define ANGLE_LIMIT 6
 
 #define WRITE_DATA 3
 
