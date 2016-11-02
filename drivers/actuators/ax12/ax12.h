@@ -2,6 +2,7 @@
 #define AX12_DRIVER
 
 #include <libopencm3/stm32/usart.h>
+#include <stdint.h>
 
 #define AX12 UART4
 
@@ -20,15 +21,16 @@
 #define ID 3
 #define BAUDRATE 4
 #define ANGLE_LIMIT 6
+#define GOAL_SPEED_L 32
 
 #define WRITE_DATA 3
 
-void move(int8_t id, int16_t position);
-void move_speed(int8_t id, int16_t position, int16_t speed);
-void set_speed(int8_t id, int16_t speed);
-void factory_reset(int8_t id);
-void set_id(int8_t id, int8_t new_id);
-void set_baudrate(int8_t id, int32_t baudrate);
-void set_angle_limit(int8_t id, int16_t cw_limit, int16_t ccw_limit);
+void move(uint8_t id, uint16_t position);
+void move_speed(uint8_t id, uint16_t position, uint16_t speed);
+void set_speed(uint8_t id, uint16_t speed);
+void factory_reset(uint8_t id);
+void set_id(uint8_t id, uint8_t new_id);
+void set_baudrate(uint8_t id, uint32_t baudrate);
+void set_angle_limit(uint8_t id, uint16_t cw_limit, uint16_t ccw_limit);
 
 #endif /* ifndef AX12_DRIVER */
