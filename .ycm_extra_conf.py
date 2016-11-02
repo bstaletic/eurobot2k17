@@ -41,7 +41,13 @@ flags = [
     '-Wextra',
     '-std=c99',
     '-I',
-    'libopencm3/include/'
+    'libopencm3/include/',
+    '-isystem',
+    '/usr/lib/gcc/arm-none-eabi/6.2.0/include',
+    '-isystem',
+    '/usr/lib/gcc/arm-none-eabi/6.2.0/include-fixed',
+    '-isystem',
+    '/usr/arm-none-eabi/include'
 ]
 
 
