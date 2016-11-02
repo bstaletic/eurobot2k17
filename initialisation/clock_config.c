@@ -1,6 +1,6 @@
 #include "clock_config.h"
 
-static void clock_config(void)
+void clock_config(void)
 {
 	/* Enable GPIOD clock for all needed ports */
 	rcc_periph_clock_enable(RCC_GPIOA);

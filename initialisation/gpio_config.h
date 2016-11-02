@@ -3,6 +3,6 @@
 
 #include <libopencm3/stm32/gpio.h>
 
-static void gpio_config(void);
+void gpio_config(void);
 
 #endif /* ifndef GPIO_CINFUG */

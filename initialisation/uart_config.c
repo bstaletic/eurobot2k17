@@ -1,17 +1,6 @@
 #include "uart_config.h"
 
-static void usart_clock_config(void)
-{
-	/* Enable GPIOD clock for LED & USARTs. */
-	rcc_periph_clock_enable(RCC_GPIOD);
-	rcc_periph_clock_enable(RCC_GPIOA);
-	rcc_periph_clock_enable(RCC_GPIOB);
-
-	/* Enable clocks for USART2. */
-	rcc_periph_clock_enable(RCC_USART2);
-}
-
-static void usart2_config(void)
+void usart2_config(void)
 {
 	/* Setup USART2 parameters. */
 	usart_set_baudrate(USART2, 115200);
@@ -27,7 +16,7 @@ static void usart2_config(void)
 	usart_enable(USART2);
 }
 
-static void usart3_config(void)
+void usart3_config(void)
 {
 	/* Setup USART3 parameters. */
 	usart_set_baudrate(USART3, 115300);
@@ -42,7 +31,7 @@ static void usart3_config(void)
 	usart_enable(USART2);
 }
 
-static void uart4_config(void)
+void uart4_config(void)
 {
 	/* Setup UART4 parameters. */
 	usart_set_baudrate(UART4, 115300);

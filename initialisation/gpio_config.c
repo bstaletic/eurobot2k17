@@ -1,6 +1,6 @@
 #include "gpio_config.h"
 
-static void gpio_config(void)
+void gpio_config(void)
 {
 
 	/* GPIO setup for every timer */
