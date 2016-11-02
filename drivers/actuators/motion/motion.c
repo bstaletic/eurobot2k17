@@ -46,9 +46,9 @@ void read_status_and_position(void)
 
 	}
 
-	driver_state.x           = new_state[1]<<8 + new_state[2];
-	driver_state.y           = new_state[3]<<8 + new_state[4];
-	driver_state.orientation = new_state[5]<<8 + new_state[6];
+	driver_state.x           = new_state[1]<<8 | new_state[2];
+	driver_state.y           = new_state[3]<<8 | new_state[4];
+	driver_state.orientation = new_state[5]<<8 | new_state[6];
 
 
 }
