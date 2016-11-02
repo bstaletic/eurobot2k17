@@ -2,6 +2,7 @@
 #define MOTION
 
 #include <libopencm3/stm32/usart.h>
+#include <stdint.h>
 
 #define MOTION_DRIVER USART3
 
@@ -23,10 +24,10 @@ void read_state(void);
 enum status { IDLE, MOVING, ROTATING, STUCK, ERROR };
 
 typedef struct state {
-	int16_t x = 0;
-	int16_t y = 0;
-	int16_t orientation = 0;
-	enum status status = IDLE;
+	int16_t x;
+	int16_t y;
+	int16_t orientation;
+	enum status status;
 } motion_state_t;
 
 motion_state_t driver_state;
