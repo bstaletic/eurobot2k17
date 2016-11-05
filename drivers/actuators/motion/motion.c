@@ -27,33 +27,33 @@ void read_status_and_position(void)
 	for (int8_t i = 0; i < 7; ++i)
 		new_state[i] = usart_recv_blocking(MOTION_DRIVER);
 
-	switch (new_state[0]) {
-		case 'I':
-			driver_state.status = IDLE;
-			break;
-		case 'M':
-			driver_state.status = MOVING;
-			break;
-		case 'R':
-			driver_state.status = ROTATING;
-			break;
-		case 'S':
-			driver_state.status = STUCK;
-			break;
-		case 'E':
-			driver_state.status = ERROR;
-			break;
-
-	}
-
-	driver_state.x           = new_state[1]<<8 | new_state[2];
-	driver_state.y           = new_state[3]<<8 | new_state[4];
-	driver_state.orientation = new_state[5]<<8 | new_state[6];
+//	switch (new_state[0]) {
+//		case 'I':
+//			driver_state.status = IDLE;
+//			break;
+//		case 'M':
+//			driver_state.status = MOVING;
+//			break;
+//		case 'R':
+//			driver_state.status = ROTATING;
+//			break;
+//		case 'S':
+//			driver_state.status = STUCK;
+//			break;
+//		case 'E':
+//			driver_state.status = ERROR;
+//			break;
+//
+//	}
+//
+//	driver_state.x           = new_state[1]<<8 | new_state[2];
+//	driver_state.y           = new_state[3]<<8 | new_state[4];
+//	driver_state.orientation = new_state[5]<<8 | new_state[6];
 
 
 }
 
-void set_speed(int8_t speed)
+void set_motion_speed(int8_t speed)
 {
 	int8_t out_data[2];
 

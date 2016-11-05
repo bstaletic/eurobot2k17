@@ -1,6 +1,6 @@
 #include <initialisation/timer_config.h>
 
-void tim1_config(void)
+void timer1_config(void)
 {
 	timer_reset(TIM1);
 	timer_set_prescaler(TIM1, 0);
@@ -14,7 +14,7 @@ void tim1_config(void)
 	timer_enable_counter(TIM1);
 }
 
-void tim2_config(void)
+void timer2_config(void)
 {
 	timer_reset(TIM2);
 	timer_set_prescaler(TIM2, 0);
@@ -28,7 +28,7 @@ void tim2_config(void)
 	timer_enable_counter(TIM2);
 }
 
-void tim3_config(void)
+void timer3_config(void)
 {
 	timer_reset(TIM3);
 	timer_set_prescaler(TIM3, 0);
@@ -44,7 +44,7 @@ void tim3_config(void)
 	timer_enable_counter(TIM3);
 }
 
-void tim4_config(void)
+void timer4_config(void)
 {
 	timer_reset(TIM4);
 	timer_set_prescaler(TIM4, 0);
@@ -58,7 +58,7 @@ void tim4_config(void)
 	timer_enable_counter(TIM4);
 }
 
-void tim9_config(void)
+void timer9_config(void)
 {
 	timer_reset(TIM9);
 	timer_set_prescaler(TIM9, 0);
@@ -74,7 +74,7 @@ void tim9_config(void)
 	timer_enable_counter(TIM9);
 }
 
-void tim10_config(void)
+void timer10_config(void)
 {
 	timer_reset(TIM10);
 	timer_set_prescaler(TIM10, 0);

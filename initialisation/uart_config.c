@@ -9,7 +9,9 @@ void usart2_config(void)
 	usart_set_mode(USART2, USART_MODE_TX_RX);
 	usart_set_parity(USART2, USART_PARITY_NONE);
 	usart_set_flow_control(USART2, USART_FLOWCONTROL_NONE);
-	usart_enable_halfduplex(USART2);
+	// TODO: Find out why doesn't the libopencm3 function work
+	USART_CR3(USART2) |= USART_CR3_HDSEL;
+	//usart_enable_halfduplex(USART2);
 	// Oversampling
 
 	/* Finally enable the USART. */

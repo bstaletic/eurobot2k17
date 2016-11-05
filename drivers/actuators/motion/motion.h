@@ -20,16 +20,17 @@ void reset_driver(void);
 void stuck_enable(void);
 void stuck_disable(void);
 void read_state(void);
+void set_motion_speed(int8_t speed);
 
 enum status { IDLE, MOVING, ROTATING, STUCK, ERROR };
 
-typedef struct state {
-	int16_t x;
-	int16_t y;
-	int16_t orientation;
-	enum status status;
-} motion_state_t;
+//typedef struct {
+//	int16_t x;
+//	int16_t y;
+//	int16_t orientation;
+//	enum status status;
+//} motion_state_t;
 
-motion_state_t driver_state;
+//motion_state_t driver_state;
 
 #endif /* ifndef MOTION */
