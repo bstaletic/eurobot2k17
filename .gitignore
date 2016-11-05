@@ -28,6 +28,10 @@
 *.i*86
 *.x86_64
 *.hex
+*.bin
+
+# Linker scripts
+*.ld
 
 # Debug files
 *.dSYM/
@@ -38,3 +42,6 @@
 
 # Vim swapfiles
 *.sw?
+
+# Output directory
+build
