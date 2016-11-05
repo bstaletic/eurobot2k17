@@ -1,4 +1,5 @@
-PROJDIR := ${HOME}/eurobot2k17
-OBJ := motion.o
+SRC := ${HOME}/eurobot2k17
 
-include $(PROJDIR)/make_def.mk
+include $(SRC)make_def_vars.mk
+-include $(DEPS)
+include $(SRC)make_def_rules.mk
