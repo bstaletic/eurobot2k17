@@ -47,7 +47,8 @@ flags = [
     '-isystem',
     '/usr/lib/gcc/arm-none-eabi/6.2.0/include-fixed',
     '-isystem',
-    '/usr/arm-none-eabi/include'
+    '/usr/arm-none-eabi/include',
+    '-I.'
 ]
 
 
