@@ -42,6 +42,3 @@
 
 # Vim swapfiles
 *.sw?
-
-# Output directory
-build

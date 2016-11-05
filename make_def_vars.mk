@@ -15,4 +15,5 @@ LINK_LIB := -lopencm3_stm32f4
 OBJ := ${SRC}main.o ${SRC}initialisation/clock_config.o ${SRC}initialisation/gpio_config.o ${SRC}initialisation/uart_config.o ${SRC}initialisation/timer_config.o ${SRC}drivers/actuators/ax12/ax12.o ${SRC}drivers/actuators/motion/motion.o
 DEPS := $(OBJ:.o=.d)
 
+DOXYGEN := doxygen
 DOXYFILE := $(SRC)Doxyfile

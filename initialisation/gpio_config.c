@@ -23,7 +23,7 @@ void gpio_config(void)
 	/* USART3 GPIO setup */
 	gpio_mode_setup(GPIOB, GPIO_MODE_AF, GPIO_PUPD_NONE, GPIO11);
 	gpio_set_af(GPIOB, GPIO_AF7, GPIO11);
-	gpio_mode_setup(GPIOD, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, GPIO8);
+	gpio_mode_setup(GPIOD, GPIO_MODE_AF, GPIO_PUPD_NONE, GPIO8);
 	gpio_set_af(GPIOD, GPIO_AF7, GPIO8);
 
 	/* USART4 GPIO setup */

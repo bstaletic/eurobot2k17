@@ -3,11 +3,18 @@
 	$(CC) $(FINAL_CFLAGS) $(MFLAGS) -MD -c $< -o $@
 
 
-clean:
+clean: doc-clean
 	rm -rf $(DEPS)
 	rm -rf $(OBJ)
-	rm -rf ${SRC}main.elf
-	rm -rf ${SRC}main.bin
+	rm -rf ${DESTDIR}eurobot2k17.elf
+	rm -rf ${DESTDIR}eurobot2k17.bin
 	rm -rf ${SRC}generated.${BOARD}.ld
+	rm -rf ${DESTDIR}html
+	rm -rf ${DESTDIR}latex
+	rm -rf eurobot2k17.map
 
-.PHONY: clean
+doc-clean:
+	rm -rf ${DESTDIR}html
+	rm -rf ${DESTDIR}latex
+
+.PHONY: clean doc-clean

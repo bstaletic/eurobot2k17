@@ -3,7 +3,3 @@
 3. motion state - currently commented out
 3.1 Make sure the code is readable
 4. Start working on FreeRTOS
-5. Write a README.md
-6. Watch out for the clean target - not tested
-7. Use doxygen to document code
-8. Make a help target
