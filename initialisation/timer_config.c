@@ -1,4 +1,4 @@
-#include "timer_config.h"
+#include <initialisation/timer_config.h>
 
 void tim1_config(void)
 {

@@ -1,4 +1,4 @@
-#include "ax12.h"
+#include <drivers/actuators/ax12/ax12.h>
 
 // TODO: Convert postion to degrees?
 void move(uint8_t id, uint16_t position)

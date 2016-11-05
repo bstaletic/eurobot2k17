@@ -1,4 +1,4 @@
-#include "clock_config.h"
+#include <initialisation/clock_config.h>
 
 void clock_config(void)
 {

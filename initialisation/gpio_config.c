@@ -1,4 +1,4 @@
-#include "gpio_config.h"
+#include <initialisation/gpio_config.h>
 
 void gpio_config(void)
 {

@@ -1,4 +1,4 @@
-#include "uart_config.h"
+#include <initialisation/uart_config.h>
 
 void usart2_config(void)
 {
