@@ -8,7 +8,7 @@ clean: doc-clean
 	rm -rf $(OBJ)
 	rm -rf ${DESTDIR}eurobot2k17.elf
 	rm -rf ${DESTDIR}eurobot2k17.bin
-	rm -rf ${SRC}generated.${BOARD}.ld
+	rm -rf ${DESTDIR}generated.${BOARD}.ld
 	rm -rf ${DESTDIR}html
 	rm -rf ${DESTDIR}latex
 	rm -rf eurobot2k17.map

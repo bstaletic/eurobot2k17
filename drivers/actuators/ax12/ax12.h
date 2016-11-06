@@ -61,6 +61,7 @@ void factory_reset(uint8_t id);
  * \brief Sets the id of AX12 for future use
  *
  * @param id [in] Uniquely identifies the AX12. Possible values are [0,254] If id is 254 the command is broadcasted to all AX12 servo motors
+ * @param new_id [in] The desired new id of AX12.
  */
 void set_id(uint8_t id, uint8_t new_id);
 /** \fn void set_baudrate(uint8_t id, uint32_t baudrate)

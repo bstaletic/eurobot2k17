@@ -35,7 +35,7 @@ This repo is going to be used for hosting the code for the upcoming Eurobot 2017
   - `LICENSE` - GPL3 license
   - `Doxyfile` - doxygen configuration
   - `Makefile` - rules to build and flash the actual binary
-  - TODO - serves as a reminder of the things needed to be done
+  - `TODO` - serves as a reminder of the things needed to be done
   - `main.c` - the main while(1) loop
   - `make_def_rules.mk` - contains clean target and .c -> .o `make` rules
   - `make_def_vars.mk` - contains all variables used by other `Makefiles`
@@ -54,6 +54,7 @@ This repo is going to be used for hosting the code for the upcoming Eurobot 2017
 
 ##### Quick start
 If you're just looking for a fastest way to use this code here's the simplest way:
+
 1. `git clone https://github.com/bstaletic/eurobot2k17`
 2. `cd eurobot2k17`
 3. `git submodule update --init`
@@ -84,6 +85,8 @@ The `make` variables known to this project's `Makefile` are:
 - DESTDIR - a directory where the resulting elf and bin binaries as well as the linker script
 - SRC - path to the project's source code
 - DOXYGEN - executable for generating documentation
+- OBJCOPY - objcopy from the utilised toolchain
+- STFLASH - flash utility from st-link package
 
 The default values of these variables:
 
@@ -93,3 +96,5 @@ The default values of these variables:
 - DESTDIR := ${SRC}build/
 - SRC := ${HOME}/eurobot2k17
 - DOXYGEN := doxygen
+- OBJCOPY := arm-none-eabi-objcopy
+- STLINK := st-flash

@@ -3,7 +3,7 @@ include $(SRC)make_def_vars.mk
 
 # Bin file will be flashed onto the STM32F4-Discovery board
 ${DESTDIR}eurobot2k17.bin: ${DESTDIR}eurobot2k17.elf
-	arm-none-eabi-objcopy -Obinary $< $@
+	${OBJCOPY} -Obinary $< $@
 
 # Compile the executable using every .o file created and the generated linker script
 ${DESTDIR}eurobot2k17.elf : ${DESTDIR}generated.$(BOARD).ld $(OBJ)
@@ -16,10 +16,10 @@ ${DESTDIR}generated.$(BOARD).ld :
 
 # Use make flash to flash the bin file onto STM32F4
 flash: ${DESTDIR}eurobot2k17.bin
-	st-flash write $< 0x8000000
+	${STLINK} write $< 0x8000000
 
 # Make the documentation for the code - currently invalid
-doc:
+doc: doc-clean
 	${DOXYGEN} $(DOXYFILE)
 	@mv ${SRC}latex ${DESTDIR}
 	@mv ${SRC}html ${DESTDIR}
@@ -44,6 +44,8 @@ help:
 	@echo CFLAGS - user configurable compiler flags
 	@echo DESTDIR - a directory where the resulting elf and bin binaries as well as the linker script
 	@echo SRC - path to the project\'s source code
+	@echo STLINK - flash utility from st-link package
+	@echo OBJCOPY - objcopy from the utilised toolchain
 	@echo ""
 	@echo The default values of these variables:
 	@echo ""
@@ -53,6 +55,8 @@ help:
 	@echo DESTDIR := \$\{SRC\}build/
 	@echo SRC := \$\{HOME\}/eurobot2k17
 	@echo DOXYGEN := doxygen
+	@echo STLINK := st-flash
+	@echo OBJCOPY := arm-none-eabi-objcopy
 
 
 # Include all implicit rules and dependencies
