@@ -21,7 +21,7 @@ void usart2_config(void)
 void usart3_config(void)
 {
 	/* Setup USART3 parameters. */
-	usart_set_baudrate(USART3, 115300);
+	usart_set_baudrate(USART3, 115200);
 	usart_set_databits(USART3, 8);
 	usart_set_stopbits(USART3, USART_STOPBITS_1);
 	usart_set_mode(USART3, USART_MODE_TX_RX);
@@ -30,13 +30,13 @@ void usart3_config(void)
 	// Oversampling
 
 	/* Finally enable the USART. */
-	usart_enable(USART2);
+	usart_enable(USART3);
 }
 
 void uart4_config(void)
 {
 	/* Setup UART4 parameters. */
-	usart_set_baudrate(UART4, 115300);
+	usart_set_baudrate(UART4, 115200);
 	usart_set_databits(UART4, 8);
 	usart_set_stopbits(UART4, USART_STOPBITS_1);
 	usart_set_mode(UART4, USART_MODE_TX_RX);
