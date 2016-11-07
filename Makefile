@@ -28,14 +28,14 @@ help:
 	@echo ""
 	@echo Use "make flash" to quickly compile the binary and flash onto STM32
 	@echo Possible make targets:
-	@echo eurobot2k17.bin - binary ready for flashing
-	@echo eurobot2k17.elf - passed to objcopy to make the bin file
-	@echo generated.\$\(BOARD\).ld - linker script used to make the elf file
-	@echo flash - flashes the bin file onto \$\(BOARD\)
+	@echo $${DESTDIR}eurobot2k17.bin - binary ready for flashing
+	@echo $${DESTDIR}eurobot2k17.elf - passed to objcopy to make the bin file
+	@echo $${DESTDIR}generated.$${BOARD}.ld - linker script used to make the elf file
+	@echo flash - flashes the bin file onto $${BOARD}
 	@echo doc - builds "doxygen" documentation
 	@echo clean - cleans the whole project of compiled files
 	@echo ""
-	@echo NOTE: eurobot2k17.elf eurobot2k17.bin and generated.\$\(BOARD\).ld
+	@echo NOTE: eurobot2k17.elf eurobot2k17.bin and generated.$${BOARD}.ld
 	@echo ""
 	@echo Variables used by this project\'s Makefile:
 	@echo ""
@@ -52,8 +52,8 @@ help:
 	@echo  BOARD := STM32F407VG
 	@echo CC := arm-none-eabi-gcc
 	@echo CFLAGS := -Os -g -Wall -Wextra -pednatic -x c -std=c99
-	@echo DESTDIR := \$\{SRC\}build/
-	@echo SRC := \$\{HOME\}/eurobot2k17
+	@echo DESTDIR := $${SRC}build/
+	@echo SRC := $${HOME}/eurobot2k17
 	@echo DOXYGEN := doxygen
 	@echo STLINK := st-flash
 	@echo OBJCOPY := arm-none-eabi-objcopy

@@ -3,8 +3,8 @@ DESTDIR := ${SRC}build/
 
 OBJCOPY := arm-none-eabi-objcopy
 CC := arm-none-eabi-gcc
-CFLAGS := -Os -g -Wall -Wextra -pedantic -x c -std=c99
-FINAL_CFLAGS := ${CLFAGS}  -DSTM32F4 -DSTM32F407VG -DSTM32F4CCM -D_ROM_OFF=0x08000000 -D_ROM=1024K -D_RAM=128K -D_CCM=64K -D_CCM_OFF=0x10000000 -D_RAM_OFF=0x20000000 -fno-common -fdata-sections -I${SRC}libopencm3/include -I${SRC}
+CFLAGS := -Os -g -Wall -Wextra -Wno-main -pedantic -x c -std=c99
+FINAL_CFLAGS := ${CFLAGS}  -DSTM32F4 -DSTM32F407VG -DSTM32F4CCM -D_ROM_OFF=0x08000000 -D_ROM=1024K -D_RAM=128K -D_CCM=64K -D_CCM_OFF=0x10000000 -D_RAM_OFF=0x20000000 -fno-common -fdata-sections -I${SRC}libopencm3/include -I${SRC}
 MFLAGS := -mfloat-abi=hard -mcpu=cortex-m4 -mthumb -mfpu=fpv4-sp-d16
 DEPFLAGS := -MD
 BOARD := STM32F407VG

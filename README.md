@@ -58,16 +58,22 @@ If you're just looking for a fastest way to use this code here's the simplest wa
 1. `git clone https://github.com/bstaletic/eurobot2k17`
 2. `cd eurobot2k17`
 3. `git submodule update --init`
-4. `make flash`
+4. `cd libopencm3`
+5. `make`
+6. `cd ..`
+7. `make flash`
 
 #### Full guide
 This will explain every single step in the compilation procedure and thte ways to customise it. While the secnod just changes the working directory to that of the cloned repo.
 
-First three steps are mandatory. The first step clones the repository and the third clones the libopencm3 library.
+First six steps are mandatory. The first step clones the repository, the third clones the libopencm3 library and the fifth compiles the `libopencm3` library.
 
 - `git clone https://github.com/bstaletic/eurobot2k17`
 - `cd eurobot2k17`
 - `git submodule update --init`
+- `cd libopencm3`
+- `make`
+- `cd ..`
 
 Now the code is ready for compilation and the default `make` target compiles the bin file ready for flashing onto STM32F407VG. Other possible targets are as follows:
 
