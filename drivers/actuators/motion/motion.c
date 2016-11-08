@@ -20,12 +20,12 @@ void set_position_and_orientation(int16_t x, int16_t y, int16_t o)
 
 void read_status_and_position(void)
 {
-	int8_t new_state[7];
+//	int8_t new_state[7];
 
 	usart_send_blocking(MOTION_DRIVER, 'P');
 
-	for (int8_t i = 0; i < 7; ++i)
-		new_state[i] = usart_recv_blocking(MOTION_DRIVER);
+//	for (int8_t i = 0; i < 7; ++i)
+//		new_state[i] = usart_recv_blocking(MOTION_DRIVER);
 
 //	switch (new_state[0]) {
 //		case 'I':

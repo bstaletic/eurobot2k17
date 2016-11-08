@@ -100,7 +100,9 @@ The default values of these variables:
 - CC := arm-none-eabi-gcc
 - CFLAGS := -Os -g -Wall -Wextra -pednatic -x c -std=c99
 - DESTDIR := ${SRC}build/
-- SRC := ${HOME}/eurobot2k17
+- SRC not set by default
 - DOXYGEN := doxygen
 - OBJCOPY := arm-none-eabi-objcopy
 - STLINK := st-flash
+
+NOTE: If you set $(SRC) or $(DESTDIR) make sure you include the trailing slash.
