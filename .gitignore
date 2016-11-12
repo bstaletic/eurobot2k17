@@ -42,3 +42,6 @@
 
 # Vim swapfiles
 *.sw?
+
+# Code tags
+tags
