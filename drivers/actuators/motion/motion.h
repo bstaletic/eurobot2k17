@@ -6,11 +6,22 @@
 
 #define MOTION_DRIVER USART3
 
+typedef enum { IDLE, STUCK, ROTATING, ERROR, MOVING } motion_status;
+
+typedef struct {
+	uint16_t x;
+	uint16_t y;
+	uint16_t orientation;
+	motion_status status;
+} motion_state;
+
+extern volatile motion_state state;
+
 /** \file motion.h
  * \brief Motion driver functions
  */
 
-/** \fn void set_position_and_orientation(int16_t x, int16_t y, int16_t o)
+/** \fn void set_position_and_orientation(int16_t x, int16_t y, int16_t orientation)
  * \brief Sets the postion and orientation. Useful for correcting the driver itself.
  *
  * Corrects the driver by telling it the coordinates and orientation. `x` and `y` are the new coordinates sent to the driver and the `orientation` is the new orientation of the driver.
@@ -20,7 +31,7 @@
  * @param [in] y Sets y coordinate
  * @param [in] o Sets orientation
  */
-void set_position_and_orientation(int16_t  x, int16_t y, int16_t o);
+void set_position_and_orientation(int16_t  x, int16_t y, int16_t orientation);
 /** \fn void read_status_and_position(void)
  * \brief Read data provided by the driver
  *
@@ -101,16 +112,5 @@ void read_state(void);
  *
  */
 void set_motion_speed(int8_t speed);
-
-enum status { IDLE, MOVING, ROTATING, STUCK, ERROR };
-
-//typedef struct {
-//	int16_t x;
-//	int16_t y;
-//	int16_t orientation;
-//	enum status status;
-//} motion_state_t;
-
-//motion_state_t driver_state;
 
 #endif /* ifndef MOTION */

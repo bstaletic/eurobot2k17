@@ -1,6 +1,8 @@
 #include <drivers/actuators/motion/motion.h>
 
-void set_position_and_orientation(int16_t x, int16_t y, int16_t o)
+volatile motion_state state;
+
+void set_position_and_orientation(int16_t x, int16_t y, int16_t orientation)
 {
 	int8_t out_data[7];
 
@@ -10,8 +12,8 @@ void set_position_and_orientation(int16_t x, int16_t y, int16_t o)
 	out_data[2] = x>>8;
 	out_data[3] = y&0xff;
 	out_data[4] = y>>8;
-	out_data[5] = o&0xff;
-	out_data[6] = o>>8;
+	out_data[5] = orientation&0xff;
+	out_data[6] = orientation>>8;
 
 	// Send to motion driver
 	for (int8_t i = 0; i < 7; ++i)
@@ -20,36 +22,36 @@ void set_position_and_orientation(int16_t x, int16_t y, int16_t o)
 
 void read_status_and_position(void)
 {
-//	int8_t new_state[7];
+	int8_t new_state[7];
 
 	usart_send_blocking(MOTION_DRIVER, 'P');
 
-//	for (int8_t i = 0; i < 7; ++i)
-//		new_state[i] = usart_recv_blocking(MOTION_DRIVER);
+	for (int8_t i = 0; i < 7; ++i)
+		new_state[i] = usart_recv_blocking(MOTION_DRIVER);
 
-//	switch (new_state[0]) {
-//		case 'I':
-//			driver_state.status = IDLE;
-//			break;
-//		case 'M':
-//			driver_state.status = MOVING;
-//			break;
-//		case 'R':
-//			driver_state.status = ROTATING;
-//			break;
-//		case 'S':
-//			driver_state.status = STUCK;
-//			break;
-//		case 'E':
-//			driver_state.status = ERROR;
-//			break;
-//
-//	}
-//
-//	driver_state.x           = new_state[1]<<8 | new_state[2];
-//	driver_state.y           = new_state[3]<<8 | new_state[4];
-//	driver_state.orientation = new_state[5]<<8 | new_state[6];
+	switch (new_state[0])
+	{
+		case 'I':
+			state.status = IDLE;
+			break;
+		case 'M':
+			state.status = MOVING;
+			break;
+		case 'R':
+			state.status = ROTATING;
+			break;
+		case 'S':
+			state.status = STUCK;
+			break;
+		case 'E':
+			state.status = ERROR;
+			break;
 
+	}
+
+	state.x           = new_state[1]<<8 | new_state[2];
+	state.y           = new_state[3]<<8 | new_state[4];
+	state.orientation = new_state[5]<<8 | new_state[6];
 
 }
 
@@ -157,4 +159,40 @@ void stuck_enable(void)
 void stuck_disable(void)
 {
 	usart_send_blocking(MOTION_DRIVER, 'z');
+}
+
+void usart2_isr(void)
+{
+	if (((USART_CR1(USART2) & USART_CR1_RXNEIE) != 0) &&
+	    ((USART_SR(USART2) & USART_SR_RXNE) != 0)) {
+
+		switch ( usart_recv_blocking(MOTION_DRIVER) ) {
+			case 'M':
+				state.status = MOVING;
+				break;
+			case 'R':
+				state.status = ROTATING;
+				break;
+			case 'E':
+				state.status = ERROR;
+				break;
+			case 'S':
+				state.status = STUCK;
+				break;
+			case 'I':
+				state.status = IDLE;
+				break;
+		}
+
+	state.x = ( usart_recv_blocking(MOTION_DRIVER) << 8 ) |
+	          ( usart_recv_blocking(MOTION_DRIVER) & 0xff );
+
+	state.y = ( usart_recv_blocking(MOTION_DRIVER) << 8 ) |
+	          ( usart_recv_blocking(MOTION_DRIVER) & 0xff );
+
+	state.orientation = ( usart_recv_blocking(MOTION_DRIVER) << 8 ) |
+	                    ( usart_recv_blocking(MOTION_DRIVER) & 0xff );
+
+	}
+
 }

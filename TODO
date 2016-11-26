@@ -1,5 +1,2 @@
-1. Configure the clocks!
-2. USART2 halfduplex - use libopencm3 function
-3. motion state - currently commented out
-3.1 Make sure the code is readable
-4. Start working on FreeRTOS
+1. USART2 halfduplex - use libopencm3 function
+2. Start working on FreeRTOS
