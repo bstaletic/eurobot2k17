@@ -1,20 +1,39 @@
-DESTDIR := $(SRC)build/
+ifeq ($(DEBUG),0)
+	DESTDIR := $(STARTDIR)build/release/
+else
+	DESTDIR := $(STARTDIR)build/debug/
+endif
+
+OBJDIR := $(DESTDIR)obj/
+DOCDIR := $(DESTDIR)doc/
+BINDIR := $(DESTDIR)bin/
+ASMDIR := $(DESTDIR)asm/
+DBGDIR := $(DESTDIR)debug/
+SRCDIR := $(STARTDIR)src/
+DEPDIR := $(DESTDIR)dep/
 
 OBJCOPY := arm-none-eabi-objcopy
 CC := arm-none-eabi-gcc
-CFLAGS := -Os -g -Wall -Wextra -Wno-main -pedantic -x c -std=c99
-FINAL_CFLAGS := $(CFLAGS)  -DSTM32F4 -DSTM32F407VG -DSTM32F4CCM -D_ROM_OFF=0x08000000 -D_ROM=1024K -D_RAM=128K -D_CCM=64K -D_CCM_OFF=0x10000000 -D_RAM_OFF=0x20000000 -fno-common -fdata-sections -I$(SRC)libopencm3/include -I$(SRC).
+AS := arm-none-eabi-as
+ifeq ($(DEBUG),0)
+	CFLAGS := -Os -Wall -Wextra -Wno-main -pedantic -std=c99
+else
+	CFLAGS := -Og -g -Wall -Wextra -Wno-main -pedantic -std=c99
+endif
+ASFLAGS := --warn
 MFLAGS := -mfloat-abi=hard -mcpu=cortex-m4 -mthumb -mfpu=fpv4-sp-d16
-DEPFLAGS := -MD
 BOARD := STM32F407VG
 
 LINK_GROUP := -Wl,--start-group -lc -lgcc -lnosys -Wl,--end-group
-LINK_PATH := -L$(SRC)libopencm3/lib
+LINK_PATH := -L$(STARTDIR)libopencm3/lib
 LINK_LIB := -lopencm3_stm32f4
 
-OBJ := $(SRC)main.o $(SRC)initialisation/clock_config.o $(SRC)initialisation/gpio_config.o $(SRC)initialisation/uart_config.o $(SRC)initialisation/timer_config.o $(SRC)drivers/actuators/ax12/ax12.o $(SRC)drivers/actuators/motion/motion.o
-DEPS := $(OBJ:.o=.d)
+SRC := $(SRCDIR)main.c $(SRCDIR)initialisation/clock_config.c $(SRCDIR)initialisation/gpio_config.c $(SRCDIR)initialisation/uart_config.c $(SRCDIR)initialisation/timer_config.c $(SRCDIR)drivers/actuators/ax12/ax12.c $(SRCDIR)drivers/actuators/motion/motion.c
+OBJ := $(subst src/,,$(SRC:%.c=$(OBJDIR)%.o))
+ASM := $(subst src/,,$(SRC:%.c=$(ASMDIR)%.s))
+DEPS := $(subst src/,,$(SRC:%.c=$(DEPDIR)%.d))
 
 DOXYGEN := doxygen
-DOXYFILE := $(SRC)Doxyfile
+DOXYFILE := $(STARTDIR)Doxyfile
 STLINK := st-flash
+MKDIR_P := mkdir -p

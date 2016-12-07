@@ -29,7 +29,7 @@ extern volatile motion_state state;
  * NOTE: This function does NOT move the robot, just corrects the driver on what it reports.
  * @param [in] x Sets x coordinate
  * @param [in] y Sets y coordinate
- * @param [in] o Sets orientation
+ * @param [in] orientation Sets orientation
  */
 void set_position_and_orientation(int16_t  x, int16_t y, int16_t orientation);
 /** \fn void read_status_and_position(void)
