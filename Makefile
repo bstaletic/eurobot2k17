@@ -21,7 +21,7 @@ $(DESTDIR)generated.$(BOARD).ld :
 assembly: $(ASM)
 
 # Use make flash to flash the bin file onto STM32F4
-flash: $(BINDIR)eurobot2k17.bin
+flash: $(FLASH_TGT)
 	$(STLINK) write $< 0x8000000
 
 # Make the documentation for the code - currently invalid
