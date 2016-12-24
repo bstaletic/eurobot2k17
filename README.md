@@ -22,13 +22,18 @@ This repo is going to be used for hosting the code for the upcoming Eurobot 2017
     - `drivers` - functions for controlling the actual devices and mechanisms on the robot
       - `actuators` - output devices such as motors and pneumatics
         - `ax12` - digital servo by Dynamixel
+          - `Makefile` - source the necessary files to make proper compilation possible
           - `ax12.c` and `ax12.h` - functions for interfacing with the AX12
-          - `Makefile` - source the necessary files to make proper compilation possible
         - `motion` - motion driver, uses UART to talk to another MCU
-          - `motion.c` and `motion.h` - functions for interfacing with the motion driver
           - `Makefile` - source the necessary files to make proper compilation possible
+          - `motion.c` and `motion.h` - functions for interfacing with the motion driver
+      - `sensors` - input devices such as digital and analog sensors
+        - `analog` - analog sensors
+          - `Makefile` - source the necessary files to make proper compilation possible
+          - `colour.c` and `colour.h` - interface of the colour sensor
     - `initialisation` - contains source files with functions initialising the MCU
       - `Makefile` - source the necessary files to make proper compilation possible
+      - `adc_config.c` and `adc_config.h` - initialises ADC1
       - `clock_config.c` and `clock_config.h` - initialises clock for all the peripheries utilised by the project
       - `gpio_config.c` and `gpio_config.h` - initialises GPIO ports
       - `timer_config.c` and `timer_config.h` - enables PWM's and other timers

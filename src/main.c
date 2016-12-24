@@ -2,9 +2,11 @@
 #include <initialisation/gpio_config.h>
 #include <initialisation/uart_config.h>
 #include <initialisation/timer_config.h>
+#include <initialisation/adc_config.h>
 
 #include <drivers/actuators/ax12/ax12.h>
 #include <drivers/actuators/motion/motion.h>
+#include <drivers/sensors/analog/colour.h>
 
 void main(void)
 {

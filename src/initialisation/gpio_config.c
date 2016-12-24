@@ -48,4 +48,7 @@ void gpio_config(void)
 	gpio_mode_setup(GPIOA, GPIO_MODE_AF, GPIO_PUPD_NONE, GPIO0|GPIO1);
 	gpio_set_af(GPIOA, GPIO_AF8, GPIO0|GPIO1);
 
+
+	/* ADC1 GPIO setup */
+	gpio_mode_setup(GPIOA, GPIO_MODE_ANALOG, GPIO_PUPD_NONE, GPIO3);
 }
