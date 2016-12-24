@@ -1,0 +1,1 @@
+SRC += $(SRCDIR)main.c

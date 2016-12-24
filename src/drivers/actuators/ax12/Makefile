@@ -1,3 +1,1 @@
-include $(SRC)make_def_vars.mk
--include $(DEPS)
-include $(SRC)make_def_rules.mk
+SRC += $(SRCDIR)drivers/actuators/ax12/ax12.c

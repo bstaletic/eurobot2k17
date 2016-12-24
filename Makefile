@@ -1,5 +1,13 @@
 include $(STARTDIR)make_def_vars.mk
 
+include $(SRCDIR)Makefile
+include $(SRCDIR)initialisation/Makefile
+include $(SRCDIR)drivers/Makefile
+
+OBJ := $(subst src/,,$(SRC:%.c=$(OBJDIR)%.o))
+ASM := $(subst src/,,$(SRC:%.c=$(ASMDIR)%.s))
+DEPS := $(subst src/,,$(SRC:%.c=$(DEPDIR)%.d))
+
 bin: $(BINDIR)eurobot2k17.bin
 
 # Bin file will be flashed onto the STM32F4-Discovery board
@@ -56,4 +64,5 @@ clean-all:
 # Include all implicit rules and dependencies
 include $(STARTDIR)make_def_rules.mk
 -include $(DEPS)
+
 .PHONY: doc flash help assembly bin clean clean-all

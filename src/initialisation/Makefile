@@ -1,3 +1,4 @@
-include $(SRC)make_def_vars.mk
--include $(DEPS)
-include $(SRC)make_def_rules.mk
+SRC += $(SRCDIR)initialisation/clock_config.c
+SRC += $(SRCDIR)initialisation/gpio_config.c
+SRC += $(SRCDIR)initialisation/timer_config.c
+SRC += $(SRCDIR)initialisation/uart_config.c

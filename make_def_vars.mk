@@ -28,11 +28,6 @@ LINK_GROUP := -Wl,--start-group -lc -lgcc -lnosys -Wl,--end-group
 LINK_PATH := -L$(STARTDIR)libopencm3/lib
 LINK_LIB := -lopencm3_stm32f4
 
-SRC := $(SRCDIR)main.c $(SRCDIR)initialisation/clock_config.c $(SRCDIR)initialisation/gpio_config.c $(SRCDIR)initialisation/uart_config.c $(SRCDIR)initialisation/timer_config.c $(SRCDIR)drivers/actuators/ax12/ax12.c $(SRCDIR)drivers/actuators/motion/motion.c
-OBJ := $(subst src/,,$(SRC:%.c=$(OBJDIR)%.o))
-ASM := $(subst src/,,$(SRC:%.c=$(ASMDIR)%.s))
-DEPS := $(subst src/,,$(SRC:%.c=$(DEPDIR)%.d))
-
 DOXYGEN := doxygen
 DOXYFILE := $(STARTDIR)Doxyfile
 STLINK := st-flash
