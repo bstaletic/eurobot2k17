@@ -45,3 +45,12 @@
 
 # Code tags
 tags
+
+# Eclipse
+.cproject
+.project
+.settings
+
+# Build
+build
+

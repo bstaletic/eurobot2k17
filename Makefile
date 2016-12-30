@@ -8,7 +8,10 @@ OBJ := $(subst src/,,$(SRC:%.c=$(OBJDIR)%.o))
 ASM := $(subst src/,,$(SRC:%.c=$(ASMDIR)%.s))
 DEPS := $(subst src/,,$(SRC:%.c=$(DEPDIR)%.d))
 
+all: bin
+
 bin: $(BINDIR)eurobot2k17.bin
+
 
 # Bin file will be flashed onto the STM32F4-Discovery board
 $(BINDIR)eurobot2k17.bin: $(BINDIR)eurobot2k17.elf
@@ -65,4 +68,4 @@ clean-all:
 include $(STARTDIR)make_def_rules.mk
 -include $(DEPS)
 
-.PHONY: doc flash help assembly bin clean clean-all
+.PHONY: doc flash help assembly bin clean clean-all all
