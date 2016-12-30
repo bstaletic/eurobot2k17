@@ -54,7 +54,7 @@ This repo is going to be used for hosting the code for the upcoming Eurobot 2017
 - `arm-none-eabi` toolchain
 - `git`
 - `make`
-- `st-link` utility
+- `openocd` utility
 
 #### Compiling and flashing the binary
 
@@ -107,7 +107,7 @@ The `make` variables known to this project's `Makefile` are:
 - SRCDIR - path to the project's source code
 - DOXYGEN - executable for generating documentation
 - DOXTFILE - $(STARTDIR)Doxyfile
-- STFLASH - flash utility from st-link package
+- OPENOCD - flash utility from openocd package
 - MKDIR_P - utility to make specified directory and its parents
 - DEBUG - set to 0 for the release build
 
@@ -124,7 +124,7 @@ The default values of these variables:
 - SRCDIR := $(STARTDIR)src/
 - DOXYGEN := doxygen
 - DOXYFILE := $(STARTDIR)Doxyfile
-- STLINK := st-flash
+- OPENOCD := openocd
 - MKDIR_P := mkdir -p
 - DEBUG := not initially set
 

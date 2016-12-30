@@ -30,7 +30,7 @@ assembly: $(ASM)
 
 # Use make flash to flash the bin file onto STM32F4
 flash: $(FLASH_TGT)
-	$(STLINK) write $< 0x8000000
+	$(OPENOCD) -f interface/stlink-v2.cfg -f target/stm32f4x.cfg -c "program $(FLASH_TGT) verify reset exit"
 
 # Make the documentation for the code - currently invalid
 doc:

@@ -30,7 +30,7 @@ LINK_LIB := -lopencm3_stm32f4
 
 DOXYGEN := doxygen
 DOXYFILE := $(STARTDIR)Doxyfile
-STLINK := st-flash
+OPENOCD := openocd
 MKDIR_P := mkdir -p
 
 ifeq ($(DEBUG),0)
