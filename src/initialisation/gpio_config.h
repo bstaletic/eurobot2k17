@@ -38,7 +38,6 @@
  *  USART3    |  D8 | USART3_TX
  *  UART4     |  A0 |  UART4_TX
  *  UART4     |  A1 |  UART4_RX
- *  ADC1      |  A3 |  ADC1 CH3
  *
  */
 void gpio_config(void);

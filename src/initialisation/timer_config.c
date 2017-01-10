@@ -75,6 +75,17 @@ void timer4_config(void)
 	timer_enable_counter(TIM4);
 }
 
+void timer5_config(void)
+{
+	timer_reset(TIM5);
+	timer_set_prescaler(TIM5, 105);
+	timer_set_mode(TIM5, TIM_CR1_CKD_CK_INT, TIM_CR1_CMS_CENTER_1, TIM_CR1_DIR_UP);
+	timer_ic_set_prescaler(TIM5, TIM_IC4, 0);
+	timer_ic_set_input(TIM5, TIM_IC4, TIM_IC_IN_TI4);
+	timer_ic_enable(TIM5, TIM_IC4);
+	timer_enable_counter(TIM4);
+}
+
 void timer9_config(void)
 {
 	/* Servo 1 (TIM_OC2) and Servo 2 (TIM_OC1) outputs */

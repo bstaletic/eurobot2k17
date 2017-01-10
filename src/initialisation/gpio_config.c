@@ -4,7 +4,7 @@ void gpio_config(void)
 {
 
 	/* GPIO setup for every timer */
-	gpio_mode_setup(GPIOA, GPIO_MODE_AF, GPIO_PUPD_NONE, GPIO8|GPIO15);
+	gpio_mode_setup(GPIOA, GPIO_MODE_AF, GPIO_PUPD_NONE, GPIO3|GPIO8|GPIO15);
 	gpio_mode_setup(GPIOB,
 					GPIO_MODE_AF,
 					GPIO_PUPD_NONE,
@@ -16,10 +16,15 @@ void gpio_config(void)
 	gpio_set_af(GPIOB, GPIO_AF2, GPIO4|GPIO5);
 	/* Set alt function for TIM4 CH1 */
 	gpio_set_af(GPIOB, GPIO_AF2, GPIO7);
+	/* Set alt function for TIM5 CH4 */
+	gpio_set_af(GPIOA, GPIO_AF2, GPIO3);
 	/* Set alt function for TIM9 CH1 and CH2 */
 	gpio_set_af(GPIOE, GPIO_AF3, GPIO5|GPIO6);
 	/* Set alt function for TIM10 CH1 */
 	gpio_set_af(GPIOB, GPIO_AF3, GPIO8);
+
+	/* GPIO for the two digital outputs for colour sensor */
+	gpio_mode_setup(GPIOD, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, GPIO6|GPIO7);
 
 	/* Timer PWM GPIO output setup */
 	gpio_set_output_options(GPIOA,

@@ -29,11 +29,10 @@ void clock_config(void)
 	rcc_periph_clock_enable(RCC_TIM3);
 	/* TIM4 clock enable */
 	rcc_periph_clock_enable(RCC_TIM4);
+	/* TIM5 clock enable */
+	rcc_periph_clock_enable(RCC_TIM5);
 	/* TIM9 clock enable */
 	rcc_periph_clock_enable(RCC_TIM9);
 	/* TIM10 clock enable */
 	rcc_periph_clock_enable(RCC_TIM10);
-
-	/* ADC1 clock enable */
-	rcc_periph_clock_enable(RCC_ADC1);
 }
