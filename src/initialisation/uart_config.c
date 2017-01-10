@@ -1,5 +1,10 @@
 #include <initialisation/uart_config.h>
 
+volatile uint16_t x_coordinate;
+volatile uint16_t y_coordinate;
+volatile uint16_t orientation;
+volatile char status;
+
 void usart2_config(void)
 {
 	/* Setup USART2 parameters. */
@@ -14,8 +19,29 @@ void usart2_config(void)
 	//usart_enable_halfduplex(USART2);
 	// Oversampling
 
+	nvic_enable_irq(NVIC_USART2_IRQ);
+	usart_enable_rx_interrupt(USART2);
 	/* Finally enable the USART. */
 	usart_enable(USART2);
+}
+
+void usart2_isr(void)
+{
+	if (((USART_CR1(USART2) & USART_CR1_RXNEIE) != 0) &&
+	    ((USART_SR(USART2) & USART_SR_RXNE) != 0)) {
+
+		status = usart_recv_blocking(USART2);
+		x_coordinate = ( usart_recv_blocking(USART2) << 8 ) |
+					   ( usart_recv_blocking(USART2) & 0xff );
+
+		y_coordinate = ( usart_recv_blocking(USART2) << 8 ) |
+					   ( usart_recv_blocking(USART2) & 0xff );
+
+		orientation = ( usart_recv_blocking(USART2) << 8 ) |
+					  ( usart_recv_blocking(USART2) & 0xff );
+
+	}
+
 }
 
 void usart3_config(void)

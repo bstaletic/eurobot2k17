@@ -16,7 +16,12 @@ typedef struct {
 	motion_status status;
 } motion_state;
 
-extern volatile motion_state state;
+extern volatile uint16_t x_coordinate;
+extern volatile uint16_t y_coordinate;
+extern volatile uint16_t orientation;
+extern volatile char status;
+
+motion_state state;
 
 /** \file motion.h
  * \brief Motion driver functions
@@ -119,5 +124,7 @@ void read_state(void);
  *
  */
 void set_motion_speed(int8_t speed);
+
+void update_state(void);
 
 #endif /* ifndef MOTION */
