@@ -1,7 +1,7 @@
 #include <drivers/actuators/ax12/ax12.h>
 
-// AX12_TODO: Convert postion to degrees?
-void ax12_move(uint8_t id, uint16_t position)
+// TODO: Convert postion to degrees?
+int move(uint8_t id, uint16_t position)
 {
 	uint8_t out_data[9], checksum;
 
@@ -21,10 +21,11 @@ void ax12_move(uint8_t id, uint16_t position)
 
 	// Send data to AX12
 	for (uint8_t i = 0; i < 9; ++i)
-		usart_send_blocking(AX12_UART, out_data[i]);
+		usart_send_blocking(AX12, out_data[i]);
+	return read_response();
 }
 
-void ax12_move_speed(uint8_t id, uint16_t position, uint16_t speed)
+int move_speed(uint8_t id, uint16_t position, uint16_t speed)
 {
 	uint8_t out_data[11], checksum;
 
@@ -47,10 +48,11 @@ void ax12_move_speed(uint8_t id, uint16_t position, uint16_t speed)
 
 	// Send data to AX12
 	for (uint8_t i = 0; i < 11; ++i)
-		usart_send_blocking(AX12_UART, out_data[i]);
+		usart_send_blocking(AX12, out_data[i]);
+	return read_response();
 }
 
-void ax12_set_speed(uint8_t id, uint16_t speed)
+int set_speed(uint8_t id, uint16_t speed)
 {
 	uint8_t out_data[9];
 
@@ -67,10 +69,11 @@ void ax12_set_speed(uint8_t id, uint16_t speed)
 	out_data[8] = checksum;
 
 	for (uint8_t i = 0; i < 9; ++i)
-		usart_send_blocking(AX12_UART, out_data[i]);
+		usart_send_blocking(AX12, out_data[i]);
+	return read_response();
 }
 
-void ax12_factory_reset(uint8_t id)
+int factory_reset(uint8_t id)
 {
 	uint8_t out_data[6], checksum = ~(id + AX12_RESET_LENGTH + AX12_RESET);
 
@@ -81,10 +84,11 @@ void ax12_factory_reset(uint8_t id)
 	out_data[5] = checksum;
 
 	for (uint8_t i = 0; i < 6; ++i)
-		usart_send_blocking(AX12_UART, out_data[i]);
+		usart_send_blocking(AX12, out_data[i]);
+	return read_response();
 }
 
-void ax12_set_baudrate(uint8_t id, uint32_t baudrate)
+int set_baudrate(uint8_t id, uint32_t baudrate)
 {
 	uint8_t out_data[8], checksum = ~(id + AX12_BAUDRATE_LENGTH + AX12_WRITE_DATA
 				+ AX12_BAUDRATE + ((2000000/baudrate)-1));
@@ -98,10 +102,11 @@ void ax12_set_baudrate(uint8_t id, uint32_t baudrate)
 	out_data[7] = checksum;
 
 	for (uint8_t i = 0; i < 8; ++i)
-		usart_send_blocking(AX12_UART, out_data[i]);
+		usart_send_blocking(AX12, out_data[i]);
+	return read_response();
 }
 
-void ax12_set_id(uint8_t id, uint8_t new_id)
+int set_id(uint8_t id, uint8_t new_id)
 {
 	uint8_t out_data[8], checksum = ~(id + AX12_ID_LENGTH + AX12_WRITE_DATA + AX12_ID + new_id);
 
@@ -114,10 +119,11 @@ void ax12_set_id(uint8_t id, uint8_t new_id)
 	out_data[7] = checksum;
 
 	for (uint8_t i = 0; i < 8; ++i)
-		usart_send_blocking(AX12_UART, out_data[i]);
+		usart_send_blocking(AX12, out_data[i]);
+	return read_response();
 }
 
-void ax12_set_angle_limit(uint8_t id, uint16_t cw_limit, uint16_t ccw_limit)
+int set_angle_limit(uint8_t id, uint16_t cw_limit, uint16_t ccw_limit)
 {
 	uint8_t out_data[11], checksum = ~(id + AX12_AL_LENGTH + AX12_WRITE_DATA
 		       		+ AX12_ANGLE_LIMIT + (cw_limit&0xff) + (ccw_limit>>8)
@@ -135,5 +141,6 @@ void ax12_set_angle_limit(uint8_t id, uint16_t cw_limit, uint16_t ccw_limit)
 	out_data[10] = checksum;
 
 	for (uint8_t i = 0; i < 11; ++i)
-		usart_send_blocking(AX12_UART, out_data[i]);
+		usart_send_blocking(AX12, out_data[i]);
+	return read_response();
 }
