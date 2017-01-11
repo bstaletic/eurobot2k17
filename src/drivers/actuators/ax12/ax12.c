@@ -1,15 +1,17 @@
 #include <drivers/actuators/ax12/ax12.h>
 
-// TODO: Convert postion to degrees?
-int move(uint8_t id, uint16_t position)
+// AX12_TODO: AX12_Convert postion to degrees?
+int16_t move(uint8_t id, uint16_t position)
 {
 	uint8_t out_data[9], checksum;
 
 	// Calculate checksum
 	checksum = ~(id + AX12_GOAL_LENGTH + AX12_WRITE_DATA + AX12_GOAL_POSITION_L
+	// AX12_Calculate checksum
+	checksum = ~(id + AX12_GOAL_LENGTH + AX12_WRITE_DATA + AX12_GOAL_POSITION_L
 			+ (position&0xff) + (position>>8));
 
-	// Construct the data to be sent
+	// AX12_Construct the data to be sent
 	out_data[0] = out_data[1] = AX12_START;
 	out_data[2] = id;
 	out_data[3] = AX12_GOAL_LENGTH;
@@ -19,22 +21,22 @@ int move(uint8_t id, uint16_t position)
 	out_data[7] = position>>8;
 	out_data[8] = checksum;
 
-	// Send data to AX12
+	// AX12_Send data to AX12_AX12
 	for (uint8_t i = 0; i < 9; ++i)
 		usart_send_blocking(AX12, out_data[i]);
 	return read_response();
 }
 
-int move_speed(uint8_t id, uint16_t position, uint16_t speed)
+int16_t move_speed(uint8_t id, uint16_t position, uint16_t speed)
 {
 	uint8_t out_data[11], checksum;
 
-	// Calculate checksum
+	// AX12_Calculate checksum
 	checksum = ~(id + AX12_GOAL_SP_LENGTH + AX12_WRITE_DATA + AX12_GOAL_POSITION_L
 			+ (position&0xff) + (position>>8)
 			+ (speed&0xff) + (speed>>8));
 
-	// Construct the data to be sent
+	// AX12_Construct the data to be sent
 	out_data[0] = out_data[1] = AX12_START;
 	out_data[2] = id;
 	out_data[3] = AX12_GOAL_SP_LENGTH;
@@ -46,13 +48,13 @@ int move_speed(uint8_t id, uint16_t position, uint16_t speed)
 	out_data[9] = speed>>8;
 	out_data[10] = checksum;
 
-	// Send data to AX12
+	// AX12_Send data to AX12_AX12
 	for (uint8_t i = 0; i < 11; ++i)
 		usart_send_blocking(AX12, out_data[i]);
 	return read_response();
 }
 
-int set_speed(uint8_t id, uint16_t speed)
+int16_t set_speed(uint8_t id, uint16_t speed)
 {
 	uint8_t out_data[9];
 
@@ -73,7 +75,7 @@ int set_speed(uint8_t id, uint16_t speed)
 	return read_response();
 }
 
-int factory_reset(uint8_t id)
+int16_t factory_reset(uint8_t id)
 {
 	uint8_t out_data[6], checksum = ~(id + AX12_RESET_LENGTH + AX12_RESET);
 
@@ -88,7 +90,7 @@ int factory_reset(uint8_t id)
 	return read_response();
 }
 
-int set_baudrate(uint8_t id, uint32_t baudrate)
+int16_t set_baudrate(uint8_t id, uint32_t baudrate)
 {
 	uint8_t out_data[8], checksum = ~(id + AX12_BAUDRATE_LENGTH + AX12_WRITE_DATA
 				+ AX12_BAUDRATE + ((2000000/baudrate)-1));
@@ -106,7 +108,7 @@ int set_baudrate(uint8_t id, uint32_t baudrate)
 	return read_response();
 }
 
-int set_id(uint8_t id, uint8_t new_id)
+int16_t set_id(uint8_t id, uint8_t new_id)
 {
 	uint8_t out_data[8], checksum = ~(id + AX12_ID_LENGTH + AX12_WRITE_DATA + AX12_ID + new_id);
 
@@ -123,7 +125,7 @@ int set_id(uint8_t id, uint8_t new_id)
 	return read_response();
 }
 
-int set_angle_limit(uint8_t id, uint16_t cw_limit, uint16_t ccw_limit)
+int16_t set_angle_limit(uint8_t id, uint16_t cw_limit, uint16_t ccw_limit)
 {
 	uint8_t out_data[11], checksum = ~(id + AX12_AL_LENGTH + AX12_WRITE_DATA
 		       		+ AX12_ANGLE_LIMIT + (cw_limit&0xff) + (ccw_limit>>8)
@@ -143,4 +145,46 @@ int set_angle_limit(uint8_t id, uint16_t cw_limit, uint16_t ccw_limit)
 	for (uint8_t i = 0; i < 11; ++i)
 		usart_send_blocking(AX12, out_data[i]);
 	return read_response();
+}
+
+int16_t read_moving_status(uint8_t id)
+{
+	uint8_t out_data[8], checksum = ~(id + AX12_MOVING_LENGTH + AX12_READ_DATA
+			                             + AX12_MOVING + AX12_BYTE_READ);
+
+	out_data[0] = out_data[1] = AX12_START;
+	out_data[2] = id;
+	out_data[3] = AX12_MOVING_LENGTH;
+	out_data[4] = AX12_READ_DATA;
+	out_data[5] = AX12_MOVING;
+	out_data[6] = AX12_BYTE_READ;
+	out_data[7] = checksum;
+
+	for (uint8_t i = 0; i < 8; ++i)
+		usart_send_blocking(AX12, out_data[i]);
+	return read_response();
+}
+
+int16_t read_response(void)
+{
+	uint8_t data[5];
+	uint8_t error, length;
+
+	for (uint8_t i = 0; i < 5; ++i)
+		data[i] = usart_recv_blocking(AX12);
+
+	if (data[0] != 0xff)
+		return -256;
+
+	length = data[3] - 2;
+	error = data[4];
+
+	if (error)
+		return -error;
+	else if (length == 0)
+		return error;
+	else if (length > 1)
+		return (usart_recv_blocking(AX12)&0xff) + (usart_recv_blocking(AX12)<<8);
+	else
+		return usart_recv_blocking(AX12);
 }
