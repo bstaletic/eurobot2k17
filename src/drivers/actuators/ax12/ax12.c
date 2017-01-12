@@ -179,9 +179,7 @@ int16_t read_response(void)
 	length = data[3] - 2;
 	error = data[4];
 
-	if (error)
-		return -error;
-	else if (length == 0)
+	if (error || !length)
 		return error;
 	else if (length > 1)
 		return (usart_recv_blocking(AX12)&0xff) + (usart_recv_blocking(AX12)<<8);
