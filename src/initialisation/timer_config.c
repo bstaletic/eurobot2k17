@@ -1,7 +1,5 @@
 #include <initialisation/timer_config.h>
 
-volatile uint32_t sys_time;
-
 void timer1_config(void)
 {
 	timer_reset(TIM1);
