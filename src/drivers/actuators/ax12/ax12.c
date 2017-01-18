@@ -1,7 +1,7 @@
 #include <drivers/actuators/ax12/ax12.h>
 
 // AX12_TODO: AX12_Convert postion to degrees?
-int16_t move(uint8_t id, uint16_t position)
+int16_t ax12_move(uint8_t id, uint16_t position)
 {
 	uint8_t out_data[9], checksum;
 
@@ -27,7 +27,7 @@ int16_t move(uint8_t id, uint16_t position)
 	return read_response();
 }
 
-int16_t move_speed(uint8_t id, uint16_t position, uint16_t speed)
+int16_t ax12_move_speed(uint8_t id, uint16_t position, uint16_t speed)
 {
 	uint8_t out_data[11], checksum;
 
@@ -54,7 +54,7 @@ int16_t move_speed(uint8_t id, uint16_t position, uint16_t speed)
 	return read_response();
 }
 
-int16_t set_speed(uint8_t id, uint16_t speed)
+int16_t ax12_set_speed(uint8_t id, uint16_t speed)
 {
 	uint8_t out_data[9];
 
@@ -75,7 +75,7 @@ int16_t set_speed(uint8_t id, uint16_t speed)
 	return read_response();
 }
 
-int16_t factory_reset(uint8_t id)
+int16_t ax12_factory_reset(uint8_t id)
 {
 	uint8_t out_data[6], checksum = ~(id + AX12_RESET_LENGTH + AX12_RESET);
 
@@ -90,7 +90,7 @@ int16_t factory_reset(uint8_t id)
 	return read_response();
 }
 
-int16_t set_baudrate(uint8_t id, uint32_t baudrate)
+int16_t ax12_set_baudrate(uint8_t id, uint32_t baudrate)
 {
 	uint8_t out_data[8], checksum = ~(id + AX12_BAUDRATE_LENGTH + AX12_WRITE_DATA
 				+ AX12_BAUDRATE + ((2000000/baudrate)-1));
@@ -108,7 +108,7 @@ int16_t set_baudrate(uint8_t id, uint32_t baudrate)
 	return read_response();
 }
 
-int16_t set_id(uint8_t id, uint8_t new_id)
+int16_t ax12_set_id(uint8_t id, uint8_t new_id)
 {
 	uint8_t out_data[8], checksum = ~(id + AX12_ID_LENGTH + AX12_WRITE_DATA + AX12_ID + new_id);
 
@@ -125,7 +125,7 @@ int16_t set_id(uint8_t id, uint8_t new_id)
 	return read_response();
 }
 
-int16_t set_angle_limit(uint8_t id, uint16_t cw_limit, uint16_t ccw_limit)
+int16_t ax12_set_angle_limit(uint8_t id, uint16_t cw_limit, uint16_t ccw_limit)
 {
 	uint8_t out_data[11], checksum = ~(id + AX12_AL_LENGTH + AX12_WRITE_DATA
 		       		+ AX12_ANGLE_LIMIT + (cw_limit&0xff) + (ccw_limit>>8)
@@ -147,7 +147,7 @@ int16_t set_angle_limit(uint8_t id, uint16_t cw_limit, uint16_t ccw_limit)
 	return read_response();
 }
 
-int16_t read_moving_status(uint8_t id)
+int16_t ax12_read_moving_status(uint8_t id)
 {
 	uint8_t out_data[8], checksum = ~(id + AX12_MOVING_LENGTH + AX12_READ_DATA
 			                             + AX12_MOVING + AX12_BYTE_READ);
@@ -165,7 +165,7 @@ int16_t read_moving_status(uint8_t id)
 	return read_response();
 }
 
-int16_t read_response(void)
+int16_t ax12_read_response(void)
 {
 	uint8_t data[5];
 	uint8_t error, length;
