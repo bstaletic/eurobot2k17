@@ -1,6 +1,6 @@
 #include <drivers/sensors/colour/colour.h>
 
-void read_sensor(char *value)
+colour_enum_t read_sensor(void)
 {
 
 }

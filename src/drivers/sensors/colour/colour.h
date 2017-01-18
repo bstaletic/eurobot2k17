@@ -1,6 +1,10 @@
 #ifndef COLOUR_SENSOR
 #define COLOUR_SENSOR
 
-void read_sensor(char *value);
+#include <initialisation/timer_config.h>
+
+typedef enum { BLUE, YELLOW, WHITE, ERROR } colour_enum_t;
+
+colour_enum_t read_sensor(void);
 
 #endif /* ifndef COLOUR_SENSOR */
