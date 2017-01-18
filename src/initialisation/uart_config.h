@@ -15,4 +15,14 @@ void usart2_config(void);
 void usart3_config(void);
 void uart4_config(void);
 
+typedef enum { IDLE, STUCK, ROTATING, ERROR, MOVING } motion_status;
+
+typedef struct {
+	uint16_t x;
+	uint16_t y;
+	uint16_t orientation;
+	motion_status status;
+} motion_state;
+
+extern volatile motion_state state;
 #endif /* ifndef UART_CONFIG */

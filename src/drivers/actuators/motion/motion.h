@@ -4,35 +4,28 @@
 #include <libopencm3/stm32/usart.h>
 #include <libopencm3/cm3/nvic.h>
 #include <stdint.h>
+#include <initialisation/uart_config.h>
 
 #define MOTION_DRIVER UART4
-
-typedef enum { IDLE, STUCK, ROTATING, ERROR, MOVING } motion_status;
-
-typedef struct {
-	uint16_t x;
-	uint16_t y;
-	uint16_t orientation;
-	motion_status status;
-} motion_state;
-
-extern volatile uint16_t x_coordinate;
-extern volatile uint16_t y_coordinate;
-extern volatile uint16_t orientation;
-extern volatile char status;
-
-motion_state state;
 
 /** \file motion.h
  * \brief Motion driver functions
  */
 
-/** \fn void set_position_and_orientation(int16_t x, int16_t y, int16_t orientation)
+/** \fn void set_position_and_orientation(int16_t
+ *                                       x,
+ *                                       int16_t
+ *                                       y,
+ *                                       int16_t
+ *                                       orientation)
  * \brief Sets the postion and orientation. Useful for correcting the driver itself.
  *
- * Corrects the driver by telling it the coordinates and orientation. `x` and `y` are the new coordinates sent to the driver and the `orientation` is the new orientation of the driver.
+ * Corrects the driver by telling it the coordinates and orientation.
+ * `x` and `y` are the new coordinates sent to the driver and the `orientation`
+ * is the new orientation of the driver.
  *
- * NOTE: This function does NOT move the robot, just corrects the driver on what it reports.
+ * NOTE: This function does NOT move the robot,
+ * just corrects the driver on what it reports.
  * @param [in] x Sets x coordinate
  * @param [in] y Sets y coordinate
  * @param [in] orientation Sets orientation
@@ -74,7 +67,8 @@ void rotate_to(int16_t angle);
 /** \fn void goto_xy(int16_t x, int16_t y, int8_t end_speed, int8_t direction)
  * \brief Let the driver calculate how to get to coordinates (x,y)
  *
- * This works by driver rotating the robot so it faces the (x,y) and moving forward to it.
+ * This works by driver rotating the robot so it faces the (x,y)
+ * and moving forward to it.
  * @param x [in] X coordinate of the point where robot should go
  * @param y [in] Y coordinate of the point where robot should go
  * @param end_speed [in] Speed at which the movement is finished. Must be zero.
@@ -124,7 +118,5 @@ void read_state(void);
  *
  */
 void set_motion_speed(int8_t speed);
-
-void update_state(void);
 
 #endif /* ifndef MOTION */

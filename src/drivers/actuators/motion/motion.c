@@ -158,11 +158,3 @@ void stuck_disable(void)
 {
 	usart_send_blocking(MOTION_DRIVER, 'z');
 }
-
-void update_state(void)
-{
-	state.x = x_coordinate;
-	state.y = y_coordinate;
-	state.status = status;
-	state.orientation = orientation;
-}

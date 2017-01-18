@@ -4,6 +4,7 @@ volatile uint16_t x_coordinate;
 volatile uint16_t y_coordinate;
 volatile uint16_t orientation;
 volatile char status;
+volatile motion_state state;
 
 void usart2_config(void)
 {
@@ -30,14 +31,14 @@ void usart2_isr(void)
 	if (((USART_CR1(USART2) & USART_CR1_RXNEIE) != 0) &&
 	    ((USART_SR(USART2) & USART_SR_RXNE) != 0)) {
 
-		status = usart_recv_blocking(USART2);
-		x_coordinate = ( usart_recv_blocking(USART2) << 8 ) |
+		state.status = usart_recv_blocking(USART2);
+		state.x = ( usart_recv_blocking(USART2) << 8 ) |
 					   ( usart_recv_blocking(USART2) & 0xff );
 
-		y_coordinate = ( usart_recv_blocking(USART2) << 8 ) |
+		state.y = ( usart_recv_blocking(USART2) << 8 ) |
 					   ( usart_recv_blocking(USART2) & 0xff );
 
-		orientation = ( usart_recv_blocking(USART2) << 8 ) |
+		state.orientation = ( usart_recv_blocking(USART2) << 8 ) |
 					  ( usart_recv_blocking(USART2) & 0xff );
 
 	}
