@@ -5,6 +5,6 @@
 
 typedef enum { BLUE, YELLOW, WHITE, ERROR } colour_enum_t;
 
-colour_enum_t read_sensor(void);
+colour_enum_t read_colour(void);
 
 #endif /* ifndef COLOUR_SENSOR */
