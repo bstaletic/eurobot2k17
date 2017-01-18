@@ -4,8 +4,8 @@
 #include <initialisation/timer_config.h>
 
 typedef struct {
-	uint16_t timer;
-	uint16_t channel;
+	uint32_t timer;
+	uint32_t channel;
 } analog_servo;
 
 /**
