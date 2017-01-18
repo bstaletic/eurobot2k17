@@ -1,21 +1,25 @@
 #include <executors/revolver/revolver.h>
 
-int8_t init(void)
+int8_t revolver_init(void)
 {
-	return move(REVOLVER_AX12_ID, revolver_position);
+	return ax12_move(REVOLVER_AX12_ID,
+                     revolver_position);
 }
 
-int8_t go_to_position(uint16_t tube_number)
+int8_t revolver_go_to_position(uint16_t tube_number)
 {
-	return move(REVOLVER_AX12_ID, revolver_position = tube_number*60);
+	return ax12_move(REVOLVER_AX12_ID,
+                     revolver_position = tube_number * AX12_NEXT_POSITION_INC);
 }
 
-int8_t next(void)
+int8_t revolver_next(void)
 {
-	return move(REVOLVER_AX12_ID, revolver_position += 60);
+	return ax12_move(REVOLVER_AX12_ID,
+                     revolver_position += AX12_NEXT_POSITION_INC);
 }
 
-int8_t previous(void)
+int8_t revolver_previous(void)
 {
-	return move(REVOLVER_AX12_ID, revolver_position -= 60);
+	return ax12_move(REVOLVER_AX12_ID,
+                     revolver_position -= AX12_NEXT_POSITION_INC);
 }
