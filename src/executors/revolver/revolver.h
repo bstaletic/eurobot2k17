@@ -12,7 +12,7 @@ int16_t revolver_position = 0;
  * \fn int8_t init(void)
  * \brief Set the executor in initial state
  */
-int8_t init(void);
+int8_t revolver_init(void);
 
 /**
  * \fn int8_t go_to_position(uint8_t)
@@ -24,18 +24,18 @@ int8_t init(void);
  *
  * Number of tubes - 8
  */
-int8_t go_to_position(uint16_t tube_number);
+int8_t revolver_go_to_position(uint16_t tube_number);
 
 /**
  * \fn int8_t next(void)
  * \brief Rotate to the next tube
  */
-int8_t next(void);
+int8_t revolver_next(void);
 
 /**
  * \fn int8_t previous(void)
  * \brief Rotate to the previous tube
  */
-int8_t previous(void);
+int8_t revolver_previous(void);
 
 #endif /* ifndef REVOLVER_EXECUTOR */
