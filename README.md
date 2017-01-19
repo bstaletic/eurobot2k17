@@ -31,6 +31,10 @@ This repo is going to be used for hosting the code for the upcoming Eurobot 2017
         - `analog` - analog sensors
           - `Makefile` - source the necessary files to make proper compilation possible
           - `colour.c` and `colour.h` - interface of the colour sensor
+    - `executors` - abstracts drivers for easier writing of tactics
+      - `trunk` - mechanism for storing ores
+        - `Makefile` - appends the source to SRC variable
+        - `trunk.c` and `trunk.h` - functions for interfacing with the trunk mechanism
     - `initialisation` - contains source files with functions initialising the MCU
       - `Makefile` - source the necessary files to make proper compilation possible
       - `adc_config.c` and `adc_config.h` - initialises ADC1
