@@ -78,12 +78,12 @@ void timer4_config(void)
 void timer5_config(void)
 {
 	timer_reset(TIM5);
-	timer_set_prescaler(TIM5, 105);
-	timer_set_mode(TIM5, TIM_CR1_CKD_CK_INT, TIM_CR1_CMS_CENTER_1, TIM_CR1_DIR_UP);
-	timer_ic_set_prescaler(TIM5, TIM_IC4, 0);
+	timer_set_period(TIM5, 168);
+	// Enable update when trigger is high
+	timer_slave_set_mode(TIM5, TIM_SMCR_SMS_GM);
 	timer_ic_set_input(TIM5, TIM_IC4, TIM_IC_IN_TI4);
 	timer_ic_enable(TIM5, TIM_IC4);
-	timer_enable_counter(TIM4);
+	timer_enable_counter(TIM5);
 }
 
 void timer9_config(void)

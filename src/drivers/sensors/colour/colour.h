@@ -2,14 +2,26 @@
 #define COLOUR_SENSOR
 
 #include <initialisation/timer_config.h>
+#include <libopencm3/stm32/timer.h>
 
-typedef enum { BLUE, YELLOW, WHITE, ERROR } colour_enum_t;
+typedef enum { BLUE, YELLOW, WHITE, UNKNOWN } colour_enum_t;
+
+#define BLUE_RANGE_START 0
+#define BLUE_RANGE_END 100
+
+#define YELLOW_RANGE_START 200
+#define YELLOW_RANGE_END 300
+
+#define WHITE_RANGE_START 400
+#define WHITE_RANGE_END 500
+
+#define COLOUR_SENSOR_TIMER TIM5
 
 /**
  * \fn colour_enum_t read_colour(void)
  * \brief Reads sensor and returns the approrpriate colour
  *
- * Returns BLUE, YELLOW, WHITE or ERROR
+ * Returns BLUE, YELLOW, WHITE or UNKNOWN
  */
 colour_enum_t read_colour(void);
 

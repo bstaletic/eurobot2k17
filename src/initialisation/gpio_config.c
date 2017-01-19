@@ -25,6 +25,7 @@ void gpio_config(void)
 
 	/* GPIO for the two digital outputs for colour sensor */
 	gpio_mode_setup(GPIOD, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, GPIO6|GPIO7);
+	gpio_set(GPIOD, GPIO6|GPIO7);
 
 	/* Timer PWM GPIO output setup */
 	gpio_set_output_options(GPIOA,
