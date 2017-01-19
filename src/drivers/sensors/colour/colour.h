@@ -5,6 +5,12 @@
 
 typedef enum { BLUE, YELLOW, WHITE, ERROR } colour_enum_t;
 
+/**
+ * \fn colour_enum_t read_colour(void)
+ * \brief Reads sensor and returns the approrpriate colour
+ *
+ * Returns BLUE, YELLOW, WHITE or ERROR
+ */
 colour_enum_t read_colour(void);
 
 #endif /* ifndef COLOUR_SENSOR */
