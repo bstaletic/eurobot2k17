@@ -8,6 +8,9 @@ typedef struct {
 	uint32_t channel;
 } analog_servo;
 
+const analog_servo servo1, servo2, servo4, servo5, servo6,
+	 				servo7, servo8;
+
 /**
  * \fn void analog_servo_move(analog_servo as, int16_t angle)
  * \brief Rotate analog servo to desired position
