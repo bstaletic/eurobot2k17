@@ -33,6 +33,7 @@ typedef struct{
 	point_t position;
 }element_t;
 
+
 /// @todo todo remove n from ifndef :D
 #ifndef ROBOT_VOYAGER
 typedef struct{
