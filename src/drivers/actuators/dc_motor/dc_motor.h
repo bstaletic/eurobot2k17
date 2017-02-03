@@ -21,6 +21,6 @@ void dc_motor_move(int16_t speed);
  * \fn void dc_motor_direction(dc_motor dc, int8_t direction);
  * \brief Set dc motor direction
  */
-void dc_motor_direction(dc_motor dc, int8_t direction);
+void dc_motor_direction(int8_t direction);
 
 #endif /* ifndef DC_MOTOR_H */

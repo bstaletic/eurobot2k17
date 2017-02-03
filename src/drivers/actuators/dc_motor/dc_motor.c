@@ -10,5 +10,5 @@ void dc_motor_direction(int8_t direction)
 	if (direction)
 		gpio_set(DC_GPIO, DC_PIN);
 	else
-		gpio_reset(DC_GPIO, DC_PIN);
+		gpio_clear(DC_GPIO, DC_PIN);
 }
