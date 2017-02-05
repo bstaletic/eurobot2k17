@@ -3,23 +3,26 @@
 #include <initialisation/uart_config.h>
 #include <initialisation/timer_config.h>
 #include <initialisation/adc_config.h>
+#include <initialisation/exti_config.h>
 
 #include <drivers/actuators/ax12/ax12.h>
 #include <drivers/actuators/motion/motion.h>
 #include <drivers/sensors/analog/colour.h>
 
 
-#include "tasks/task_test_1.h"
-#include "tasks/task_test_2.h"
-#include "core/task_mngr.h"
+void exti0_isr(void){
 
+	gpio_toggle(GPIOD, GPIO13);
+
+	exti_reset_request(EXTI0);
+}	
 
 void main(void)
 {
-
-
+	//_disable_interrupts();
 	clock_config();
 	gpio_config();
+	exti_config();
 
 	usart2_config();
 	usart3_config();
@@ -38,6 +41,7 @@ void main(void)
 	task_mngr_run();
 
 	while (1) {
+
 	}
 
 }
