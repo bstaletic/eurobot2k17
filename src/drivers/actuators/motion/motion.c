@@ -1,4 +1,4 @@
-#include <drivers/actuators/motion/motion.h>
+#include "motion.h"
 
 volatile motion_state state;
 
