@@ -1,4 +1,4 @@
-#include <drivers/actuators/ax12/ax12.h>
+#include "ax12.h"
 
 // AX12_TODO: AX12_Convert postion to degrees?
 int16_t ax12_move(uint8_t id, uint16_t position)
@@ -24,7 +24,7 @@ int16_t ax12_move(uint8_t id, uint16_t position)
 	// AX12_Send data to AX12_AX12
 	for (uint8_t i = 0; i < 9; ++i)
 		usart_send_blocking(AX12, out_data[i]);
-	return read_response();
+	return ax12_read_response();
 }
 
 int16_t ax12_move_speed(uint8_t id, uint16_t position, uint16_t speed)
