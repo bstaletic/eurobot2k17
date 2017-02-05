@@ -1,6 +1,9 @@
 #include <initialisation/timer_config.h>
 
-volatile uint32_t sys_time;
+volatile int32_t colour_sensor_frequency;
+static volatile int8_t colour_sensor_first_read = 1;
+static volatile int32_t colour_sensor_counter_value1;
+static volatile int32_t colour_sensor_counter_value2;
 
 void timer1_config(void)
 {
@@ -78,7 +81,7 @@ void timer4_config(void)
 void timer5_config(void)
 {
 	timer_reset(TIM5);
-	timer_set_period(TIM5, 168);
+	//timer_set_period(TIM5, 168);
 	// Enable update when trigger is high
 	timer_slave_set_mode(TIM5, TIM_SMCR_SMS_GM);
 	timer_ic_set_input(TIM5, TIM_IC4, TIM_IC_IN_TI4);
@@ -120,4 +123,39 @@ void timer10_config(void)
 	timer_set_oc_value(TIM10, TIM_OC1, 8000);
 	timer_enable_oc_output(TIM10, TIM_OC1);
 	timer_enable_counter(TIM10);
+}
+
+void timer14_config(void)
+{
+	timer_reset(TIM14);
+	nvic_enable_irq(NVIC_TIM14_IRQ);
+	timer_set_prescaler(TIM14, 420);
+	timer_set_mode(TIM14, TIM_CK1_CKD_CK_INT_MUL_4, TIM_CR1_CMS_CENTER_1, TIM_CR1_DIR_UP);
+	/* Reset after 1ms */
+	timer_set_period(TIM14, 10000);
+	timer_set_oc_value(TIM14, 5000);
+	timer_enable_counter(TIM14);
+	timer_enable_irq(TIM14, TIM_DIER_CC1IE);
+}
+
+void tim14_isr(void)
+{
+	if (timer_get_flag(TIM14, TIM_SR_CC1IF)) {
+
+		/* Clear compare interrupt flag. */
+		timer_clear_flag(TIM14, TIM_SR_CC1IF);
+
+		if (colour_sensor_first_read)
+		{
+			colour_sensor_counter_value1 = timer_get_counter(COLOUR_SENSOR_TIMER);
+			colour_sensor_first_read = 0;
+		}
+		else
+		{
+			colour_sensor_counter_value2 = timer_get_counter(COLOUR_SENSOR_TIMER);
+			colour_sensor_frequency = ( colour_sensor_counter_value2 - colour_sensor_counter_value1 ) * 1000000;
+			colour_sensor_first_read = 1;
+
+		}
+	}
 }
