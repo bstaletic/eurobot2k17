@@ -2,8 +2,8 @@
 #define DC_MOTOR_H
 
 #include <stdint.h>
-#include <initialisation/timer_config.h>
-#include <initialisation/gpio_config.h>
+#include "../../../initialisation/timer_config.h"
+#include "../../../initialisation/gpio_config.h"
 
 #define DC_TIMER TIM12
 #define DC_CHANNEL TIM_OC1
