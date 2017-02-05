@@ -1,4 +1,4 @@
-#include <executors/revolver/revolver.h>
+#include "revolver.h"
 
 int8_t revolver_init(void)
 {
