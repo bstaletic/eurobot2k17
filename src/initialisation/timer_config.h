@@ -2,7 +2,7 @@
 #define TIMER_CONFIG
 
 #include <libopencm3/stm32/timer.h>
-#include <libopencmsis/nvic.h>
+#include <libopencm3/cm3/nvic.h>
 #include <stdint.h>
 
 #define COLOUR_SENSOR_TIMER TIM5

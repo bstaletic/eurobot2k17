@@ -81,9 +81,16 @@ void timer4_config(void)
 void timer5_config(void)
 {
 	timer_reset(TIM5);
+	nvic_enable_irq(NVIC_TIM5_IRQ);
+	timer_set_prescaler(TIM5, 420);
+	timer_set_mode(TIM5, TIM_CR1_CKD_CK_INT_MUL_4, TIM_CR1_CMS_CENTER_1, TIM_CR1_DIR_UP);
+	timer_set_period(TIM5, 10000);
+	timer_set_oc_value(TIM5, TIM_OC3, 5000);
 	//timer_set_period(TIM5, 168);
 	// Enable update when trigger is high
 	timer_slave_set_mode(TIM5, TIM_SMCR_SMS_GM);
+	timer_enable_counter(TIM5);
+	timer_enable_irq(TIM5, TIM_DIER_CC1IE);
 	timer_ic_set_input(TIM5, TIM_IC4, TIM_IC_IN_TI4);
 	timer_ic_enable(TIM5, TIM_IC4);
 	timer_enable_counter(TIM5);
@@ -125,25 +132,12 @@ void timer10_config(void)
 	timer_enable_counter(TIM10);
 }
 
-void timer14_config(void)
+void tim5_isr(void)
 {
-	timer_reset(TIM14);
-	nvic_enable_irq(NVIC_TIM14_IRQ);
-	timer_set_prescaler(TIM14, 420);
-	timer_set_mode(TIM14, TIM_CK1_CKD_CK_INT_MUL_4, TIM_CR1_CMS_CENTER_1, TIM_CR1_DIR_UP);
-	/* Reset after 1ms */
-	timer_set_period(TIM14, 10000);
-	timer_set_oc_value(TIM14, 5000);
-	timer_enable_counter(TIM14);
-	timer_enable_irq(TIM14, TIM_DIER_CC1IE);
-}
-
-void tim14_isr(void)
-{
-	if (timer_get_flag(TIM14, TIM_SR_CC1IF)) {
+	if (timer_get_flag(TIM5, TIM_SR_CC1IF)) {
 
 		/* Clear compare interrupt flag. */
-		timer_clear_flag(TIM14, TIM_SR_CC1IF);
+		timer_clear_flag(TIM5, TIM_SR_CC1IF);
 
 		if (colour_sensor_first_read)
 		{
