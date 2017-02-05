@@ -5,11 +5,11 @@
 #include <initialisation/timer_config.h>
 #include <initialisation/gpio_config.h>
 
-#define DC_TIMER TIM1
+#define DC_TIMER TIM12
 #define DC_CHANNEL TIM_OC1
 
-#define DC_GPIO GPIOA
-#define DC_PIN GPIO0
+#define DC_GPIO GPIOC
+#define DC_PIN GPIO6
 
 /**
  * \fn void dc_motor_move(dc_motor dc, int16_t speed);

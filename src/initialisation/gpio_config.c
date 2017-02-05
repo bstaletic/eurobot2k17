@@ -48,10 +48,6 @@ void gpio_config(void)
 	gpio_mode_setup(GPIOA, GPIO_MODE_AF, GPIO_PUPD_NONE, GPIO0|GPIO1);
 	gpio_set_af(GPIOA, GPIO_AF8, GPIO0|GPIO1);
 
-
-	/* ADC1 GPIO setup */
-	gpio_mode_setup(GPIOA, GPIO_MODE_ANALOG, GPIO_PUPD_NONE, GPIO3);
-
 	/* Configure GPIO for external interrupts (sensors) */
 	/* NOTE: only inputs with bodge pull down resistors are used */
 
@@ -68,4 +64,7 @@ void gpio_config(void)
 
 	/*LEDs output GPIO setup */
 	gpio_mode_setup(GPIOD, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, GPIO12|GPIO13|GPIO14|GPIO15);
+
+	/* DC motor direction pin */
+	gpio_mode_setup(GPIOD, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, GPIO12);
 }

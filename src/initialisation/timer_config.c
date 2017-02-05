@@ -23,7 +23,7 @@ void timer1_config(void)
 }
 
 void timer2_config(void)
-{	
+{
 	/* Servo 7 (TIM_OC1) output */
 	timer_reset(TIM2);
 	timer_set_prescaler(TIM2, 26);
@@ -59,7 +59,7 @@ void timer3_config(void)
 }
 
 void timer4_config(void)
-{	
+{
 	/*Servo 4 (TIM_OC2) output */
 	timer_reset(TIM4);
 	timer_set_prescaler(TIM4, 26);
@@ -75,7 +75,7 @@ void timer4_config(void)
 }
 
 void timer9_config(void)
-{	
+{
 	/* Servo 1 (TIM_OC2) and Servo 2 (TIM_OC1) outputs */
 	timer_reset(TIM9);
 	timer_set_prescaler(TIM9, 105);
@@ -95,7 +95,7 @@ void timer9_config(void)
 }
 
 void timer10_config(void)
-{	
+{
 	/* Should be Servo 3 (TIMOC1) output, I (Darko) missed a pin, my bad, useless currently */
 	timer_reset(TIM10);
 	timer_set_prescaler(TIM10, 0);
@@ -108,4 +108,17 @@ void timer10_config(void)
 	timer_set_oc_value(TIM10, TIM_OC1, 8000);
 	timer_enable_oc_output(TIM10, TIM_OC1);
 	timer_enable_counter(TIM10);
+}
+
+void timer12_config(void)
+{
+	/* DC motor */
+	timer_reset(TIM12);
+	timer_set_prescaler(TIM12, 0);
+	timer_set_mode(TIM12, TIM_CR1_CKD_CK_INT_MUL_4, TIM_CR1_CMS_CENTER_1, TIM_CR1_DIR_UP);
+	timer_set_oc_mode(TIM12, TIM_OC1, TIM_OCM_PWM1);
+	timer_set_period(TIM12, 8399);
+	timer_set_oc_value(TIM12, TIM_OC1, 8000);
+	timer_enable_oc_output(TIM12, TIM_OC1);
+	timer_enable_counter(TIM12);
 }
