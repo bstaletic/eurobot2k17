@@ -52,8 +52,15 @@ void gpio_config(void)
 	/* ADC1 GPIO setup */
 	gpio_mode_setup(GPIOA, GPIO_MODE_ANALOG, GPIO_PUPD_NONE, GPIO3);
 
-	/*EXTI0 PB0 GPIO setup */
-	gpio_mode_setup(GPIOB, GPIO_MODE_INPUT, GPIO_PUPD_PULLDOWN, GPIO0);
+	/* Configure GPIO for external interrupts (sensors) */
+	/* NOTE: only sensor with bodge pull down resistors are used */
+
+	/* EXTI0 PB0, EXTI0 PB2 GPIO setup */
+	gpio_mode_setup(GPIOB, GPIO_MODE_INPUT, GPIO_PUPD_NONE, GPIO0|GPIO2);
+
+	/* EXT8 PE8, EXT11 PE11. EXT13 PE13, EXT15 PE15 */
+	gpio_mode_setup(GPIOE, GPIO_MODE_INPUT, GPIO_PUPD_NONE, GPIO8|GPIO11|GPIO13|GPIO15);
+
 
 	/*LEDs output GPIO setup */
 	gpio_mode_setup(GPIOD, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, GPIO12|GPIO13|GPIO14|GPIO15);
