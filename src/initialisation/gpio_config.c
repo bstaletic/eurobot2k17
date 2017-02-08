@@ -53,7 +53,7 @@ void gpio_config(void)
 	gpio_mode_setup(GPIOA, GPIO_MODE_ANALOG, GPIO_PUPD_NONE, GPIO3);
 
 	/* Configure GPIO for external interrupts (sensors) */
-	/* NOTE: only sensor with bodge pull down resistors are used */
+	/* NOTE: only inputs with bodge pull down resistors are used */
 
 	/* EXTI0 PB0, EXTI0 PB2 GPIO setup */
 	gpio_mode_setup(GPIOB, GPIO_MODE_INPUT, GPIO_PUPD_NONE, GPIO0|GPIO2);
