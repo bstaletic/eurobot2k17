@@ -72,13 +72,13 @@ void exti15_10_isr(void){
 		if (gpio_get(GPIOE, GPIO13)){
 
 			/* Here goes code when something is detected */
-			gpio_set(GPIOD, GPIO13);
+
 		}
 
 		else {
 
 			/* Here goes code when there is not anything in front of the sensor */
-			gpio_clear(GPIOD, GPIO13);
+
 		}
 	}
 
