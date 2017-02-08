@@ -2,6 +2,9 @@
 
 void clock_config(void)
 {
+	/* Enable clock for NVIC and stuff */
+	rcc_periph_clock_enable(RCC_SYSCFG);
+
 	/* Enable GPIOD clock for all needed ports */
 	rcc_periph_clock_enable(RCC_GPIOA);
 	rcc_periph_clock_enable(RCC_GPIOB);
