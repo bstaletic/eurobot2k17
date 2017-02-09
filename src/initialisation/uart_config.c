@@ -36,7 +36,7 @@ void usart3_config(void)
 void uart4_config(void)
 {
 	/* Setup UART4 parameters. */
-	usart_set_baudrate(UART4, 115200);
+	usart_set_baudrate(UART4, 57600);
 	usart_set_databits(UART4, 8);
 	usart_set_stopbits(UART4, USART_STOPBITS_1);
 	usart_set_mode(UART4, USART_MODE_TX_RX);
