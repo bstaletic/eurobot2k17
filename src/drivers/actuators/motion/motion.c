@@ -17,14 +17,14 @@ void set_position_and_orientation(int16_t x, int16_t y, int16_t orientation)
 
 	// Send to motion driver
 	for (int8_t i = 0; i < 7; ++i)
-		usart_send_blocking(MOTION_DRIVER, out_data[i]);
+		usart_send(MOTION_DRIVER, out_data[i]);
 }
 
 void read_status_and_position(void)
 {
 	int8_t new_state[7];
 
-	usart_send_blocking(MOTION_DRIVER, 'P');
+	usart_send(MOTION_DRIVER, 'P');
 
 	for (int8_t i = 0; i < 7; ++i)
 		new_state[i] = usart_recv_blocking(MOTION_DRIVER);
@@ -63,7 +63,7 @@ void set_motion_speed(int8_t speed)
 	out_data[1] = speed;
 
 	for (int8_t i = 0; i < 2; ++i)
-		usart_send_blocking(MOTION_DRIVER, out_data[i]);
+		usart_send(MOTION_DRIVER, out_data[i]);
 }
 
 void move_forward(int16_t dist, int8_t end_speed)
@@ -76,7 +76,7 @@ void move_forward(int16_t dist, int8_t end_speed)
 	out_data[3] = end_speed;
 
 	for (int8_t i = 0; i < 4; ++i)
-		usart_send_blocking(MOTION_DRIVER, out_data[i]);
+		usart_send(MOTION_DRIVER, out_data[i]);
 }
 
 void rotate_for(int16_t angle)
@@ -88,7 +88,7 @@ void rotate_for(int16_t angle)
 	out_data[2] = angle>>8;
 
 	for (int8_t i = 0; i < 3; ++i)
-		usart_send_blocking(MOTION_DRIVER, out_data[i]);
+		usart_send(MOTION_DRIVER, out_data[i]);
 }
 
 void rotate_to(int16_t angle)
@@ -100,7 +100,7 @@ void rotate_to(int16_t angle)
 	out_data[2] = angle>>8;
 
 	for (int8_t i = 0; i < 3; ++i)
-		usart_send_blocking(MOTION_DRIVER, out_data[i]);
+		usart_send(MOTION_DRIVER, out_data[i]);
 }
 
 void goto_xy(int16_t x, int16_t y, int8_t end_speed, int8_t direction)
@@ -116,7 +116,7 @@ void goto_xy(int16_t x, int16_t y, int8_t end_speed, int8_t direction)
 	out_data[6] = direction;
 
 	for (int8_t i = 0; i < 7; ++i)
-		usart_send_blocking(MOTION_DRIVER, out_data[i]);
+		usart_send(MOTION_DRIVER, out_data[i]);
 }
 
 void curve(int16_t x, int16_t y, int8_t angle, int8_t angle_direction, int8_t direction)
@@ -133,32 +133,32 @@ void curve(int16_t x, int16_t y, int8_t angle, int8_t angle_direction, int8_t di
 	out_data[7] = direction;
 
 	for (int8_t i = 0; i < 8; ++i)
-		usart_send_blocking(MOTION_DRIVER, out_data[i]);
+		usart_send(MOTION_DRIVER, out_data[i]);
 }
 
 void hard_stop(void)
 {
-	usart_send_blocking(MOTION_DRIVER, 'S');
+	usart_send(MOTION_DRIVER, 'S');
 }
 
 void soft_stop(void)
 {
-	usart_send_blocking(MOTION_DRIVER, 's');
+	usart_send(MOTION_DRIVER, 's');
 }
 
 void reset_driver(void)
 {
-	usart_send_blocking(MOTION_DRIVER, 'R');
+	usart_send(MOTION_DRIVER, 'R');
 }
 
 void stuck_enable(void)
 {
-	usart_send_blocking(MOTION_DRIVER, 'Z');
+	usart_send(MOTION_DRIVER, 'Z');
 }
 
 void stuck_disable(void)
 {
-	usart_send_blocking(MOTION_DRIVER, 'z');
+	usart_send(MOTION_DRIVER, 'z');
 }
 
 void usart2_isr(void)

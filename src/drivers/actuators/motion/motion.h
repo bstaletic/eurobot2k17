@@ -5,7 +5,7 @@
 #include <libopencm3/cm3/nvic.h>
 #include <stdint.h>
 
-#define MOTION_DRIVER USART3
+#define MOTION_DRIVER UART4
 
 typedef enum { IDLE, STUCK, ROTATING, ERROR, MOVING } motion_status;
 
