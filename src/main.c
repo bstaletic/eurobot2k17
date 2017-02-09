@@ -9,14 +9,6 @@
 #include <drivers/actuators/motion/motion.h>
 #include <drivers/sensors/analog/colour.h>
 
-
-void exti0_isr(void){
-
-	gpio_toggle(GPIOD, GPIO13);
-
-	exti_reset_request(EXTI0);
-}	
-
 void main(void)
 {
 	//_disable_interrupts();
@@ -42,8 +34,8 @@ void main(void)
 		for (i = 0; i < 10000000; i++) {	/* Wait a bit. */
 			__asm__("nop");
 		}
-		
-		
+
+
 	}
 
 }

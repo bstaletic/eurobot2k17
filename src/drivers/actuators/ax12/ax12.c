@@ -7,7 +7,6 @@ uint8_t ax12_move(uint8_t id, uint16_t position)
 
 	// Calculate checksum
 	checksum = ~(id + AX12_GOAL_LENGTH + AX12_WRITE_DATA + AX12_GOAL_POSITION_L
-	checksum = ~(id + AX12_GOAL_LENGTH + AX12_WRITE_DATA + AX12_GOAL_POSITION_L
 			+ (position&0xff) + (position>>8));
 
 	// Construct the data to be sent
