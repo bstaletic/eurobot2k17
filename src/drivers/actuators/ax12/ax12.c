@@ -109,7 +109,8 @@ uint8_t ax12_set_baudrate(uint8_t id, uint32_t baudrate)
 
 uint8_t ax12_set_id(uint8_t id, uint8_t new_id)
 {
-	uint8_t out_data[8], checksum = ~(id + AX12_ID_LENGTH + AX12_WRITE_DATA + AX12_ID + new_id);
+	uint8_t out_data[8], checksum = ~(id + AX12_ID_LENGTH + AX12_WRITE_DATA
+                                         + AX12_ID + new_id);
 
 	out_data[0] = out_data[1] = AX12_START;
 	out_data[2] = id;
@@ -127,8 +128,9 @@ uint8_t ax12_set_id(uint8_t id, uint8_t new_id)
 uint8_t ax12_set_angle_limit(uint8_t id, uint16_t cw_limit, uint16_t ccw_limit)
 {
 	uint8_t out_data[11], checksum = ~(id + AX12_AL_LENGTH + AX12_WRITE_DATA
-		       		+ AX12_ANGLE_LIMIT + (cw_limit&0xff) + (ccw_limit>>8)
-				+ (ccw_limit&0xff) + (ccw_limit>>8));
+                                          + AX12_ANGLE_LIMIT + (cw_limit&0xff)
+                                          + (ccw_limit>>8) + (ccw_limit&0xff)
+                                          + (ccw_limit>>8));
 
 	out_data[0]  = out_data[1] = AX12_START;
 	out_data[2]  = id;
