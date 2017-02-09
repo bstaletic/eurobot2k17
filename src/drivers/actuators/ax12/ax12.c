@@ -22,7 +22,7 @@ uint8_t ax12_move(uint8_t id, uint16_t position)
 
 	// Send data to AX12
 	for (uint8_t i = 0; i < 9; ++i)
-		usart_send_blocking(AX12_UART, out_data[i]);
+		usart_send(AX12_UART, out_data[i]);
 	return ax12_read_response();
 }
 
@@ -49,7 +49,7 @@ uint8_t ax12_move_speed(uint8_t id, uint16_t position, uint16_t speed)
 
 	// Send data to AX12
 	for (uint8_t i = 0; i < 11; ++i)
-		usart_send_blocking(AX12_UART, out_data[i]);
+		usart_send(AX12_UART, out_data[i]);
 	return ax12_read_response();
 }
 
@@ -70,7 +70,7 @@ uint8_t ax12_set_speed(uint8_t id, uint16_t speed)
 	out_data[8] = checksum;
 
 	for (uint8_t i = 0; i < 9; ++i)
-		usart_send_blocking(AX12_UART, out_data[i]);
+		usart_send(AX12_UART, out_data[i]);
 	return ax12_read_response();
 }
 
@@ -85,7 +85,7 @@ uint8_t ax12_factory_reset(uint8_t id)
 	out_data[5] = checksum;
 
 	for (uint8_t i = 0; i < 6; ++i)
-		usart_send_blocking(AX12_UART, out_data[i]);
+		usart_send(AX12_UART, out_data[i]);
 	return ax12_read_response();
 }
 
@@ -103,7 +103,7 @@ uint8_t ax12_set_baudrate(uint8_t id, uint32_t baudrate)
 	out_data[7] = checksum;
 
 	for (uint8_t i = 0; i < 8; ++i)
-		usart_send_blocking(AX12_UART, out_data[i]);
+		usart_send(AX12_UART, out_data[i]);
 	return ax12_read_response();
 }
 
@@ -120,7 +120,7 @@ uint8_t ax12_set_id(uint8_t id, uint8_t new_id)
 	out_data[7] = checksum;
 
 	for (uint8_t i = 0; i < 8; ++i)
-		usart_send_blocking(AX12_UART, out_data[i]);
+		usart_send(AX12_UART, out_data[i]);
 	return ax12_read_response();
 }
 
@@ -142,7 +142,7 @@ uint8_t ax12_set_angle_limit(uint8_t id, uint16_t cw_limit, uint16_t ccw_limit)
 	out_data[10] = checksum;
 
 	for (uint8_t i = 0; i < 11; ++i)
-		usart_send_blocking(AX12_UART, out_data[i]);
+		usart_send(AX12_UART, out_data[i]);
 	return ax12_read_response();
 }
 
@@ -160,7 +160,7 @@ uint8_t ax12_read_moving_status(uint8_t id)
 	out_data[7] = checksum;
 
 	for (uint8_t i = 0; i < 8; ++i)
-		usart_send_blocking(AX12_UART, out_data[i]);
+		usart_send(AX12_UART, out_data[i]);
 	return ax12_read_response();
 }
 
