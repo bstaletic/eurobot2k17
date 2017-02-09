@@ -45,5 +45,5 @@ void uart4_config(void)
 	// Oversampling
 
 	/* Finally enable the USART. */
-	usart_enable(USART2);
+	usart_enable(UART4);
 }

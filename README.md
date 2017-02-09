@@ -21,6 +21,9 @@ This repo is going to be used for hosting the code for the upcoming Eurobot 2017
     - `main.c` - the main while(1) loop
     - `drivers` - functions for controlling the actual devices and mechanisms on the robot
       - `actuators` - output devices such as motors and pneumatics
+        - `analog_servo` - analog chinese servo
+          - `Makefile` - source the necessary files to make proper compilation possible
+          - `analog_servo.c` and `analog_servo.h` -  functions for interfacing with chinese analog servos
         - `ax12` - digital servo by Dynamixel
           - `Makefile` - source the necessary files to make proper compilation possible
           - `ax12.c` and `ax12.h` - functions for interfacing with the AX12
