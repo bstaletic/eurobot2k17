@@ -1,5 +1,17 @@
 #include "trunk.h"
 
+void trunk_init(void)
+{
+	analog_servo servo;
+	servo.channel = OPEN_TRUNK_TIMER_CHANNEL;
+	servo.timer = OPEN_TRUNK_TIMER;
+	analog_servo_move(servo, CLOSE_TRUNK_VALUE);
+
+	servo.channel = INCREASE_TRUNK_TIMER_CHANNEL;
+	servo.timer = INCREASE_TRUNK_TIMER;
+	analog_servo_move(servo, REDUCE_TRUNK_VALUE);
+}
+
 void open_trunk(void)
 {
 	analog_servo servo;
