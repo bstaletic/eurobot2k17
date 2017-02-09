@@ -20,29 +20,8 @@ void usart2_config(void)
 	//usart_enable_halfduplex(USART2);
 	// Oversampling
 
-	nvic_enable_irq(NVIC_USART2_IRQ);
-	usart_enable_rx_interrupt(USART2);
 	/* Finally enable the USART. */
 	usart_enable(USART2);
-}
-
-void usart2_isr(void)
-{
-	if (((USART_CR1(USART2) & USART_CR1_RXNEIE) != 0) &&
-	    ((USART_SR(USART2) & USART_SR_RXNE) != 0)) {
-
-		state.status = usart_recv_blocking(USART2);
-		state.x = ( usart_recv_blocking(USART2) << 8 ) |
-					   ( usart_recv_blocking(USART2) & 0xff );
-
-		state.y = ( usart_recv_blocking(USART2) << 8 ) |
-					   ( usart_recv_blocking(USART2) & 0xff );
-
-		state.orientation = ( usart_recv_blocking(USART2) << 8 ) |
-					  ( usart_recv_blocking(USART2) & 0xff );
-
-	}
-
 }
 
 void usart3_config(void)
@@ -71,6 +50,28 @@ void uart4_config(void)
 	usart_set_flow_control(UART4, USART_FLOWCONTROL_NONE);
 	// Oversampling
 
+	nvic_enable_irq(NVIC_UART4_IRQ);
+	usart_enable_rx_interrupt(UART4);
 	/* Finally enable the USART. */
 	usart_enable(UART4);
+}
+
+void uart4_isr(void)
+{
+	if ((UART4_CR1 & USART_CR1_RXNEIE) && (UART4_SR & USART_SR_RXNE)) {
+
+		state.status = usart_recv_blocking(UART4);
+		state.x = ( usart_recv_blocking(UART4) << 8 ) |
+					   ( usart_recv_blocking(UART4) & 0xff );
+
+		state.y = ( usart_recv_blocking(UART4) << 8 ) |
+					   ( usart_recv_blocking(UART4) & 0xff );
+
+		state.orientation = ( usart_recv_blocking(UART4) << 8 ) |
+					  ( usart_recv_blocking(UART4) & 0xff );
+
+	} else if ((UART4_CR1 & USART_CR1_TXEIE) && (UART4_SR & USART_SR_TXE)) {
+
+	}
+
 }
