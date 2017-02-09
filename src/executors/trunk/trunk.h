@@ -29,5 +29,6 @@ void close_trunk(void);
  */
 void increase_trunk(void);
 void reduce_trunk(void);
+void trunk_init(void);
 
 #endif /* ifndef TRUNK_EXECUTOR */
