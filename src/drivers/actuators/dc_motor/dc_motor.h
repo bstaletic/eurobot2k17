@@ -3,13 +3,12 @@
 
 #include <stdint.h>
 #include "../../../initialisation/timer_config.h"
-#include "../../../initialisation/gpio_config.h"
+#include "../mosfet_switches/mosfet_switches.h"
 
 #define DC_TIMER TIM12
 #define DC_CHANNEL TIM_OC1
 
-#define DC_GPIO GPIOC
-#define DC_PIN GPIO6
+#define DC_MOSFET_ID 1
 
 /**
  * \fn void dc_motor_move(dc_motor dc, int16_t speed);

@@ -33,8 +33,6 @@ void clock_config(void)
 	rcc_periph_clock_enable(RCC_TIM9);
 	/* TIM10 clock enable */
 	rcc_periph_clock_enable(RCC_TIM10);
-	/* TIM12 clock enable */
-	rcc_periph_clock_enable(RCC_TIM12);
 
 	/* ADC1 clock enable */
 	rcc_periph_clock_enable(RCC_ADC1);

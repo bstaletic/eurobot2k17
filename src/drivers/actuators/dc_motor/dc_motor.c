@@ -8,7 +8,7 @@ void dc_motor_move(int16_t speed)
 void dc_motor_direction(int8_t direction)
 {
 	if (direction)
-		gpio_set(DC_GPIO, DC_PIN);
+		mosfet_set(DC_MOSFET_ID);
 	else
-		gpio_clear(DC_GPIO, DC_PIN);
+		mosfet_clear(DC_MOSFET_ID);
 }

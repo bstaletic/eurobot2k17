@@ -109,16 +109,3 @@ void timer10_config(void)
 	timer_enable_oc_output(TIM10, TIM_OC1);
 	timer_enable_counter(TIM10);
 }
-
-void timer12_config(void)
-{
-	/* DC motor */
-	timer_reset(TIM12);
-	timer_set_prescaler(TIM12, 0);
-	timer_set_mode(TIM12, TIM_CR1_CKD_CK_INT_MUL_4, TIM_CR1_CMS_CENTER_1, TIM_CR1_DIR_UP);
-	timer_set_oc_mode(TIM12, TIM_OC1, TIM_OCM_PWM1);
-	timer_set_period(TIM12, 8399);
-	timer_set_oc_value(TIM12, TIM_OC1, 8000);
-	timer_enable_oc_output(TIM12, TIM_OC1);
-	timer_enable_counter(TIM12);
-}
