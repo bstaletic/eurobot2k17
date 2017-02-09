@@ -1,7 +1,7 @@
 #include "ax12.h"
 
 // TODO: Convert postion to degrees?
-int16_t ax12_move(uint8_t id, uint16_t position)
+uint8_t ax12_move(uint8_t id, uint16_t position)
 {
 	uint8_t out_data[9], checksum;
 
@@ -24,10 +24,9 @@ int16_t ax12_move(uint8_t id, uint16_t position)
 	for (uint8_t i = 0; i < 9; ++i)
 		usart_send_blocking(AX12_UART, out_data[i]);
 	return ax12_read_response();
-	//return 0;
 }
 
-int16_t ax12_move_speed(uint8_t id, uint16_t position, uint16_t speed)
+uint8_t ax12_move_speed(uint8_t id, uint16_t position, uint16_t speed)
 {
 	uint8_t out_data[11], checksum;
 
@@ -54,7 +53,7 @@ int16_t ax12_move_speed(uint8_t id, uint16_t position, uint16_t speed)
 	return ax12_read_response();
 }
 
-int16_t ax12_set_speed(uint8_t id, uint16_t speed)
+uint8_t ax12_set_speed(uint8_t id, uint16_t speed)
 {
 	uint8_t out_data[9];
 
@@ -75,7 +74,7 @@ int16_t ax12_set_speed(uint8_t id, uint16_t speed)
 	return ax12_read_response();
 }
 
-int16_t ax12_factory_reset(uint8_t id)
+uint8_t ax12_factory_reset(uint8_t id)
 {
 	uint8_t out_data[6], checksum = ~(id + AX12_RESET_LENGTH + AX12_RESET);
 
@@ -90,7 +89,7 @@ int16_t ax12_factory_reset(uint8_t id)
 	return ax12_read_response();
 }
 
-int16_t ax12_set_baudrate(uint8_t id, uint32_t baudrate)
+uint8_t ax12_set_baudrate(uint8_t id, uint32_t baudrate)
 {
 	uint8_t out_data[8], checksum = ~(id + AX12_BAUDRATE_LENGTH + AX12_WRITE_DATA
 				+ AX12_BAUDRATE + ((2000000/baudrate)-1));
@@ -108,7 +107,7 @@ int16_t ax12_set_baudrate(uint8_t id, uint32_t baudrate)
 	return ax12_read_response();
 }
 
-int16_t ax12_set_id(uint8_t id, uint8_t new_id)
+uint8_t ax12_set_id(uint8_t id, uint8_t new_id)
 {
 	uint8_t out_data[8], checksum = ~(id + AX12_ID_LENGTH + AX12_WRITE_DATA + AX12_ID + new_id);
 
@@ -125,7 +124,7 @@ int16_t ax12_set_id(uint8_t id, uint8_t new_id)
 	return ax12_read_response();
 }
 
-int16_t ax12_set_angle_limit(uint8_t id, uint16_t cw_limit, uint16_t ccw_limit)
+uint8_t ax12_set_angle_limit(uint8_t id, uint16_t cw_limit, uint16_t ccw_limit)
 {
 	uint8_t out_data[11], checksum = ~(id + AX12_AL_LENGTH + AX12_WRITE_DATA
 		       		+ AX12_ANGLE_LIMIT + (cw_limit&0xff) + (ccw_limit>>8)
@@ -147,7 +146,7 @@ int16_t ax12_set_angle_limit(uint8_t id, uint16_t cw_limit, uint16_t ccw_limit)
 	return ax12_read_response();
 }
 
-int16_t ax12_read_moving_status(uint8_t id)
+uint8_t ax12_read_moving_status(uint8_t id)
 {
 	uint8_t out_data[8], checksum = ~(id + AX12_MOVING_LENGTH + AX12_READ_DATA
 			                             + AX12_MOVING + AX12_BYTE_READ);
@@ -165,24 +164,24 @@ int16_t ax12_read_moving_status(uint8_t id)
 	return ax12_read_response();
 }
 
-int16_t ax12_read_response(void)
+uint8_t ax12_read_response(void)
 {
-	uint8_t data[5];
+	uint8_t data[4];
 	uint8_t error, length;
 
-	for (uint8_t i = 0; i < 5; ++i)
-		data[i] = usart_recv_blocking(AX12_UART);
+	for (uint8_t i = 0; i < 4; ++i)
+		data[i] = usart_recv(AX12_UART);
 
 	if (data[0] != 0xff)
 		return 0;
 
-	length = data[3] - 2;
-	error = data[4];
+	length = data[3];
 
-	if (error || !length)
-		return error;
-	else if (length > 1)
-		return (usart_recv_blocking(AX12_UART)&0xff) + (usart_recv_blocking(AX12_UART)<<8);
-	else
-		return usart_recv_blocking(AX12_UART);
+	error = usart_recv(AX12_UART);
+
+	for (uint8_t i = 0; i < length - 1; ++i) {
+		usart_recv(AX12_UART);
+	}
+
+	return error;
 }
