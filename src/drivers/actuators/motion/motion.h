@@ -5,7 +5,7 @@
 #include <libopencm3/cm3/nvic.h>
 #include <stdint.h>
 
-#define MOTION_DRIVER USART3
+#define MOTION_DRIVER UART4
 
 typedef enum { IDLE, STUCK, ROTATING, ERROR, MOVING } motion_status;
 
@@ -77,7 +77,13 @@ void rotate_to(int16_t angle);
  */
 void goto_xy(int16_t x, int16_t y, int8_t end_speed, int8_t direction);
 /** \fn void curve(int16_t x, int16_t y, int8_t angle, int8_t angle_direction, int8_t direction)
- * \brief Move along a curve - not tested, hence not documented
+ * \brief Move along a curve
+ *
+ * @param x [in] X coordinate of the center of rotation
+ * @param y [in] Y coordinate of the center of rotation
+ * @param angle [in] Angle by which robot should be rotated around center
+ * @param angle_direction [in] 0 means counter clockwise, otherwise clockwise
+ * @param direction [in] negative means backwards, positive forward
  */
 void curve(int16_t x, int16_t y, int8_t angle,
 		int8_t angle_direction, int8_t direction);
