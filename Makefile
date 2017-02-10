@@ -34,7 +34,8 @@ assembly: $(ASM)
 
 # Use make flash to flash the bin file onto STM32F4
 flash: $(FLASH_TGT)
-	$(OPENOCD) -f interface/stlink-v2.cfg -f target/stm32f4x.cfg -c "program $(FLASH_TGT) verify reset exit"
+	$(OPENOCD) -f interface/stlink-v2-1.cfg -f target/stm32f4x.cfg -c "reset_config srst_only separate srst_nogate srst_open_drain connect_assert_srst" -c "program $(FLASH_TGT) verify reset exit $(FLASH_OFFSET)"
+
 
 # Make the documentation for the code - currently invalid
 doc:
