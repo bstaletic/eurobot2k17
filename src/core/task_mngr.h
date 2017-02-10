@@ -16,7 +16,6 @@
  */
 void task_mngr_run();
 
-
 void set_start_task(task_t *_task);
 
 void add_task(task_t *_task);

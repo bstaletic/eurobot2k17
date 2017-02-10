@@ -14,11 +14,6 @@
 #include "tasks/task_test_2.h"
 #include "core/task_mngr.h"
 
-	gpio_toggle(GPIOD, GPIO13);
-
-	exti_reset_request(EXTI0);
-}	
-
 void main(void)
 {
 	//_disable_interrupts();
