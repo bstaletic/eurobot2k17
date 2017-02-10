@@ -7,6 +7,7 @@
 
 #define DC_TIMER TIM2
 #define DC_CHANNEL TIM_OC1
+#define DC_PWM 2000
 
 #define DC_MOSFET_ID 1
 

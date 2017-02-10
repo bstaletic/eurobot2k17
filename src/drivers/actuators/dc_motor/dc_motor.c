@@ -1,8 +1,11 @@
 #include "dc_motor.h"
 
-void dc_motor_move(int16_t speed)
+void dc_motor_on(int8_t power_on)
 {
-	timer_set_oc_value(DC_TIMER, DC_CHANNEL, speed);
+	if (power_on)
+		timer_set_oc_value(DC_TIMER, DC_CHANNEL, DC_PWM);
+	else
+		timer_set_oc_value(DC_TIMER, DC_CHANNEL, 0);
 }
 
 void dc_motor_direction(int8_t direction)
