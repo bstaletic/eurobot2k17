@@ -1,8 +1,6 @@
 #ifndef MOTION
 #define MOTION
 
-#include <libopencm3/stm32/usart.h>
-#include <libopencm3/cm3/nvic.h>
 #include <stdint.h>
 #include <initialisation/uart_config.h>
 
@@ -106,7 +104,6 @@ void stuck_enable(void);
  * Disables stuck detection feature of the driver
  */
 void stuck_disable(void);
-void read_state(void);
 /** \fn void set_motion_speed(int8_t speed)
  * \brief Set robot's speed
  *
