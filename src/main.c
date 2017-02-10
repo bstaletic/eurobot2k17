@@ -9,6 +9,12 @@
 #include <drivers/actuators/motion/motion.h>
 #include <drivers/sensors/analog/colour.h>
 
+
+#include "tasks/task_test_1.h"
+#include "tasks/task_test_2.h"
+#include "core/task_mngr.h"
+
+
 void main(void)
 {
 	//_disable_interrupts();
@@ -27,14 +33,12 @@ void main(void)
 	timer9_config();
 	timer10_config();
 
-	int i=0;
+	ctor_test_1();
+	ctor_test_2();
 
-	while(1){
-		gpio_toggle(GPIOD, GPIO12);	/* LED on/off */
-		for (i = 0; i < 10000000; i++) {	/* Wait a bit. */
-			__asm__("nop");
-		}
+	task_mngr_run();
 
+	while (1) {
 
 	}
 
