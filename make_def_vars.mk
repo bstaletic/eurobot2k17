@@ -35,6 +35,7 @@ MKDIR_P := mkdir -p
 
 ifeq ($(DEBUG),0)
 	FLASH_TGT := $(BINDIR)eurobot2k17.bin
+	FLASH_OFFSET := 0x08000000
 else
 	FLASH_TGT := $(BINDIR)eurobot2k17.elf
 endif
