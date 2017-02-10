@@ -8,8 +8,16 @@
 #include <drivers/actuators/motion/motion.h>
 #include <drivers/sensors/analog/colour.h>
 
+
+#include "tasks/task_test_1.h"
+#include "tasks/task_test_2.h"
+#include "core/task_mngr.h"
+
+
 void main(void)
 {
+
+
 	clock_config();
 	gpio_config();
 
@@ -24,8 +32,12 @@ void main(void)
 	timer9_config();
 	timer10_config();
 
-	while (1) {
+	ctor_test_1();
+	ctor_test_2();
 
+	task_mngr_run();
+
+	while (1) {
 	}
 
 }
