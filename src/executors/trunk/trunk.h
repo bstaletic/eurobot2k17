@@ -15,20 +15,20 @@
 #define REDUCE_TRUNK_VALUE 100
 
 /**
- * \fn void open_trunk(void)
+ * \fn void trunk_open(void)
  * \brief Opens trunk to unload the ores
  */
-void open_trunk(void);
-void close_trunk(void);
+void trunk_open(void);
+void trunk_close(void);
 /**
- * \fn void increase_trunk(void)
+ * \fn void trunk_increase(void)
  * \brief Extends the trunk
  *
  * Allows for much more space inside the robot
  * needed for storing the ores.
  */
-void increase_trunk(void);
-void reduce_trunk(void);
+void trunk_increase(void);
+void trunk_reduce(void);
 void trunk_init(void);
 
 #endif /* ifndef TRUNK_EXECUTOR */
