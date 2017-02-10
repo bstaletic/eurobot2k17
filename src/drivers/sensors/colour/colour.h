@@ -1,7 +1,7 @@
 #ifndef COLOUR_SENSOR
 #define COLOUR_SENSOR
 
-#include <initialisation/timer_config.h>
+#include "../../../initialisation/timer_config.h"
 
 typedef enum { BLUE, YELLOW, WHITE, UNKNOWN } colour_enum_t;
 

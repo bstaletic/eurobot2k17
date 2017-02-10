@@ -1,6 +1,7 @@
-#include <initialisation/timer_config.h>
+#include "timer_config.h"
 
 volatile int32_t colour_sensor_frequency;
+volatile int32_t colour_sensor_counter_value_ready = 0;
 static volatile int8_t colour_sensor_first_read = 1;
 static volatile int32_t colour_sensor_counter_value1;
 static volatile int32_t colour_sensor_counter_value2;
@@ -81,19 +82,26 @@ void timer4_config(void)
 void timer5_config(void)
 {
 	timer_reset(TIM5);
-	nvic_enable_irq(NVIC_TIM5_IRQ);
 	timer_set_prescaler(TIM5, 420);
 	timer_set_mode(TIM5, TIM_CR1_CKD_CK_INT_MUL_4, TIM_CR1_CMS_CENTER_1, TIM_CR1_DIR_UP);
-	timer_set_period(TIM5, 10000);
-	timer_set_oc_value(TIM5, TIM_OC3, 5000);
-	//timer_set_period(TIM5, 168);
-	// Enable update when trigger is high
-	timer_slave_set_mode(TIM5, TIM_SMCR_SMS_GM);
-	timer_enable_counter(TIM5);
-	timer_enable_irq(TIM5, TIM_DIER_CC1IE);
+	timer_set_period(TIM5, ~1+1);
+	timer_slave_set_mode(TIM5, TIM_SMCR_SMS_OFF);
+	timer_ic_set_prescaler(TIM5, TIM_IC4, 0);
+	timer_ic_set_filter(TIM5, TIM_IC4, TIM_IC_OFF);
 	timer_ic_set_input(TIM5, TIM_IC4, TIM_IC_IN_TI4);
 	timer_ic_enable(TIM5, TIM_IC4);
 	timer_enable_counter(TIM5);
+}
+
+void timer6_config(void)
+{
+	timer_reset(TIM6);
+	timer_set_prescaler(TIM6, 1680);
+	timer_set_period(TIM6, 10000);
+	nvic_enable_irq(NVIC_TIM6_DAC_IRQ);
+	timer_enable_update_event(TIM6);
+	timer_enable_irq(TIM6, TIM_DIER_UIE);
+	timer_enable_counter(TIM6);
 }
 
 void timer9_config(void)
@@ -132,23 +140,25 @@ void timer10_config(void)
 	timer_enable_counter(TIM10);
 }
 
-void tim5_isr(void)
+void tim6_dac_isr(void)
 {
-	if (timer_get_flag(TIM5, TIM_SR_CC1IF)) {
+	if (timer_get_flag(TIM6, TIM_SR_UIF)) {
 
 		/* Clear compare interrupt flag. */
-		timer_clear_flag(TIM5, TIM_SR_CC1IF);
+		timer_clear_flag(TIM6, TIM_SR_UIF);
 
 		if (colour_sensor_first_read)
 		{
 			colour_sensor_counter_value1 = timer_get_counter(COLOUR_SENSOR_TIMER);
 			colour_sensor_first_read = 0;
+			colour_sensor_counter_value_ready = 0;
 		}
 		else
 		{
 			colour_sensor_counter_value2 = timer_get_counter(COLOUR_SENSOR_TIMER);
-			colour_sensor_frequency = ( colour_sensor_counter_value2 - colour_sensor_counter_value1 ) * 1000000;
+			colour_sensor_frequency = ( colour_sensor_counter_value2 - colour_sensor_counter_value1 ) * 1000;
 			colour_sensor_first_read = 1;
+			colour_sensor_counter_value_ready = 1;
 
 		}
 	}

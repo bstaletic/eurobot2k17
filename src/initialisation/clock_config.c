@@ -2,6 +2,7 @@
 
 void clock_config(void)
 {
+	rcc_periph_clock_enable(RCC_SYSCFG);
 	/* Enable clock for NVIC and stuff */
 	rcc_periph_clock_enable(RCC_SYSCFG);
 
@@ -31,6 +32,8 @@ void clock_config(void)
 	rcc_periph_clock_enable(RCC_TIM4);
 	/* TIM5 clock enable */
 	rcc_periph_clock_enable(RCC_TIM5);
+	/* TIM6 clock enable */
+	rcc_periph_clock_enable(RCC_TIM6);
 	/* TIM9 clock enable */
 	rcc_periph_clock_enable(RCC_TIM9);
 	/* TIM10 clock enable */

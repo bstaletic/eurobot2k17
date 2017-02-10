@@ -28,6 +28,8 @@ void main(void)
 	timer2_config();
 	timer3_config();
 	timer4_config();
+	timer5_config();
+	timer6_config();
 	timer9_config();
 	timer10_config();
 
