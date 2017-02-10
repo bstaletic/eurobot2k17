@@ -10,7 +10,9 @@
 #include <drivers/sensors/analog/colour.h>
 
 
-void exti0_isr(void){
+#include "tasks/task_test_1.h"
+#include "tasks/task_test_2.h"
+#include "core/task_mngr.h"
 
 	gpio_toggle(GPIOD, GPIO13);
 
