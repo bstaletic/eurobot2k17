@@ -3,10 +3,10 @@ include $(STARTDIR)make_def_vars.mk
 include $(SRCDIR)Makefile
 include $(SRCDIR)initialisation/Makefile
 include $(SRCDIR)drivers/Makefile
-include $(SRCDIR)executors/Makefile
 include $(SRCDIR)core/Makefile
 include $(SRCDIR)utils/Makefile
 include $(SRCDIR)tasks/Makefile
+include $(SRCDIR)executors/Makefile
 
 OBJ := $(subst src/,,$(SRC:%.c=$(OBJDIR)%.o))
 ASM := $(subst src/,,$(SRC:%.c=$(ASMDIR)%.s))
