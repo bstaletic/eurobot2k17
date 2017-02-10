@@ -5,7 +5,7 @@
 #include "../../../initialisation/timer_config.h"
 #include "../mosfet_switches/mosfet_switches.h"
 
-#define DC_TIMER TIM12
+#define DC_TIMER TIM2
 #define DC_CHANNEL TIM_OC1
 
 #define DC_MOSFET_ID 1
