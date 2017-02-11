@@ -6,7 +6,7 @@
 #define DOOR_CLOSED_POSITION 1000
 #define DOOR_OPEN_POSITION 2000
 
-//second servo to "poke" lunar module and get it off revovler
+//second servo to "poke" lunar module and get it off the revolver
 #define SERVO_POKE servo2
 #define POKE_INIT_POSITION 1000
 #define POKE_MODULE_POSITION 2000
