@@ -1,4 +1,5 @@
 #include "timer_config.h"
+#include "gpio_config.h"
 
 volatile int32_t colour_sensor_frequency;
 volatile int32_t colour_sensor_counter_value_ready = 0;
@@ -82,22 +83,23 @@ void timer4_config(void)
 void timer5_config(void)
 {
 	timer_reset(TIM5);
-	timer_set_prescaler(TIM5, 420);
+	timer_set_prescaler(TIM5, 0);
 	timer_set_mode(TIM5, TIM_CR1_CKD_CK_INT_MUL_4, TIM_CR1_CMS_CENTER_1, TIM_CR1_DIR_UP);
 	timer_set_period(TIM5, ~1+1);
-	timer_slave_set_mode(TIM5, TIM_SMCR_SMS_OFF);
-	timer_ic_set_prescaler(TIM5, TIM_IC4, 0);
-	timer_ic_set_filter(TIM5, TIM_IC4, TIM_IC_OFF);
-	timer_ic_set_input(TIM5, TIM_IC4, TIM_IC_IN_TI4);
-	timer_ic_enable(TIM5, TIM_IC4);
+	timer_slave_set_mode(TIM5, TIM_SMCR_SMS_ECM1);
+	timer_slave_set_trigger(TIM5, TIM_SMCR_TS_TI2FP2);
+	timer_ic_set_prescaler(TIM5, TIM_IC2, 0);
+	timer_ic_set_filter(TIM5, TIM_IC2, TIM_IC_OFF);
+	timer_ic_set_input(TIM5, TIM_IC2, TIM_IC_IN_TI2);
+	timer_ic_enable(TIM5, TIM_IC2);
 	timer_enable_counter(TIM5);
 }
 
 void timer6_config(void)
 {
 	timer_reset(TIM6);
-	timer_set_prescaler(TIM6, 1680);
-	timer_set_period(TIM6, 10000);
+	timer_set_prescaler(TIM6, 420);
+	timer_set_period(TIM6, 100);
 	nvic_enable_irq(NVIC_TIM6_DAC_IRQ);
 	timer_enable_update_event(TIM6);
 	timer_enable_irq(TIM6, TIM_DIER_UIE);
@@ -146,13 +148,15 @@ void tim6_dac_isr(void)
 
 		/* Clear compare interrupt flag. */
 		timer_clear_flag(TIM6, TIM_SR_UIF);
+		gpio_toggle(GPIOD, GPIO14);
+		/*
 
 		if (colour_sensor_first_read)
 		{
 			colour_sensor_counter_value1 = timer_get_counter(COLOUR_SENSOR_TIMER);
 			colour_sensor_first_read = 0;
 			colour_sensor_counter_value_ready = 0;
-		}
+
 		else
 		{
 			colour_sensor_counter_value2 = timer_get_counter(COLOUR_SENSOR_TIMER);
@@ -160,6 +164,6 @@ void tim6_dac_isr(void)
 			colour_sensor_first_read = 1;
 			colour_sensor_counter_value_ready = 1;
 
-		}
+		}*/
 	}
 }

@@ -4,7 +4,7 @@ void gpio_config(void)
 {
 
 	/* GPIO setup for every timer */
-	gpio_mode_setup(GPIOA, GPIO_MODE_AF, GPIO_PUPD_NONE, GPIO3|GPIO8|GPIO15);
+	gpio_mode_setup(GPIOA, GPIO_MODE_AF, GPIO_PUPD_NONE, GPIO8|GPIO15);
 	gpio_mode_setup(GPIOB,
 					GPIO_MODE_AF,
 					GPIO_PUPD_NONE,
@@ -17,7 +17,8 @@ void gpio_config(void)
 	/* Set alt function for TIM4 CH1 */
 	gpio_set_af(GPIOB, GPIO_AF2, GPIO7);
 	/* Set alt function for TIM5 CH4 */
-	gpio_set_af(GPIOA, GPIO_AF2, GPIO3);
+	gpio_mode_setup(GPIOA, GPIO_MODE_AF, GPIO_PUPD_PULLDOWN, GPIO1);
+	gpio_set_af(GPIOA, GPIO_AF2, GPIO1);
 	/* Set alt function for TIM9 CH1 and CH2 */
 	gpio_set_af(GPIOE, GPIO_AF3, GPIO5|GPIO6);
 	/* Set alt function for TIM10 CH1 */
