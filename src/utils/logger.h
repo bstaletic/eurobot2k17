@@ -9,12 +9,6 @@
 
 #define LOGGER_BUFFER_SIZE 512
 
-// todo @todo create struct for formated output
-//typedef struct{
-//	char task_name[50];
-//
-//};
-
 
 void print_header(void);
 

@@ -183,7 +183,7 @@ task_t* find_next_task(void){
 					task_user_list[i]->data->state == TASK_READY){
 				_task = task_user_list[i];
 			}
-		}break;
+		}
 		} // end switch
 	}
 	if(_task != NULL) {
