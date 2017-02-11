@@ -1,0 +1,20 @@
+#ifndef DOOR_EXECUTOR
+#define DOOR_EXECUTOR
+
+#define SERVO_DOOR servo1
+#define DOOR_CLOSED_POSITION 1000
+#define DOOR_OPEN_POSITION 2000
+
+#define SERVO_POKE servo2
+#define POKE_INIT_POSITION 1000
+#define POKE_MODULE_POSITION 2000
+
+#include "../../drivers/actuators/analog_servo/analog_servo.h"
+
+void door_close(void);
+void door_open(void);
+
+void poke_init(void);
+void poke_module(void);
+
+#endif /* ifndef DOOR_EXECUTOR */
