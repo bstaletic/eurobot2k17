@@ -64,7 +64,5 @@ void gpio_config(void)
 
 	/*LEDs output GPIO setup */
 	gpio_mode_setup(GPIOD, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, GPIO12|GPIO13|GPIO14|GPIO15);
-
-	/* DC motor direction pin */
-	gpio_mode_setup(GPIOD, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, GPIO12);
+	
 }

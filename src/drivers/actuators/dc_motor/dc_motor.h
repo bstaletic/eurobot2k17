@@ -7,11 +7,17 @@
 
 #define DC_TIMER TIM2
 #define DC_CHANNEL TIM_OC1
-#define DC_PWM 2000
 
-#define DC_MOSFET_ID 1
+/* Maximum PWM for DC motor 800 */
+#define DC_PWM 800
 
-typedef enum { DC_INWARDS, DC_OUTWARDS } dc_direction;
+#define DC_ON 1
+#define DC_OFF 0
+
+#define DC_MOSFET_ID1 1
+#define DC_MOSFET_ID2 2
+
+typedef enum { DC_FORWARD, DC_REVERSE } dc_direction;
 
 /**
  * \fn void dc_motor_move(dc_motor dc, int16_t speed);
