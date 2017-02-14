@@ -16,9 +16,9 @@ OBJCOPY := arm-none-eabi-objcopy
 CC := arm-none-eabi-gcc
 AS := arm-none-eabi-as
 ifeq ($(DEBUG),0)
-	CFLAGS := -Os -Wall -Wextra -Wno-main -pedantic -std=c99
+	CFLAGS := -Os -Wall -Wextra -Wno-main -std=c11
 else
-	CFLAGS := -Og -g -Wall -Wextra -Wno-main -pedantic -std=c99
+	CFLAGS := -Og -g -Wall -Wextra -Wno-main -std=c11
 endif
 ASFLAGS := --warn
 MFLAGS := -mfloat-abi=hard -mcpu=cortex-m4 -mthumb -mfpu=fpv4-sp-d16
