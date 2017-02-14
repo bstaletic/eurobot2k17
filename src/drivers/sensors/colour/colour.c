@@ -38,6 +38,8 @@ colour_enum_t read_colour(void)
 	return colour;
 }
 
+// This should reenable TIM6 interrupt when called, read the frequency and then
+// disable the interrupt again
 static uint32_t read_colour_channel(colour_channel_enum_t channel)
 {
 	uint32_t channel_frequency_value;

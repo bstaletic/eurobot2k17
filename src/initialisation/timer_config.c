@@ -139,6 +139,9 @@ void timer12_config(void)
 	timer_enable_counter(TIM12);
 }
 
+// TIM6 interrupt - should fire every millisecond
+// and read the colour sensor saving the value in
+// colour_sensor_frequency
 void tim6_dac_isr(void)
 {
 	if (timer_get_flag(TIM6, TIM_SR_UIF)) {
