@@ -6,13 +6,14 @@
 
 #include "../../drivers/actuators/dc_motor/dc_motor.h"
 
-dc_direction ROLLERS_INWARDS = DC_INWARDS;
-dc_direction ROLLERS_OUTWARDS = DC_OUTWARDS;
-
+/// \brief Turns rollers on
 void rollers_on(void);
+/// \brief Turns rollers off
 void rollers_off(void);
 
-void rollers_inwards(void);
-void rollers_outwards(void);
+/// \brief Makes rollers move tube inside
+void rollers_reverse(void);
+/// \brief Makes rollers move tube outside
+void rollers_forward(void);
 
 #endif /* ifndef FRONT_ROLLERS_EXECUTOR */

@@ -2,20 +2,20 @@
 
 void rollers_on(void)
 {
-    dc_motor_on(ROLLERS_ON);
+    dc_motor_direction(DC_ON);
 }
 
 void rollers_off(void)
 {
-    dc_motor_on(ROLLERS_OFF);
+    dc_motor_direction(DC_OFF);
 }
 
-void rollers_inwards(void)
+void rollers_reverse(void)
 {
-    dc_motor_direction(ROLLERS_INWARDS);
+    dc_motor_direction(DC_REVERSE);
 }
 
-void rollers_outwards(void)
+void rollers_forward(void)
 {
-    dc_motor_direction(ROLLERS_OUTWARDS);
+    dc_motor_direction(DC_FORWARD);
 }
