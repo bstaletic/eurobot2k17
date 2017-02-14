@@ -10,17 +10,18 @@ void dc_motor_switch(int8_t power)
 
 void dc_motor_direction(dc_direction direction)
 {
-	if (direction == DC_FORWARD){
+	if (direction == DC_FORWARD)
+	{
 
 		mosfet_set(DC_MOSFET_ID1);
 		mosfet_clear(DC_MOSFET_ID2);
-	
-	}
 
-	else {
+	}
+	else
+	{
 
 		mosfet_clear(DC_MOSFET_ID1);
 		mosfet_set(DC_MOSFET_ID2);
-	
+
 	}
 }

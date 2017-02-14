@@ -17,6 +17,7 @@
 #define DC_MOSFET_ID1 1
 #define DC_MOSFET_ID2 2
 
+/// \brief DC direction setting
 typedef enum { DC_FORWARD, DC_REVERSE } dc_direction;
 
 /**
