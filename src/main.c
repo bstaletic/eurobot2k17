@@ -28,10 +28,10 @@ void main(void)
 	timer2_config();
 	timer3_config();
 	timer4_config();
-	timer5_config();
 	timer6_config();
 	timer9_config();
 	timer10_config();
+	timer12_config();
 
 	ctor_test_1();
 	ctor_test_2();
