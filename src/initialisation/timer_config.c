@@ -124,6 +124,8 @@ void timer10_config(void)
 	timer_enable_counter(TIM10);
 }
 
+/* Configured as external counter for color sensnor */
+
 void timer12_config(void)
 {
 	timer_reset(TIM12);

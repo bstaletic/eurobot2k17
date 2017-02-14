@@ -5,7 +5,7 @@
 #include <libopencm3/cm3/nvic.h>
 #include <stdint.h>
 
-#define COLOUR_SENSOR_TIMER TIM5
+#define COLOUR_SENSOR_TIMER TIM12
 
 extern volatile int32_t colour_sensor_frequency; // raw output of sensor, if everything is working should be in kHz
 extern volatile int32_t colour_sensor_value_ready; // set to true when reading the sensor is done
