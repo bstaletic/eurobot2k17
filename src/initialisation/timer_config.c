@@ -151,7 +151,7 @@ void tim6_dac_isr(void)
 		timer_clear_flag(TIM6, TIM_SR_UIF);
 
 		/* Read counter and treat it as kHz value */
-		colour_sensor_frequency = timer_get_counter(COLOUR_SENSOR_TIMER) * 1000;
+		colour_sensor_frequency = timer_get_counter(COLOUR_SENSOR_TIMER);
 		colour_sensor_value_ready = 1;
 		timer_set_counter(COLOUR_SENSOR_TIMER, 0);
 	}

@@ -5,6 +5,7 @@
 #include <libopencm3/stm32/gpio.h>
 
 #include "../../../initialisation/timer_config.h"
+#include "../../actuators/mosfet_switches/mosfet_switches.h"
 
 typedef enum { BLUE, YELLOW, WHITE, UNKNOWN } colour_enum_t;
 typedef enum { RED_CHANNEL, GREEN_CHANNEL, BLUE_CHANNEL } colour_channel_enum_t;

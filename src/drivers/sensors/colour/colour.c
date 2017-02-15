@@ -46,15 +46,19 @@ static uint32_t read_colour_channel(colour_channel_enum_t channel)
 	// Set appropriate gpio values
 	switch (channel)
 	{
-		case RED_CHANNEL: gpio_clear(GPIOD, GPIO1|GPIO2);
-				  break;
+		case RED_CHANNEL:
+			mosfet_clear(3);
+			mosfet_clear(4);
+			break;
 
-		case GREEN_CHANNEL: gpio_set(GPIOD, GPIO1|GPIO2);
-					break;
+		case GREEN_CHANNEL: 
+			mosfet_set(3);
+			mosfet_set(4);
+			break;
 
-		case BLUE_CHANNEL: gpio_set(GPIOD, GPIO2);
-				   gpio_clear(GPIOD, GPIO2);
-
+		case BLUE_CHANNEL: 
+			mosfet_set(3);
+			mosfet_clear(4);
 	}
 	// Enable TIM6 interrupt
 	nvic_enable_irq(NVIC_TIM6_DAC_IRQ);
