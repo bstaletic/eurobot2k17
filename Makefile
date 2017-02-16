@@ -24,11 +24,13 @@ $(BINDIR)eurobot2k17.bin: $(BINDIR)eurobot2k17.elf
 
 # Compile the executable using every .o file created and the generated linker script
 $(BINDIR)eurobot2k17.elf : $(DESTDIR)generated.$(BOARD).ld $(OBJ)
+	$(VECHO) "Linking $@"
 	@$(MKDIR_P) $(@D)
 	$(CC) --static -nostartfiles -T$(DESTDIR)generated.$(BOARD).ld $(MFLAGS) -Wl,-Map=$(DESTDIR)eurobot2k17.map -Wl,--gc-sections $(LINK_PATH) $(OBJ) $(LINK_LIB) $(LINK_GROUP) -o $@
 
 # Generate the linker script
 $(DESTDIR)generated.$(BOARD).ld :
+	$(VECHO) "Generating $@"
 	@$(MKDIR_P) $(@D)
 	$(CC) -E $(CFLAGS) $(MFLAGS) -D_ROM=1024K -D_ROM_OFF=0x08000000 -D_RAM=128K -D_RAM_OFF=0x20000000 -D_CCM=64K -D_CCM_OFF=0x10000000 -P -E $(STARTDIR)libopencm3/ld/linker.ld.S > $@
 
@@ -37,12 +39,14 @@ assembly: $(ASM)
 
 # Use make flash to flash the bin file onto STM32F4
 flash: $(FLASH_TGT)
+	$(VECHO) "Flashing $@"
 	$(OPENOCD) -f interface/stlink-v2-1.cfg -f target/stm32f4x.cfg -c "reset_config srst_only separate srst_nogate srst_open_drain connect_assert_srst" -c "program $(FLASH_TGT) verify reset exit $(FLASH_OFFSET)"
 
 
 # Make the documentation for the code - currently invalid
 doc:
-	$(DOXYGEN) $(DOXYFILE) 1>/dev/null
+	$(VECHO) "Generating documentation"
+	$(DOXYGEN) $(DOXYFILE) &>/dev/null
 	@$(MKDIR_P) $(DOCDIR)
 	@rm -rf $(DOCDIR)latex $(DOCDIR)html
 	@mv $(STARTDIR)latex $(DOCDIR)
