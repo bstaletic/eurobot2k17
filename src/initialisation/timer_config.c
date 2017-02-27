@@ -82,7 +82,6 @@ void timer6_config(void)
 	timer_reset(TIM6);
 	timer_set_prescaler(TIM6, 420);
 	timer_set_period(TIM6, 100);
-	nvic_enable_irq(NVIC_TIM6_DAC_IRQ);
 	timer_enable_update_event(TIM6);
 	timer_enable_irq(TIM6, TIM_DIER_UIE);
 	timer_enable_counter(TIM6);
@@ -130,8 +129,8 @@ void timer12_config(void)
 {
 	timer_reset(TIM12);
 	timer_set_prescaler(TIM12, 0);
-	timer_set_mode(TIM12, TIM_CR1_CKD_CK_INT_MUL_4, TIM_CR1_CMS_CENTER_1, TIM_CR1_DIR_UP);
-	timer_set_period(TIM12, 0xffff);
+	timer_set_mode(TIM12, TIM_CR1_CKD_CK_INT, TIM_CR1_CMS_CENTER_1, TIM_CR1_DIR_UP);
+	timer_set_period(TIM12, 10000);
 	timer_slave_set_mode(TIM12, TIM_SMCR_SMS_ECM1);
 	timer_slave_set_trigger(TIM12, TIM_SMCR_TS_TI2FP2);
 	timer_ic_set_prescaler(TIM12, TIM_IC2, 0);
