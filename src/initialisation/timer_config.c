@@ -1,8 +1,6 @@
 #include "timer_config.h"
 #include "gpio_config.h"
 
-volatile int32_t colour_sensor_frequency;
-volatile int32_t colour_sensor_value_ready = 0;
 
 void timer1_config(void)
 {
@@ -138,20 +136,4 @@ void timer12_config(void)
 	timer_ic_set_input(TIM12, TIM_IC2, TIM_IC_IN_TI2);
 	timer_ic_enable(TIM12, TIM_IC2);
 	timer_enable_counter(TIM12);
-}
-
-// TIM6 interrupt - should fire every millisecond
-// and read the colour sensor saving the value in
-// colour_sensor_frequency
-void tim6_dac_isr(void)
-{
-	if (timer_get_flag(TIM6, TIM_SR_UIF)) {
-		/* Clear overflow interrupt flag. */
-		timer_clear_flag(TIM6, TIM_SR_UIF);
-
-		/* Read counter and treat it as kHz value */
-		colour_sensor_frequency = timer_get_counter(COLOUR_SENSOR_TIMER);
-		colour_sensor_value_ready = 1;
-		timer_set_counter(COLOUR_SENSOR_TIMER, 0);
-	}
 }

@@ -34,6 +34,10 @@ typedef enum { RED_CHANNEL, GREEN_CHANNEL, BLUE_CHANNEL } colour_channel_enum_t;
 #define RED_CHANNEL_YELLOW_RANGE_START 400
 #define RED_CHANNEL_YELLOW_RANGE_END 500
 
+extern volatile uint32_t colour_sensor_frequency; // raw output of sensor, if everything is working should be in kHz
+extern volatile uint8_t colour_sensor_value_ready; // set to true when reading the sensor is done
+extern volatile uint8_t colour_sensor_step; // variable needed for a little state machine in tim6 isr
+
 /**
  * \fn colour_enum_t read_colour(void)
  * \brief Reads sensor and returns the approrpriate colour
