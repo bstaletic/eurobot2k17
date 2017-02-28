@@ -24,10 +24,6 @@ void gpio_config(void)
 	/* Set alt function for TIM10 CH1 */
 	gpio_set_af(GPIOB, GPIO_AF3, GPIO8);
 
-	/* GPIO for the two digital outputs for colour sensor */
-	gpio_mode_setup(GPIOD, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, GPIO6|GPIO7);
-	gpio_set(GPIOD, GPIO6|GPIO7);
-
 	/* Timer PWM GPIO output setup */
 	gpio_set_output_options(GPIOA,
 							GPIO_OTYPE_PP, GPIO_OSPEED_100MHZ,
@@ -64,9 +60,6 @@ void gpio_config(void)
 
 	gpio_mode_setup(GPIOD, GPIO_MODE_OUTPUT, GPIO_PUPD_PULLDOWN, GPIO0|GPIO1|GPIO2|GPIO3);
 	gpio_mode_setup(GPIOC, GPIO_MODE_OUTPUT, GPIO_PUPD_PULLDOWN, GPIO6|GPIO8|GPIO9|GPIO11);
-
-	/* Mosfet 2 and three used for colour sensor */
-	gpio_set(GPIOD, GPIO1|GPIO2);
 
 	/*LEDs output GPIO setup */
 	gpio_mode_setup(GPIOD, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, GPIO12|GPIO13|GPIO14|GPIO15);

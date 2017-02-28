@@ -64,8 +64,6 @@ colour_enum_t read_colour(void)
 	nvic_disable_irq(NVIC_TIM6_DAC_IRQ);
 	timer_disable_irq(TIM6, TIM_DIER_UIE);
 
-	/*
-
 	if (colour_sensor_red_value >= RED_CHANNEL_WHITE_RANGE_START &&
 		colour_sensor_red_value <= RED_CHANNEL_WHITE_RANGE_END &&
 		colour_sensor_blue_value >= BLUE_CHANNEL_WHITE_RANGE_START &&
@@ -90,7 +88,6 @@ colour_enum_t read_colour(void)
 	else
 		colour = UNKNOWN;
 
-		*/
 
 	return colour;
 }
