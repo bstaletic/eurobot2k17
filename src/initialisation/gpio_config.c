@@ -47,6 +47,10 @@ void gpio_config(void)
 	gpio_mode_setup(GPIOD, GPIO_MODE_AF, GPIO_PUPD_NONE, GPIO8);
 	gpio_set_af(GPIOD, GPIO_AF7, GPIO8);
 
+	/* USART4 GPIO setup */
+	gpio_mode_setup(GPIOA, GPIO_MODE_AF, GPIO_PUPD_NONE, GPIO0|GPIO1);
+	gpio_set_af(GPIOA, GPIO_AF8, GPIO0|GPIO1);
+
 	/* Configure GPIO for external interrupts (sensors) */
 	/* NOTE: only inputs with bodge pull down resistors are used */
 
