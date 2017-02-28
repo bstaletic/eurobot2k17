@@ -16,6 +16,9 @@ void gpio_config(void)
 	gpio_set_af(GPIOB, GPIO_AF2, GPIO4|GPIO5);
 	/* Set alt function for TIM4 CH1 */
 	gpio_set_af(GPIOB, GPIO_AF2, GPIO7);
+	/* Set alt function for TIM12 CH? */
+	gpio_mode_setup(GPIOB, GPIO_MODE_AF, GPIO_PUPD_PULLDOWN, GPIO15);
+	gpio_set_af(GPIOB, GPIO_AF9, GPIO15);
 	/* Set alt function for TIM9 CH1 and CH2 */
 	gpio_set_af(GPIOE, GPIO_AF3, GPIO5|GPIO6);
 	/* Set alt function for TIM10 CH1 */

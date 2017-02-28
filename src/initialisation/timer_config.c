@@ -1,6 +1,6 @@
-#include <initialisation/timer_config.h>
+#include "timer_config.h"
+#include "gpio_config.h"
 
-volatile uint32_t sys_time;
 
 void timer1_config(void)
 {
@@ -75,6 +75,16 @@ void timer4_config(void)
 	timer_enable_counter(TIM4);
 }
 
+void timer6_config(void)
+{
+	timer_reset(TIM6);
+	timer_set_prescaler(TIM6, 420);
+	timer_set_period(TIM6, 100);
+	timer_enable_update_event(TIM6);
+	timer_enable_irq(TIM6, TIM_DIER_UIE);
+	timer_enable_counter(TIM6);
+}
+
 void timer9_config(void)
 {
 	/* Servo 1 (TIM_OC2) and Servo 2 (TIM_OC1) outputs */
@@ -109,4 +119,21 @@ void timer10_config(void)
 	timer_set_oc_value(TIM10, TIM_OC1, 8000);
 	timer_enable_oc_output(TIM10, TIM_OC1);
 	timer_enable_counter(TIM10);
+}
+
+/* Configured as external counter for color sensnor */
+
+void timer12_config(void)
+{
+	timer_reset(TIM12);
+	timer_set_prescaler(TIM12, 0);
+	timer_set_mode(TIM12, TIM_CR1_CKD_CK_INT, TIM_CR1_CMS_CENTER_1, TIM_CR1_DIR_UP);
+	timer_set_period(TIM12, 10000);
+	timer_slave_set_mode(TIM12, TIM_SMCR_SMS_ECM1);
+	timer_slave_set_trigger(TIM12, TIM_SMCR_TS_TI2FP2);
+	timer_ic_set_prescaler(TIM12, TIM_IC2, 0);
+	timer_ic_set_filter(TIM12, TIM_IC2, TIM_IC_OFF);
+	timer_ic_set_input(TIM12, TIM_IC2, TIM_IC_IN_TI2);
+	timer_ic_enable(TIM12, TIM_IC2);
+	timer_enable_counter(TIM12);
 }
