@@ -1,7 +1,5 @@
 #include "motion.h"
 
-volatile motion_state state;
-
 void set_position_and_orientation(int16_t x, int16_t y, int16_t orientation)
 {
 	int8_t out_data[7];
@@ -159,40 +157,4 @@ void stuck_enable(void)
 void stuck_disable(void)
 {
 	usart_send_blocking(MOTION_DRIVER, 'z');
-}
-
-void usart2_isr(void)
-{
-	if (((USART_CR1(USART2) & USART_CR1_RXNEIE) != 0) &&
-	    ((USART_SR(USART2) & USART_SR_RXNE) != 0)) {
-
-		switch ( usart_recv_blocking(MOTION_DRIVER) ) {
-			case 'M':
-				state.status = MOVING;
-				break;
-			case 'R':
-				state.status = ROTATING;
-				break;
-			case 'E':
-				state.status = ERROR;
-				break;
-			case 'S':
-				state.status = STUCK;
-				break;
-			case 'I':
-				state.status = IDLE;
-				break;
-		}
-
-	state.x = ( usart_recv_blocking(MOTION_DRIVER) << 8 ) |
-	          ( usart_recv_blocking(MOTION_DRIVER) & 0xff );
-
-	state.y = ( usart_recv_blocking(MOTION_DRIVER) << 8 ) |
-	          ( usart_recv_blocking(MOTION_DRIVER) & 0xff );
-
-	state.orientation = ( usart_recv_blocking(MOTION_DRIVER) << 8 ) |
-	                    ( usart_recv_blocking(MOTION_DRIVER) & 0xff );
-
-	}
-
 }
