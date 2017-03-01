@@ -1,11 +1,19 @@
 #include "colour_shifter.h"
 
-void colour_shift(colour_enum colour)
+void colour_shift(colour_enum_t colour)
 {
-	while (colour != read_colour())
+	if (colour == BLUE)
 	{
-		//rotate DC motor by 5 degrees?
+		while (read_colour() != YELLOW)
+		{
+			ax12_set_speed(COLOUR_SHIFTER_ID, 100);
+		}
 	}
-
-	//offset needed for positioning?
+	else if (colour == YELLOW)
+	{
+		while (read_colour() != BLUE)
+		{
+			ax12_set_speed(COLOUR_SHIFTER_ID, 100);
+		}
+	}
 }
