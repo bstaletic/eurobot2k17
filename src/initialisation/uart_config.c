@@ -59,27 +59,23 @@ void uart4_config(void)
 
 void uart4_isr(void)
 {
-	static uint8_t recieved;
 	if ((UART4_CR1 & USART_CR1_RXNEIE) && (UART4_SR & USART_SR_RXNE)) {
 
-		recieved=usart_recv_blocking(UART4);
-		gpio_toggle(GPIOD, GPIO13);
+
+
+
+		/* Special char X for defining polling status and position message,
+		this message is to be recieved every 10 ms */
+		if (usart_recv_blocking(UART4)=='X'){
+
+			state.status = usart_recv_blocking(UART4);
+			state.x = (usart_recv_blocking(UART4) << 8 ) | (usart_recv_blocking(UART4) & 0xff);
+			state.y = (usart_recv_blocking(UART4) << 8 ) | (usart_recv_blocking(UART4) & 0xff);
+			state.orientation = ( usart_recv_blocking(UART4) << 8 ) | (usart_recv_blocking(UART4) & 0xff);
+		}
 
 		/* Clear the RXNE flag */
 		USART_SR(UART4)=USART_SR(UART4)&&(~(USART_SR_RXNE));
-		usart_send_blocking(UART4, recieved);
-
-		/*
-		state.status = usart_recv_blocking(UART4);
-		state.x = ( usart_recv_blocking(UART4) << 8 ) |
-					   ( usart_recv_blocking(UART4) & 0xff );
-
-		state.y = ( usart_recv_blocking(UART4) << 8 ) |
-					   ( usart_recv_blocking(UART4) & 0xff );
-
-		state.orientation = ( usart_recv_blocking(UART4) << 8 ) |
-					  ( usart_recv_blocking(UART4) & 0xff );
-		*/
 
 	}
 }
