@@ -56,10 +56,20 @@ void uart4_config(void)
 	usart_enable(UART4);
 }
 
+
 void uart4_isr(void)
 {
+	static uint8_t recieved;
 	if ((UART4_CR1 & USART_CR1_RXNEIE) && (UART4_SR & USART_SR_RXNE)) {
 
+		recieved=usart_recv_blocking(UART4);
+		gpio_toggle(GPIOD, GPIO13);
+
+		/* Clear the RXNE flag */
+		USART_SR(UART4)=USART_SR(UART4)&&(~(USART_SR_RXNE));
+		usart_send_blocking(UART4, recieved);
+
+		/*
 		state.status = usart_recv_blocking(UART4);
 		state.x = ( usart_recv_blocking(UART4) << 8 ) |
 					   ( usart_recv_blocking(UART4) & 0xff );
@@ -69,9 +79,7 @@ void uart4_isr(void)
 
 		state.orientation = ( usart_recv_blocking(UART4) << 8 ) |
 					  ( usart_recv_blocking(UART4) & 0xff );
-
-	} else if ((UART4_CR1 & USART_CR1_TXEIE) && (UART4_SR & USART_SR_TXE)) {
+		*/
 
 	}
-
 }
