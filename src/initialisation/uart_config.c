@@ -75,7 +75,7 @@ void uart4_isr(void)
 		}
 
 		/* Clear the RXNE flag */
-		USART_SR(UART4)=USART_SR(UART4)&&(~(USART_SR_RXNE));
+		UART4_SR &= ~USART_SR_RXNE;
 
 	}
 }
