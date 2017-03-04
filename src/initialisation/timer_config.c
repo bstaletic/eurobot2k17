@@ -149,3 +149,23 @@ void timer12_config(void)
 	timer_ic_enable(TIM12, TIM_IC2);
 	timer_enable_counter(TIM12);
 }
+
+void timer_config(void)
+{
+	timer1_config();
+	timer2_config();
+	timer3_config();
+	timer4_config();
+	timer6_config();
+	timer7_config();
+	timer9_config();
+	timer10_config();
+	timer12_config();
+}
+
+void delay(uint32_t clocks){
+
+	for (int i=0; i<clocks; i++){
+		__asm__("nop");
+	}
+}

@@ -9,5 +9,6 @@
 void usart2_config(void);
 void usart3_config(void);
 void uart4_config(void);
+void usart_config(void);
 
 #endif /* ifndef UART_CONFIG */

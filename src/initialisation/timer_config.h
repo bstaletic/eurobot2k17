@@ -17,5 +17,7 @@ void timer7_config(void);
 void timer9_config(void);
 void timer10_config(void);
 void timer12_config(void);
+void timer_config(void);
+void delay(uint32_t clocks);
 
 #endif /* ifndef TIMER_CONFIG */

@@ -12,7 +12,6 @@ void usart2_config(void)
 	// TODO: Find out why doesn't the libopencm3 function work
 	USART_CR3(USART2) |= USART_CR3_HDSEL;
 	//usart_enable_halfduplex(USART2);
-	// Oversampling
 
 	/* Finally enable the USART. */
 	usart_enable(USART2);
@@ -27,7 +26,6 @@ void usart3_config(void)
 	usart_set_mode(USART3, USART_MODE_TX_RX);
 	usart_set_parity(USART3, USART_PARITY_NONE);
 	usart_set_flow_control(USART3, USART_FLOWCONTROL_NONE);
-	// Oversampling
 
 	/* Finally enable the USART. */
 	usart_enable(USART3);
@@ -45,4 +43,13 @@ void uart4_config(void)
 
 	/* Finally enable the USART. */
 	usart_enable(UART4);
+}
+
+void usart_config(void)
+{
+
+	usart2_config();
+	usart3_config();
+	uart4_config();
+
 }
