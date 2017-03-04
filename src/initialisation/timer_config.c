@@ -85,6 +85,18 @@ void timer6_config(void)
 	timer_enable_counter(TIM6);
 }
 
+/* Timer 7 interrupt, used for getting status from motion driver, set to 10 ms */
+
+void timer7_config(void)
+{
+	timer_reset(TIM7);
+	timer_set_prescaler(TIM7, 420);
+	timer_set_period(TIM7, 1000);
+	timer_enable_update_event(TIM7);
+	timer_enable_irq(TIM7, TIM_DIER_UIE);
+	timer_enable_counter(TIM7);
+}
+
 void timer9_config(void)
 {
 	/* Servo 1 (TIM_OC2) and Servo 2 (TIM_OC1) outputs */

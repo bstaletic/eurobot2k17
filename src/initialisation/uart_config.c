@@ -1,11 +1,5 @@
 #include <initialisation/uart_config.h>
 
-volatile uint16_t x_coordinate;
-volatile uint16_t y_coordinate;
-volatile uint16_t orientation;
-volatile char status;
-volatile motion_state state;
-
 void usart2_config(void)
 {
 	/* Setup USART2 parameters. */
@@ -48,34 +42,7 @@ void uart4_config(void)
 	usart_set_mode(UART4, USART_MODE_TX_RX);
 	usart_set_parity(UART4, USART_PARITY_NONE);
 	usart_set_flow_control(UART4, USART_FLOWCONTROL_NONE);
-	// Oversampling
 
-	nvic_enable_irq(NVIC_UART4_IRQ);
-	usart_enable_rx_interrupt(UART4);
 	/* Finally enable the USART. */
 	usart_enable(UART4);
-}
-
-
-void uart4_isr(void)
-{
-	if ((UART4_CR1 & USART_CR1_RXNEIE) && (UART4_SR & USART_SR_RXNE)) {
-
-
-
-
-		/* Special char X for defining polling status and position message,
-		this message is to be recieved every 10 ms */
-		if (usart_recv_blocking(UART4)=='X'){
-
-			state.status = usart_recv_blocking(UART4);
-			state.x = (usart_recv_blocking(UART4) << 8 ) | (usart_recv_blocking(UART4) & 0xff);
-			state.y = (usart_recv_blocking(UART4) << 8 ) | (usart_recv_blocking(UART4) & 0xff);
-			state.orientation = ( usart_recv_blocking(UART4) << 8 ) | (usart_recv_blocking(UART4) & 0xff);
-		}
-
-		/* Clear the RXNE flag */
-		USART_SR(UART4)=USART_SR(UART4)&&(~(USART_SR_RXNE));
-
-	}
 }

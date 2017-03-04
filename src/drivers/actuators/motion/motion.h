@@ -3,8 +3,27 @@
 
 #include <stdint.h>
 #include <initialisation/uart_config.h>
+#include <libopencm3/cm3/nvic.h>
+#include <libopencm3/stm32/timer.h>
+
 
 #define MOTION_DRIVER UART4
+
+extern volatile uint16_t x_coordinate;
+extern volatile uint16_t y_coordinate;
+extern volatile uint16_t orientation;
+extern volatile char status;
+
+typedef enum { IDLE, STUCK, ROTATING, ERROR, MOVING } motion_status;
+
+typedef struct {
+	uint16_t x;
+	uint16_t y;
+	uint16_t orientation;
+	motion_status status;
+} motion_state;
+
+extern volatile motion_state state;
 
 /** \file motion.h
  * \brief Motion driver functions
