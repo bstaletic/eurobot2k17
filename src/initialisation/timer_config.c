@@ -90,11 +90,13 @@ void timer6_config(void)
 void timer7_config(void)
 {
 	timer_reset(TIM7);
-	timer_set_prescaler(TIM7, 420);
+	timer_set_prescaler(TIM7, 42000);
 	timer_set_period(TIM7, 1000);
 	timer_enable_update_event(TIM7);
 	timer_enable_irq(TIM7, TIM_DIER_UIE);
 	timer_enable_counter(TIM7);
+	nvic_enable_irq(NVIC_TIM7_IRQ);
+	timer_enable_irq(TIM7, TIM_DIER_UIE);
 }
 
 void timer9_config(void)
@@ -165,7 +167,7 @@ void timer_config(void)
 
 void delay(uint32_t clocks){
 
-	for (int i=0; i<clocks; i++){
+	for (uint32_t i=0; i<clocks; i++){
 		__asm__("nop");
 	}
 }

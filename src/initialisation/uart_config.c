@@ -1,4 +1,4 @@
-#include <initialisation/uart_config.h>
+#include "uart_config.h"
 
 void usart2_config(void)
 {
@@ -45,7 +45,7 @@ void uart4_config(void)
 	usart_enable(UART4);
 }
 
-void usart_config(void)
+void uart_config(void)
 {
 
 	usart2_config();

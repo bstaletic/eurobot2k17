@@ -18,17 +18,17 @@ void main(void)
 	clock_config();
 	gpio_config();
 	exti_config();
-	usart_config();
+	uart_config();
 	timer_config();
 
 	ctor_test_1();
 	ctor_test_2();
 
-	task_mngr_run();
+//	task_mngr_run();
 
 	while (1) {
 		gpio_toggle(BLUE_LED);
-		delay(10000000);
+		delay(16800000);
 
 	}
 
