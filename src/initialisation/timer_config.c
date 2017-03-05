@@ -90,7 +90,7 @@ void timer6_config(void)
 void timer7_config(void)
 {
 	timer_reset(TIM7);
-	timer_set_prescaler(TIM7, 42000);
+	timer_set_prescaler(TIM7, 420);
 	timer_set_period(TIM7, 1000);
 	timer_enable_update_event(TIM7);
 	timer_enable_irq(TIM7, TIM_DIER_UIE);
