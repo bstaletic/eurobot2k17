@@ -2,7 +2,7 @@
 #include "gpio_config.h"
 
 
-void timer1_config(void)
+static void timer1_config(void)
 {
 	/* Servo 8 (TIM_OC1) output */
 	timer_reset(TIM1);
@@ -22,7 +22,7 @@ void timer1_config(void)
 	timer_enable_counter(TIM1);
 }
 
-void timer2_config(void)
+static void timer2_config(void)
 {
 	/* Servo 7 (TIM_OC1) output */
 	/* Configured for DC motor, 1 kHz */ 
@@ -39,7 +39,7 @@ void timer2_config(void)
 	timer_enable_counter(TIM2);
 }
 
-void timer3_config(void)
+static void timer3_config(void)
 {
 	/* Servo 5 (TIM_OC2) and Servo 6 (TIM_OC1) output */
 	timer_reset(TIM3);
@@ -59,7 +59,7 @@ void timer3_config(void)
 	timer_enable_counter(TIM3);
 }
 
-void timer4_config(void)
+static void timer4_config(void)
 {
 	/*Servo 4 (TIM_OC2) output */
 	timer_reset(TIM4);
@@ -75,7 +75,7 @@ void timer4_config(void)
 	timer_enable_counter(TIM4);
 }
 
-void timer6_config(void)
+static void timer6_config(void)
 {
 	timer_reset(TIM6);
 	timer_set_prescaler(TIM6, 420);
@@ -87,7 +87,7 @@ void timer6_config(void)
 
 /* Timer 7 interrupt, used for getting status from motion driver, set to 10 ms */
 
-void timer7_config(void)
+static void timer7_config(void)
 {
 	timer_reset(TIM7);
 	timer_set_prescaler(TIM7, 420);
@@ -99,7 +99,7 @@ void timer7_config(void)
 	timer_enable_irq(TIM7, TIM_DIER_UIE);
 }
 
-void timer9_config(void)
+static void timer9_config(void)
 {
 	/* Servo 1 (TIM_OC2) and Servo 2 (TIM_OC1) outputs */
 	timer_reset(TIM9);
@@ -119,7 +119,7 @@ void timer9_config(void)
 	timer_enable_counter(TIM9);
 }
 
-void timer10_config(void)
+static void timer10_config(void)
 {
 	/* Should be Servo 3 (TIMOC1) output, I (Darko) missed a pin, my bad, useless currently */
 	timer_reset(TIM10);
@@ -137,7 +137,7 @@ void timer10_config(void)
 
 /* Configured as external counter for color sensnor */
 
-void timer12_config(void)
+static void timer12_config(void)
 {
 	timer_reset(TIM12);
 	timer_set_prescaler(TIM12, 0);

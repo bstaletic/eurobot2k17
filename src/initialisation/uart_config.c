@@ -1,6 +1,6 @@
 #include "uart_config.h"
 
-void usart2_config(void)
+static void usart2_config(void)
 {
 	/* Setup USART2 parameters. */
 	usart_set_baudrate(USART2, 115200);
@@ -17,7 +17,7 @@ void usart2_config(void)
 	usart_enable(USART2);
 }
 
-void usart3_config(void)
+static void usart3_config(void)
 {
 	/* Setup USART3 parameters. */
 	usart_set_baudrate(USART3, 115200);
@@ -31,7 +31,7 @@ void usart3_config(void)
 	usart_enable(USART3);
 }
 
-void uart4_config(void)
+static void uart4_config(void)
 {
 	/* Setup UART4 parameters. */
 	usart_set_baudrate(UART4, 57600);

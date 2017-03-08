@@ -7,16 +7,6 @@
 
 #define COLOUR_SENSOR_TIMER TIM12
 
-
-void timer1_config(void);
-void timer2_config(void);
-void timer3_config(void);
-void timer4_config(void);
-void timer6_config(void);
-void timer7_config(void);
-void timer9_config(void);
-void timer10_config(void);
-void timer12_config(void);
 void timer_config(void);
 void delay(uint32_t clocks);
 
