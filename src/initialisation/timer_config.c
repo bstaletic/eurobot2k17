@@ -2,7 +2,7 @@
 #include "gpio_config.h"
 
 
-void timer1_config(void)
+static void timer1_config(void)
 {
 	/* Servo 8 (TIM_OC1) output */
 	timer_reset(TIM1);
@@ -22,7 +22,7 @@ void timer1_config(void)
 	timer_enable_counter(TIM1);
 }
 
-void timer2_config(void)
+static void timer2_config(void)
 {
 	/* Servo 7 (TIM_OC1) output */
 	/* Configured for DC motor, 1 kHz */ 
@@ -39,7 +39,7 @@ void timer2_config(void)
 	timer_enable_counter(TIM2);
 }
 
-void timer3_config(void)
+static void timer3_config(void)
 {
 	/* Servo 5 (TIM_OC2) and Servo 6 (TIM_OC1) output */
 	timer_reset(TIM3);
@@ -59,7 +59,7 @@ void timer3_config(void)
 	timer_enable_counter(TIM3);
 }
 
-void timer4_config(void)
+static void timer4_config(void)
 {
 	/*Servo 4 (TIM_OC2) output */
 	timer_reset(TIM4);
@@ -75,7 +75,7 @@ void timer4_config(void)
 	timer_enable_counter(TIM4);
 }
 
-void timer6_config(void)
+static void timer6_config(void)
 {
 	timer_reset(TIM6);
 	timer_set_prescaler(TIM6, 420);
@@ -85,7 +85,21 @@ void timer6_config(void)
 	timer_enable_counter(TIM6);
 }
 
-void timer9_config(void)
+/* Timer 7 interrupt, used for getting status from motion driver, set to 10 ms */
+
+static void timer7_config(void)
+{
+	timer_reset(TIM7);
+	timer_set_prescaler(TIM7, 420);
+	timer_set_period(TIM7, 1000);
+	timer_enable_update_event(TIM7);
+	timer_enable_irq(TIM7, TIM_DIER_UIE);
+	timer_enable_counter(TIM7);
+	nvic_enable_irq(NVIC_TIM7_IRQ);
+	timer_enable_irq(TIM7, TIM_DIER_UIE);
+}
+
+static void timer9_config(void)
 {
 	/* Servo 1 (TIM_OC2) and Servo 2 (TIM_OC1) outputs */
 	timer_reset(TIM9);
@@ -105,7 +119,7 @@ void timer9_config(void)
 	timer_enable_counter(TIM9);
 }
 
-void timer10_config(void)
+static void timer10_config(void)
 {
 	/* Should be Servo 3 (TIMOC1) output, I (Darko) missed a pin, my bad, useless currently */
 	timer_reset(TIM10);
@@ -123,7 +137,7 @@ void timer10_config(void)
 
 /* Configured as external counter for color sensnor */
 
-void timer12_config(void)
+static void timer12_config(void)
 {
 	timer_reset(TIM12);
 	timer_set_prescaler(TIM12, 0);
@@ -136,4 +150,24 @@ void timer12_config(void)
 	timer_ic_set_input(TIM12, TIM_IC2, TIM_IC_IN_TI2);
 	timer_ic_enable(TIM12, TIM_IC2);
 	timer_enable_counter(TIM12);
+}
+
+void timer_config(void)
+{
+	timer1_config();
+	timer2_config();
+	timer3_config();
+	timer4_config();
+	timer6_config();
+	timer7_config();
+	timer9_config();
+	timer10_config();
+	timer12_config();
+}
+
+void delay(uint32_t clocks){
+
+	for (uint32_t i=0; i<clocks; i++){
+		__asm__("nop");
+	}
 }

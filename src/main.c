@@ -15,30 +15,20 @@
 
 void main(void)
 {
-	//_disable_interrupts();
 	clock_config();
 	gpio_config();
 	exti_config();
-
-	usart2_config();
-	usart3_config();
-	uart4_config();
-
-	timer1_config();
-	timer2_config();
-	timer3_config();
-	timer4_config();
-	timer6_config();
-	timer9_config();
-	timer10_config();
-	timer12_config();
+	uart_config();
+	timer_config();
 
 	ctor_test_1();
 	ctor_test_2();
 
-	task_mngr_run();
+//	task_mngr_run();
 
 	while (1) {
+		gpio_toggle(BLUE_LED);
+		delay(16800000);
 
 	}
 

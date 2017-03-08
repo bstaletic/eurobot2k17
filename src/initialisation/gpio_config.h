@@ -3,6 +3,12 @@
 
 #include <libopencm3/stm32/gpio.h>
 
+/* LEDs macros for STM32F4 dev board */
+#define GREEN_LED GPIOD, GPIO12
+#define ORANGE_LED GPIOD, GPIO13
+#define RED_LED GPIOD, GPIO14
+#define BLUE_LED GPIOD, GPIO15
+
 /** \file gpio_config.h
  * \brief Configures GPIO pins
  */
