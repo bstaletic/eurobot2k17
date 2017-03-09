@@ -16,17 +16,16 @@ all: bin
 
 bin: $(BINDIR)eurobot2k17.bin
 
-
 # Bin file will be flashed onto the STM32F4-Discovery board
 $(BINDIR)eurobot2k17.bin: $(BINDIR)eurobot2k17.elf
 	@$(MKDIR_P) $(@D)
 	$(OBJCOPY) -Obinary $< $@
 
 # Compile the executable using every .o file created and the generated linker script
-$(BINDIR)eurobot2k17.elf : $(DESTDIR)generated.$(BOARD).ld $(OBJ)
+$(BINDIR)eurobot2k17.elf : $(OBJ)
 	$(VECHO) "Linking $@"
 	@$(MKDIR_P) $(@D)
-	$(CC) --static -nostartfiles -T$(DESTDIR)generated.$(BOARD).ld $(MFLAGS) -Wl,-Map=$(DESTDIR)eurobot2k17.map -Wl,--gc-sections $(LINK_PATH) $(OBJ) $(LINK_LIB) $(LINK_GROUP) -o $@
+	$(CC) --static -nostartfiles -T$(STARTDIR)ldscript/generated.$(BOARD).ld $(MFLAGS) -Wl,-Map=$(DESTDIR)eurobot2k17.map -Wl,--gc-sections $(OBJ) $(LINK_GROUP) -o $@
 
 # Generate the linker script
 $(DESTDIR)generated.$(BOARD).ld :

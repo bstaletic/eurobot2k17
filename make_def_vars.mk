@@ -15,15 +15,13 @@ DEPDIR := $(DESTDIR)dep/
 ifeq ($(DEBUG),0)
 	CFLAGS := -Os -Wall -Wextra -Wno-main -std=c11
 else
-	CFLAGS := -Og -g -Wall -Wextra -Wno-main -std=c11
+	CFLAGS := -Og -g -Wall -Wextra -Wno-main -std=c11 -w
 endif
 ASFLAGS := --warn
 MFLAGS := -mfloat-abi=hard -mcpu=cortex-m4 -mthumb -mfpu=fpv4-sp-d16
 BOARD := STM32F407VG
 
 LINK_GROUP := -Wl,--start-group -lc -lgcc -lnosys -Wl,--end-group
-LINK_PATH := -L$(STARTDIR)libopencm3/lib
-LINK_LIB := -lopencm3_stm32f4
 
 DOXYFILE := $(STARTDIR)Doxyfile
 ifeq ($V,1)

@@ -2,9 +2,9 @@
 #define COLOUR_SENSOR
 
 #include <stdint.h>
-#include <libopencm3/stm32/gpio.h>
+#include <usart.h>
 
-#include "../../../initialisation/timer_config.h"
+#include "../../../initialisation/tim.h"
 #include "../../actuators/mosfet_switches/mosfet_switches.h"
 
 typedef enum { BLUE, YELLOW, WHITE, UNKNOWN } colour_enum_t;
