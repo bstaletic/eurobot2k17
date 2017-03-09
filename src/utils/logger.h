@@ -3,7 +3,7 @@
 
 #include <stdarg.h>
 #include <stdio.h>
-#include <libopencm3/stm32/usart.h>
+#include <usart.h>
 #include <string.h>
 
 

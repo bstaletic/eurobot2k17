@@ -30,9 +30,6 @@
 *.hex
 *.bin
 
-# Linker scripts
-*.ld
-
 # Debug files
 *.dSYM/
 *.su
