@@ -7,3 +7,4 @@ SRC += $(SRCDIR)Middlewares/Third_Party/FreeRTOS/Source/timers.c
 
 include $(SRCDIR)Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/Makefile
 include $(SRCDIR)Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/Makefile
+include $(SRCDIR)Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/Makefile

@@ -8,4 +8,4 @@ $(ASMDIR)%.s: $(SRCDIR)%.c
 
 $(OBJDIR)%.o: $(ASMDIR)%.s
 	@$(MKDIR_P) $(@D)
-	$(AS) $(ASFLAGS) $(MFLAGS) -I$(SRCDIR) -Ilibopencm3/include $< -o $@
+	$(AS) $(ASFLAGS) $(MFLAGS) -I$(SRCDIR) -I$(SRCDIR)libs/STM32F4xx_HAL_Driver/Inc/ -I$(SRCDIR)libs/CMSIS/Device/ST/STM32F4xx/Include/ -I$(SRCDIR)libs/CMSIS/Include/ -I$(SRCDIR)initialisation -I$(SRCDIR)Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/ -I$(SRCDIR)Middlewares/Third_Party/FreeRTOS/Source/include/ -I$(SRCDIR)Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/ $< -o $@

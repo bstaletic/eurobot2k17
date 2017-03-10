@@ -2,8 +2,8 @@
 #define MOTION
 
 #include <stdint.h>
-#include "../../../initialisation/uart_config.h"
-#include "../../../initialisation/timer_config.h"
+#include "../../../initialisation/usart.h"
+#include "../../../initialisation/tim.h"
 
 #define MOTION_DRIVER UART4
 
