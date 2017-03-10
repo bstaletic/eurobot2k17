@@ -38,8 +38,6 @@ void main(void)
 	osKernelStart();
 
 	while (1) {
-		gpio_toggle(BLUE_LED);
-		delay(16800000);
 
 	}
 

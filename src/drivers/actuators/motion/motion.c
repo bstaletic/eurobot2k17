@@ -7,23 +7,23 @@ volatile char status;
 
 volatile motion_state state;
 
-void tim7_isr(void)
-{
-
-	if (timer_get_flag(TIM7, TIM_SR_UIF)) {
-
-			usart_send_blocking(UART4, 'S');
-			state.status = usart_recv_blocking(UART4);
-			state.x = (usart_recv_blocking(UART4) << 8 ) | (usart_recv_blocking(UART4) & 0xff);
-			state.y = (usart_recv_blocking(UART4) << 8 ) | (usart_recv_blocking(UART4) & 0xff);
-			state.orientation = ( usart_recv_blocking(UART4) << 8 ) | (usart_recv_blocking(UART4) & 0xff);
-
-			/* Clear overflow interrupt flag. */
-			timer_clear_flag(TIM7, TIM_SR_UIF);
-
-	}
-
-}
+// void tim7_isr(void)
+// {
+//
+// 	if (timer_get_flag(TIM7, TIM_SR_UIF)) {
+//
+// 			usart_send_blocking(UART4, 'S');
+// 			state.status = usart_recv_blocking(UART4);
+// 			state.x = (usart_recv_blocking(UART4) << 8 ) | (usart_recv_blocking(UART4) & 0xff);
+// 			state.y = (usart_recv_blocking(UART4) << 8 ) | (usart_recv_blocking(UART4) & 0xff);
+// 			state.orientation = ( usart_recv_blocking(UART4) << 8 ) | (usart_recv_blocking(UART4) & 0xff);
+//
+// 			/* Clear overflow interrupt flag. */
+// 			timer_clear_flag(TIM7, TIM_SR_UIF);
+//
+// 	}
+//
+// }
 
 
 void set_position_and_orientation(int16_t x, int16_t y, int16_t orientation)

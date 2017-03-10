@@ -7,10 +7,16 @@ include $(SRCDIR)core/Makefile
 include $(SRCDIR)utils/Makefile
 include $(SRCDIR)tasks/Makefile
 include $(SRCDIR)executors/Makefile
+SRC += $(SRCDIR)libs/CMSIS/Device/ST/STM32F4xx/Source/Templates/system_stm32f4xx.c
 
 OBJ := $(subst src/,,$(SRC:%.c=$(OBJDIR)%.o))
 ASM := $(subst src/,,$(SRC:%.c=$(ASMDIR)%.s))
 DEPS := $(subst src/,,$(SRC:%.c=$(DEPDIR)%.d))
+
+include src/libs/CMSIS/Device/ST/STM32F4xx/Source/Templates/Makefile
+
+echo:
+	@echo $(OBJ)
 
 all: bin
 
@@ -25,7 +31,7 @@ $(BINDIR)eurobot2k17.bin: $(BINDIR)eurobot2k17.elf
 $(BINDIR)eurobot2k17.elf : $(OBJ)
 	$(VECHO) "Linking $@"
 	@$(MKDIR_P) $(@D)
-	$(CC) --static -nostartfiles -T$(STARTDIR)ldscript/generated.$(BOARD).ld $(MFLAGS) -Wl,-Map=$(DESTDIR)eurobot2k17.map -Wl,--gc-sections $(OBJ) $(LINK_GROUP) -o $@
+	$(CC) --specs=nano.specs --static -T$(STARTDIR)ldscript/stm32f4_freertos.ld $(MFLAGS) -Wl,-Map=$(DESTDIR)eurobot2k17.map -Wl,--gc-sections $(OBJ) $(LINK_GROUP) -o $@
 
 # Generate the linker script
 $(DESTDIR)generated.$(BOARD).ld :
