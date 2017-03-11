@@ -92,6 +92,6 @@ void clean_buffer(int _clean_size){
 
 void send_buffer_to_uart(int _buff_lenght){
 	logger_buffer[++_buff_lenght] = '\n';
-	TM_USART_Send(USART3, logger_buffer, _buff_lenght);
+	HAL_UART_Transmit(&huart3, (unsigned char *)logger_buffer, _buff_lenght, 0);
 	clean_buffer(_buff_lenght);
 }

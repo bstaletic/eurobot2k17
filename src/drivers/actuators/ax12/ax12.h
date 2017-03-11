@@ -4,7 +4,7 @@
 #include <usart.h>
 #include <stdint.h>
 
-#define AX12_UART USART2
+#define AX12_UART &huart2
 
 #define AX12_AL_LENGTH 7
 #define AX12_BAUDRATE_LENGTH 4

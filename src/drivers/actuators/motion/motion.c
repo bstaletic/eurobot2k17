@@ -1,9 +1,14 @@
 #include "motion.h"
 
+volatile uint16_t x_coordinate;
+volatile uint16_t y_coordinate;
+volatile uint16_t orientation;
+volatile char status = MOTION_IDLE;
+volatile motion_state state;
 
 void set_position_and_orientation(int16_t x, int16_t y, int16_t orientation)
 {
-	int8_t out_data[7];
+	uint8_t out_data[7];
 
 	// Build data
 	out_data[0] = 'I';
@@ -15,17 +20,16 @@ void set_position_and_orientation(int16_t x, int16_t y, int16_t orientation)
 	out_data[6] = orientation&0xff;
 
 	// Send to motion driver
-	TM_USART_Send(UART4, out_data, 7);
+	HAL_UART_Transmit(MOTION_DRIVER, out_data, 7, 0);
 }
 
 void read_status_and_position(void)
 {
-	int8_t new_state[7];
+	uint8_t new_state[7];
 
-	TM_USART_Putc(MOTION_DRIVER, 'P');
+	HAL_UART_Transmit(MOTION_DRIVER, (unsigned char *)"P", 1, 0);
 
-	for (int8_t i = 0; i < 7; ++i)
-		new_state[i] = TM_USART_Getc(MOTION_DRIVER);
+	HAL_UART_Receive(MOTION_DRIVER, new_state, 7, 0);
 
 	switch (new_state[0])
 	{
@@ -55,51 +59,51 @@ void read_status_and_position(void)
 
 void set_motion_speed(int8_t speed)
 {
-	int8_t out_data[2];
+	uint8_t out_data[2];
 
 	out_data[0] = 'V';
 	out_data[1] = speed;
 
-	TM_USART_Send(UART4, out_data, 2);
+	HAL_UART_Transmit(MOTION_DRIVER, out_data, 2, 0);
 }
 
 void move_forward(int16_t dist, int8_t end_speed)
 {
-	int8_t out_data[4];
+	uint8_t out_data[4];
 
 	out_data[0] = 'D';
 	out_data[1] = dist>>8;
 	out_data[2] = dist&0xff;
 	out_data[3] = end_speed;
 
-	TM_USART_Send(UART4, out_data, 4);
+	HAL_UART_Transmit(MOTION_DRIVER, out_data, 4, 0);
 }
 
 void rotate_for(int16_t angle)
 {
-	int8_t out_data[3];
+	uint8_t out_data[3];
 
 	out_data[0] = 'T';
 	out_data[1] = angle>>8;
 	out_data[2] = angle&0xff;
 
-	TM_USART_Send(UART4, out_data, 3);
+	HAL_UART_Transmit(MOTION_DRIVER, out_data, 3, 0);
 }
 
 void rotate_to(int16_t angle)
 {
-	int8_t out_data[3];
+	uint8_t out_data[3];
 
 	out_data[0] = 'A';
 	out_data[1] = angle>>8;
 	out_data[2] = angle&0xff;
 
-	TM_USART_Send(UART4, out_data, 3);
+	HAL_UART_Transmit(MOTION_DRIVER, out_data, 3, 0);
 }
 
 void goto_xy(int16_t x, int16_t y, int8_t end_speed, int8_t direction)
 {
-	int8_t out_data[7];
+	uint8_t out_data[7];
 
 	out_data[0] = 'G';
 	out_data[1] = x>>8;
@@ -109,12 +113,12 @@ void goto_xy(int16_t x, int16_t y, int8_t end_speed, int8_t direction)
 	out_data[5] = end_speed;
 	out_data[6] = direction;
 
-	TM_USART_Send(UART4, out_data, 7);
+	HAL_UART_Transmit(MOTION_DRIVER, out_data, 7, 0);
 }
 
 void curve(int16_t x, int16_t y, int8_t angle, int8_t angle_direction, int8_t direction)
 {
-	int8_t out_data[8];
+	uint8_t out_data[8];
 
 	out_data[0] = 'Q';
 	out_data[1] = x>>8;
@@ -125,30 +129,58 @@ void curve(int16_t x, int16_t y, int8_t angle, int8_t angle_direction, int8_t di
 	out_data[6] = angle_direction;
 	out_data[7] = direction;
 
-	TM_USART_Send(UART4, out_data, 8);
+	HAL_UART_Transmit(MOTION_DRIVER, out_data, 8, 0);
 }
 
 void hard_stop(void)
 {
-	TM_USART_Putc(MOTION_DRIVER, 'S');
+	HAL_UART_Transmit(MOTION_DRIVER, (unsigned char *)"S", 1, 0);
 }
 
 void soft_stop(void)
 {
-	TM_USART_Putc(MOTION_DRIVER, 's');
+	HAL_UART_Transmit(MOTION_DRIVER, (unsigned char *)"s", 1, 0);
 }
 
 void reset_driver(void)
 {
-	TM_USART_Putc(MOTION_DRIVER, 'R');
+	HAL_UART_Transmit(MOTION_DRIVER, (unsigned char *)"R", 1, 0);
 }
 
 void stuck_enable(void)
 {
-	TM_USART_Putc(MOTION_DRIVER, 'Z');
+	HAL_UART_Transmit(MOTION_DRIVER, (unsigned char *)"Z", 1, 0);
 }
 
 void stuck_disable(void)
 {
-	TM_USART_Putc(MOTION_DRIVER, 'z');
+	HAL_UART_Transmit(MOTION_DRIVER, (unsigned char *)"z", 1, 0);
+}
+
+/**
+* @brief This function handles TIM7 global interrupt.
+*/
+void TIM7_IRQHandler(void)
+{
+  /* USER CODE BEGIN TIM7_IRQn 0 */
+	uint8_t temp[7];
+  	if (__HAL_TIM_GET_FLAG(&htim7, TIM_FLAG_UPDATE) != RESET) {
+
+  			HAL_UART_Transmit(MOTION_DRIVER, (unsigned char *)"S", 1, 0);
+			HAL_UART_Receive(MOTION_DRIVER, temp, 7, 0);
+  			state.status = temp[0];
+  			state.x = (temp[1] << 8 ) | (temp[2] & 0xff);
+  			state.y = (temp[3] << 8 ) | (temp[4] & 0xff);
+  			state.orientation = (temp[5] << 8) | (temp[6] & 0xff);
+
+  			/* Clear overflow interrupt flag. */
+  			__HAL_TIM_CLEAR_IT(&htim7, TIM_IT_UPDATE);
+
+  	}
+
+  /* USER CODE END TIM7_IRQn 0 */
+  HAL_TIM_IRQHandler(&htim7);
+  /* USER CODE BEGIN TIM7_IRQn 1 */
+
+  /* USER CODE END TIM7_IRQn 1 */
 }
