@@ -46,8 +46,18 @@ extern TIM_HandleTypeDef htim7;
 
 extern TIM_HandleTypeDef htim5;
 
+volatile uint32_t colour_sensor_red_value, colour_sensor_green_value, colour_sensor_blue_value;
+volatile uint8_t colour_sensor_step = 0, colour_sensor_value_ready = 0;
+static void set_channel(colour_channel_enum_t channel);
+
+volatile uint16_t x_coordinate;
+volatile uint16_t y_coordinate;
+volatile uint16_t orientation;
+volatile char status;
+volatile motion_state state;
+
 /******************************************************************************/
-/*            Cortex-M4 Processor Interruption and Exception Handlers         */ 
+/*            Cortex-M4 Processor Interruption and Exception Handlers         */
 /******************************************************************************/
 
 /**
@@ -152,9 +162,48 @@ void TIM5_IRQHandler(void)
 /**
 * @brief This function handles TIM6 global interrupt, DAC1 and DAC2 underrun error interrupts.
 */
+
+// TIM6 interrupt - should fire every millisecond
+// and read the colour sensor
+// There's probably better way of doing this (best kind of comments, btw)
 void TIM6_DAC_IRQHandler(void)
 {
   /* USER CODE BEGIN TIM6_DAC_IRQn 0 */
+// 	if (__HAL_TIM_GET_FLAG(&htim6, TIM_FLAG_UPDATE) != RESET) {
+// 		/* Clear overflow interrupt flag. */
+// 		__HAL_TIM_CLEAR_IT(&htim6, TIM_IT_UPDATE);
+// 		/* Read counter and treat it as kHz value */
+//
+//  		switch(colour_sensor_step){
+//
+//  			case 0:
+//  				__HAL_TIM_SetCounter(&htim6, 0);
+//  				set_channel(RED_CHANNEL);
+//  				colour_sensor_step++;
+//  				break;
+//
+//  			case 1:
+//  				colour_sensor_red_value  =  __HAL_TIM_GET_COUNTER(&htim6);
+//  				__HAL_TIM_SetCounter(&htim6, 0);
+//  				set_channel(GREEN_CHANNEL);
+//  				colour_sensor_step++;
+//  				break;
+//
+//  			case 2:
+//  				colour_sensor_green_value = __HAL_TIM_GET_COUNTER(&htim6);
+//  				__HAL_TIM_SetCounter(&htim6, 0);
+//  				set_channel(BLUE_CHANNEL);
+//  				colour_sensor_step++;
+//  				break;
+//
+//  			case 3:
+//  				colour_sensor_blue_value = __HAL_TIM_GET_COUNTER(&htim6);
+//  				colour_sensor_step = 0;
+//  				colour_sensor_value_ready = 1;
+//  				break;
+//
+//  		}
+// 	}
 
   /* USER CODE END TIM6_DAC_IRQn 0 */
   HAL_TIM_IRQHandler(&htim6);
@@ -169,6 +218,18 @@ void TIM6_DAC_IRQHandler(void)
 void TIM7_IRQHandler(void)
 {
   /* USER CODE BEGIN TIM7_IRQn 0 */
+//  	if (__HAL_TIM_GET_FLAG(&htim7, TIM_FLAG_UPDATE) != RESET) {
+//
+//  			TM_USART_Putc(UART4, 'S');
+//  			state.status = TM_USART_Getc(UART4);
+//  			state.x = (TM_USART_Getc(UART4) << 8 ) | (TM_USART_Getc(UART4) & 0xff);
+//  			state.y = (TM_USART_Getc(UART4) << 8 ) | (TM_USART_Getc(UART4) & 0xff);
+//  			state.orientation = ( TM_USART_Getc(UART4) << 8 ) | (TM_USART_Getc(UART4) & 0xff);
+//
+//  			/* Clear overflow interrupt flag. */
+//  			__HAL_TIM_CLEAR_IT(&htim7, TIM_IT_UPDATE);
+//
+//  	}
 
   /* USER CODE END TIM7_IRQn 0 */
   HAL_TIM_IRQHandler(&htim7);
@@ -178,6 +239,28 @@ void TIM7_IRQHandler(void)
 }
 
 /* USER CODE BEGIN 1 */
+static void set_channel(colour_channel_enum_t channel)
+{
+	// Set appropriate gpio values
+	switch (channel)
+	{
+		case RED_CHANNEL:
+			mosfet_clear(3);
+			mosfet_clear(4);
+			break;
+
+		case GREEN_CHANNEL:
+			mosfet_set(3);
+			mosfet_set(4);
+			break;
+
+		case BLUE_CHANNEL:
+			mosfet_set(3);
+			mosfet_clear(4);
+			break;
+	}
+
+}
 
 /* USER CODE END 1 */
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

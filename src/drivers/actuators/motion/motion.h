@@ -2,30 +2,11 @@
 #define MOTION
 
 #include <stdint.h>
-#include "../../../initialisation/usart.h"
-#include "../../../initialisation/tim.h"
+#include "usart.h"
+#include "tim.h"
+#include "stm32f4xx_it.h"
 
 #define MOTION_DRIVER UART4
-
-extern volatile uint16_t x_coordinate;
-extern volatile uint16_t y_coordinate;
-extern volatile uint16_t orientation;
-extern volatile char status;
-
-typedef enum { MOTION_IDLE,
-               MOTION_STUCK,
-               MOTION_ROTATING,
-               MOTION_ERROR,
-               MOTION_MOVING } motion_status;
-
-typedef struct {
-	uint16_t x;
-	uint16_t y;
-	uint16_t orientation;
-	motion_status status;
-} motion_state;
-
-extern volatile motion_state state;
 
 /** \file motion.h
  * \brief Motion driver functions

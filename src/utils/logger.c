@@ -92,8 +92,6 @@ void clean_buffer(int _clean_size){
 
 void send_buffer_to_uart(int _buff_lenght){
 	logger_buffer[++_buff_lenght] = '\n';
-	for(int i = 0; i <= _buff_lenght; i++){
-//		usart_send_blocking(USART3,logger_buffer[i]);
-	}
+	TM_USART_Send(USART3, logger_buffer, _buff_lenght);
 	clean_buffer(_buff_lenght);
 }

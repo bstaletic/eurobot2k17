@@ -1,30 +1,5 @@
 #include "motion.h"
 
-volatile uint16_t x_coordinate;
-volatile uint16_t y_coordinate;
-volatile uint16_t orientation;
-volatile char status;
-
-volatile motion_state state;
-
-// void tim7_isr(void)
-// {
-//
-// 	if (timer_get_flag(TIM7, TIM_SR_UIF)) {
-//
-// 			usart_send_blocking(UART4, 'S');
-// 			state.status = usart_recv_blocking(UART4);
-// 			state.x = (usart_recv_blocking(UART4) << 8 ) | (usart_recv_blocking(UART4) & 0xff);
-// 			state.y = (usart_recv_blocking(UART4) << 8 ) | (usart_recv_blocking(UART4) & 0xff);
-// 			state.orientation = ( usart_recv_blocking(UART4) << 8 ) | (usart_recv_blocking(UART4) & 0xff);
-//
-// 			/* Clear overflow interrupt flag. */
-// 			timer_clear_flag(TIM7, TIM_SR_UIF);
-//
-// 	}
-//
-// }
-
 
 void set_position_and_orientation(int16_t x, int16_t y, int16_t orientation)
 {
@@ -40,18 +15,17 @@ void set_position_and_orientation(int16_t x, int16_t y, int16_t orientation)
 	out_data[6] = orientation&0xff;
 
 	// Send to motion driver
-	//for (int8_t i = 0; i < 7; ++i)
-//		usart_send_blocking(MOTION_DRIVER, out_data[i]);
+	TM_USART_Send(UART4, out_data, 7);
 }
 
 void read_status_and_position(void)
 {
 	int8_t new_state[7];
 
-//	usart_send_blocking(MOTION_DRIVER, 'P');
+	TM_USART_Putc(MOTION_DRIVER, 'P');
 
-	//for (int8_t i = 0; i < 7; ++i)
-//		new_state[i] = usart_recv_blocking(MOTION_DRIVER);
+	for (int8_t i = 0; i < 7; ++i)
+		new_state[i] = TM_USART_Getc(MOTION_DRIVER);
 
 	switch (new_state[0])
 	{
@@ -86,8 +60,7 @@ void set_motion_speed(int8_t speed)
 	out_data[0] = 'V';
 	out_data[1] = speed;
 
-//	for (int8_t i = 0; i < 2; ++i)
-//		usart_send_blocking(MOTION_DRIVER, out_data[i]);
+	TM_USART_Send(UART4, out_data, 2);
 }
 
 void move_forward(int16_t dist, int8_t end_speed)
@@ -99,8 +72,7 @@ void move_forward(int16_t dist, int8_t end_speed)
 	out_data[2] = dist&0xff;
 	out_data[3] = end_speed;
 
-//	for (int8_t i = 0; i < 4; ++i)
-//		usart_send_blocking(MOTION_DRIVER, out_data[i]);
+	TM_USART_Send(UART4, out_data, 4);
 }
 
 void rotate_for(int16_t angle)
@@ -111,8 +83,7 @@ void rotate_for(int16_t angle)
 	out_data[1] = angle>>8;
 	out_data[2] = angle&0xff;
 
-//	for (int8_t i = 0; i < 3; ++i)
-//		usart_send_blocking(MOTION_DRIVER, out_data[i]);
+	TM_USART_Send(UART4, out_data, 3);
 }
 
 void rotate_to(int16_t angle)
@@ -123,8 +94,7 @@ void rotate_to(int16_t angle)
 	out_data[1] = angle>>8;
 	out_data[2] = angle&0xff;
 
-//	for (int8_t i = 0; i < 3; ++i)
-//		usart_send_blocking(MOTION_DRIVER, out_data[i]);
+	TM_USART_Send(UART4, out_data, 3);
 }
 
 void goto_xy(int16_t x, int16_t y, int8_t end_speed, int8_t direction)
@@ -139,8 +109,7 @@ void goto_xy(int16_t x, int16_t y, int8_t end_speed, int8_t direction)
 	out_data[5] = end_speed;
 	out_data[6] = direction;
 
-//	for (int8_t i = 0; i < 7; ++i)
-//		usart_send_blocking(MOTION_DRIVER, out_data[i]);
+	TM_USART_Send(UART4, out_data, 7);
 }
 
 void curve(int16_t x, int16_t y, int8_t angle, int8_t angle_direction, int8_t direction)
@@ -156,31 +125,30 @@ void curve(int16_t x, int16_t y, int8_t angle, int8_t angle_direction, int8_t di
 	out_data[6] = angle_direction;
 	out_data[7] = direction;
 
-//	for (int8_t i = 0; i < 8; ++i)
-//		usart_send_blocking(MOTION_DRIVER, out_data[i]);
+	TM_USART_Send(UART4, out_data, 8);
 }
 
 void hard_stop(void)
 {
-//	usart_send_blocking(MOTION_DRIVER, 'S');
+	TM_USART_Putc(MOTION_DRIVER, 'S');
 }
 
 void soft_stop(void)
 {
-//	usart_send_blocking(MOTION_DRIVER, 's');
+	TM_USART_Putc(MOTION_DRIVER, 's');
 }
 
 void reset_driver(void)
 {
-//	usart_send_blocking(MOTION_DRIVER, 'R');
+	TM_USART_Putc(MOTION_DRIVER, 'R');
 }
 
 void stuck_enable(void)
 {
-//	usart_send_blocking(MOTION_DRIVER, 'Z');
+	TM_USART_Putc(MOTION_DRIVER, 'Z');
 }
 
 void stuck_disable(void)
 {
-//	usart_send_blocking(MOTION_DRIVER, 'z');
+	TM_USART_Putc(MOTION_DRIVER, 'z');
 }

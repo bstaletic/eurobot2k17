@@ -4,9 +4,10 @@
 #include <stdint.h>
 #include "tim.h"
 #include "../mosfet_switches/mosfet_switches.h"
+#include "utils/timer_utils.h"
 
-//#define DC_TIMER TIM2
-//#define DC_CHANNEL TIM_OC1
+#define DC_TIMER 2
+#define DC_CHANNEL TIM_CHANNEL_1
 
 /* Maximum PWM for DC motor 800 */
 #define DC_PWM 800
