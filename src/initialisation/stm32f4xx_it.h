@@ -48,37 +48,7 @@
 /* Exported functions ------------------------------------------------------- */
 
 void SysTick_Handler(void);
-void EXTI0_IRQHandler(void);
-void EXTI2_IRQHandler(void);
-void EXTI9_5_IRQHandler(void);
-void EXTI15_10_IRQHandler(void);
 void TIM5_IRQHandler(void);
-void TIM6_DAC_IRQHandler(void);
-void TIM7_IRQHandler(void);
-
-extern volatile uint32_t colour_sensor_red_value, colour_sensor_green_value, colour_sensor_blue_value;
-extern volatile uint8_t colour_sensor_step, colour_sensor_value_ready;
-typedef enum { RED_CHANNEL, GREEN_CHANNEL, BLUE_CHANNEL } colour_channel_enum_t;
-
-extern volatile uint16_t x_coordinate;
-extern volatile uint16_t y_coordinate;
-extern volatile uint16_t orientation;
-extern volatile char status;
-
-typedef enum { MOTION_IDLE,
-               MOTION_STUCK,
-               MOTION_ROTATING,
-               MOTION_ERROR,
-               MOTION_MOVING } motion_status;
-
-typedef struct {
-	uint16_t x;
-	uint16_t y;
-	uint16_t orientation;
-	motion_status status;
-} motion_state;
-
-extern volatile motion_state state;
 
 #ifdef __cplusplus
 }

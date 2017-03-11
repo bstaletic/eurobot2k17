@@ -15,7 +15,7 @@ DEPDIR := $(DESTDIR)dep/
 ifeq ($(DEBUG),0)
 	CFLAGS := -Os -Wall -Wextra -Wno-main -std=c11
 else
-	CFLAGS := -Og -g -Wall -Wextra -Wno-main -std=c11 -w
+	CFLAGS := -Og -g -Wall -Wextra -Wno-main -std=c11
 endif
 ASFLAGS := --warn
 MFLAGS := -mfloat-abi=hard -mcpu=cortex-m4 -mthumb -mfpu=fpv4-sp-d16
