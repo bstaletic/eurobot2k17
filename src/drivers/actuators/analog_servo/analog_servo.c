@@ -1,4 +1,4 @@
-#include <drivers/actuators/analog_servo/analog_servo.h>
+#include "analog_servo.h"
 
 const analog_servo servo1={9, TIM_CHANNEL_2};
 const analog_servo servo2={9, TIM_CHANNEL_1};

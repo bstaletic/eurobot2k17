@@ -1,4 +1,4 @@
-#include <drivers/actuators/mosfet_switches/mosfet_switches.h>
+#include "mosfet_switches.h"
 
 void mosfet_set(uint8_t id)
 {

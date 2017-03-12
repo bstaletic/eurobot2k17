@@ -1,2 +1,2 @@
-SRC += $(SRCDIR)core/task_mngr.c
+SRC += core/task_mngr.c
 

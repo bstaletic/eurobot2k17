@@ -2,6 +2,7 @@
 #define TRUNK_EXECUTOR
 
 #include <stdint.h>
+
 #include "../../drivers/actuators/analog_servo/analog_servo.h"
 
 #define OPEN_TRUNK_TIMER 1

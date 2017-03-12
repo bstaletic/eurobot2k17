@@ -11,7 +11,7 @@ This repo is going to be used for hosting the code for the upcoming Eurobot 2017
 
 ### Software being utilised
 
-1. [libopencm3](https://libopencm3.github.io/docs/latest/stm32f4/html/modules.html) library
+1. HAL library
 2. [FreeRTOS](https://freertos.org/)
 
 ### Directory structure
