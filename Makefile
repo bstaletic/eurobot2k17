@@ -1,43 +1,27 @@
-include $(STARTDIR)make_def_vars.mk
+include $(CURDIR)/make_def_vars.mk
 
-include $(SRCDIR)Makefile
-include $(SRCDIR)initialisation/Makefile
-include $(SRCDIR)drivers/Makefile
-include $(SRCDIR)core/Makefile
-include $(SRCDIR)utils/Makefile
-include $(SRCDIR)tasks/Makefile
-include $(SRCDIR)executors/Makefile
-SRC += $(SRCDIR)libs/CMSIS/Device/ST/STM32F4xx/Source/Templates/system_stm32f4xx.c
+include $(SRCDIR)/Makefile
 
-OBJ := $(subst src/,,$(SRC:%.c=$(OBJDIR)%.o))
-ASM := $(subst src/,,$(SRC:%.c=$(ASMDIR)%.s))
-DEPS := $(subst src/,,$(SRC:%.c=$(DEPDIR)%.d))
+OBJ := $(SRC:%.c=$(OBJDIR)/%.o)
+ASM := $(SRC:%.c=$(ASMDIR)/%.s)
+DEPS := $(SRC:%.c=$(DEPDIR)/%.d)
 
-include src/libs/CMSIS/Device/ST/STM32F4xx/Source/Templates/Makefile
-
-echo:
-	@echo $(OBJ)
+include $(SRCDIR)/libs/asm_src.mk
 
 all: bin
 
-bin: $(BINDIR)eurobot2k17.bin
+bin: $(BINDIR)/eurobot2k17.bin
 
 # Bin file will be flashed onto the STM32F4-Discovery board
-$(BINDIR)eurobot2k17.bin: $(BINDIR)eurobot2k17.elf
+$(BINDIR)/eurobot2k17.bin: $(BINDIR)/eurobot2k17.elf
 	@$(MKDIR_P) $(@D)
 	$(OBJCOPY) -Obinary $< $@
 
 # Compile the executable using every .o file created and the generated linker script
-$(BINDIR)eurobot2k17.elf : $(OBJ)
+$(BINDIR)/eurobot2k17.elf : $(OBJ)
 	$(VECHO) "Linking $@"
 	@$(MKDIR_P) $(@D)
-	$(CC) --specs=nano.specs --static -T$(STARTDIR)ldscript/stm32f4_freertos.ld $(MFLAGS) -Wl,-Map=$(DESTDIR)eurobot2k17.map -Wl,--gc-sections $(OBJ) $(LINK_GROUP) -o $@
-
-# Generate the linker script
-$(DESTDIR)generated.$(BOARD).ld :
-	$(VECHO) "Generating $@"
-	@$(MKDIR_P) $(@D)
-	$(CC) -E $(CFLAGS) $(MFLAGS) -D_ROM=1024K -D_ROM_OFF=0x08000000 -D_RAM=128K -D_RAM_OFF=0x20000000 -D_CCM=64K -D_CCM_OFF=0x10000000 -P -E $(STARTDIR)libopencm3/ld/linker.ld.S > $@
+	$(CC) --specs=nano.specs --static -T$(STARTDIR)/ldscript/stm32f4_freertos.ld $(MFLAGS) -Wl,-Map=$(DESTDIR)/eurobot2k17.map -Wl,--gc-sections $(OBJ) $(LINK_GROUP) -o $@
 
 # Generate all assembly files
 assembly: $(ASM)
@@ -53,9 +37,9 @@ doc:
 	$(VECHO) "Generating documentation"
 	$(DOXYGEN) $(DOXYFILE) &>/dev/null
 	@$(MKDIR_P) $(DOCDIR)
-	@rm -rf $(DOCDIR)latex $(DOCDIR)html
-	@mv $(STARTDIR)latex $(DOCDIR)
-	@mv $(STARTDIR)html $(DOCDIR)
+	@$(RM) -rf $(DOCDIR)/latex $(DOCDIR)/html
+	@mv $(STARTDIR)/latex $(DOCDIR)
+	@mv $(STARTDIR)/html $(DOCDIR)
 
 help:
 	@echo Use "make flash" to quickly compile the binary and flash onto STM32
@@ -73,13 +57,40 @@ help:
 	@echo For more information about these variables check the README.md
 
 clean:
-	rm -rf $(DESTDIR)
+	$(VECHO) "Cleaning dependency directory"
+	$(RM) -rf $(DEPDIR)/core
+	$(RM) -rf $(DEPDIR)/drivers
+	$(RM) -rf $(DEPDIR)/executors
+	$(RM) -rf $(DEPDIR)/initialisation
+	$(RM) -rf $(DEPDIR)/tasks
+	$(RM) -rf $(DEPDIR)/utils
+	$(RM) -rf $(DEPDIR)/main.d
+	$(VECHO) "Cleaning binaries directory"
+	$(RM) -rf $(BINDIR)
+	$(RM) -rf $(DESTDIR)/eurobot2k17.map
+	$(VECHO) "Cleaning object directory"
+	$(RM) -rf $(OBJDIR)/core
+	$(RM) -rf $(OBJDIR)/drivers
+	$(RM) -rf $(OBJDIR)/executors
+	$(RM) -rf $(OBJDIR)/initialisation
+	$(RM) -rf $(OBJDIR)/tasks
+	$(RM) -rf $(OBJDIR)/utils
+	$(RM) -rf $(OBJDIR)/main.o
+	$(VECHO) "Cleaning assembly directory"
+	$(RM) -rf $(ASMDIR)/core
+	$(RM) -rf $(ASMDIR)/drivers
+	$(RM) -rf $(ASMDIR)/executors
+	$(RM) -rf $(ASMDIR)/initialisation
+	$(RM) -rf $(ASMDIR)/tasks
+	$(RM) -rf $(ASMDIR)/utils
+	$(RM) -rf $(ASMDIR)/main.s
 
 clean-all:
-	rm -rf $(STARTDIR)build/
+	@$(VECHO) "Cleaning all files"
+	$(RM) -rf $(STARTDIR)/build/
 
 # Include all implicit rules and dependencies
-include $(STARTDIR)make_def_rules.mk
+include $(STARTDIR)/make_def_rules.mk
 -include $(DEPS)
 
 .PHONY: doc flash help assembly bin clean clean-all all

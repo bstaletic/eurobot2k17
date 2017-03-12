@@ -1,5 +1,10 @@
-SRC += $(SRCDIR)main.c
+include $(SRCDIR)/Middlewares/Makefile
+include $(SRCDIR)/core/Makefile
+include $(SRCDIR)/drivers/Makefile
+include $(SRCDIR)/executors/Makefile
+include $(SRCDIR)/initialisation/Makefile
+include $(SRCDIR)/libs/Makefile
+include $(SRCDIR)/tasks/Makefile
+include $(SRCDIR)/utils/Makefile
 
-#include $(SRCDIR)Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/Makefile
-include $(SRCDIR)libs/STM32F4xx_HAL_Driver/Src/Makefile
-include $(SRCDIR)Middlewares/Third_Party/FreeRTOS/Source/Makefile
+SRC += main.c

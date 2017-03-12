@@ -1,8 +1,8 @@
 #ifndef TASKS_TASK_TEST_1_H
 #define TASKS_TASK_TEST_1_H
 
-#include "core/task_mngr.h"
-#include "utils/logger.h"
+#include "../core/task_mngr.h"
+#include "../utils/logger.h"
 
 
 

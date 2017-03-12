@@ -2,9 +2,10 @@
 #define DC_MOTOR_H
 
 #include <stdint.h>
-#include "tim.h"
+#include <tim.h>
+
 #include "../mosfet_switches/mosfet_switches.h"
-#include "utils/timer_utils.h"
+#include "../../../utils/timer_utils.h"
 
 #define DC_TIMER 2
 #define DC_CHANNEL TIM_CHANNEL_1

@@ -2,6 +2,7 @@
 #define CORE_TASK_H
 
 #include <stdint-gcc.h>
+
 /// status of task
 typedef enum{
 	TASK_ACTIVE, ///< task is currently running

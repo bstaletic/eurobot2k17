@@ -2,9 +2,9 @@
 #define MOTION
 
 #include <stdint.h>
-#include "usart.h"
-#include "tim.h"
-#include "stm32f4xx_it.h"
+#include <usart.h>
+#include <tim.h>
+#include <stm32f4xx_it.h>
 
 #define MOTION_DRIVER &huart4
 
