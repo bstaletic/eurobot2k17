@@ -21,7 +21,7 @@ $(BINDIR)/eurobot2k17.bin: $(BINDIR)/eurobot2k17.elf
 $(BINDIR)/eurobot2k17.elf : $(OBJ)
 	$(VECHO) "Linking $@"
 	@$(MKDIR_P) $(@D)
-	$(CC) --specs=nano.specs --static -T$(STARTDIR)/ldscript/stm32f4_freertos.ld $(MFLAGS) -Wl,-Map=$(DESTDIR)/eurobot2k17.map -Wl,--gc-sections $(OBJ) $(LINK_GROUP) -o $@
+	$(CC) --specs=nano.specs --static -T$(STARTDIR)/ldscript/stm32f4_freertos.ld $(MFLAGS) -Wl,-Map=$(DESTDIR)/eurobot2k17.map -Wl,--gc-sections $(OBJ) -o $@
 
 # Generate all assembly files
 assembly: $(ASM)

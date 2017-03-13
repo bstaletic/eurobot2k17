@@ -40,7 +40,6 @@ void main(void)
 	while (1) {
 
 	}
-
 }
 
 /** System Clock Configuration
