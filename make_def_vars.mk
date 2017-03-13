@@ -1,8 +1,11 @@
 STARTDIR := $(CURDIR)
 ifeq ($(DEBUG),0)
 	DESTDIR := $(STARTDIR)/build/release
+	FLASH_TGT := $(BINDIR)/eurobot2k17.bin
+	FLASH_OFFSET := 0x08000000
 else
 	DESTDIR := $(STARTDIR)/build/debug
+	FLASH_TGT := $(BINDIR)/eurobot2k17.elf
 endif
 
 OBJDIR := $(DESTDIR)/obj
@@ -14,14 +17,12 @@ SRCDIR := $(STARTDIR)/src
 DEPDIR := $(DESTDIR)/dep
 
 ifeq ($(DEBUG),0)
-	CFLAGS := -Os -Wall -Wextra -Wno-main -std=c11
+	CFLAGS := -Ofast -Wall -Wextra -Wno-main -std=c11 -fdata-sections -ffunction-sections -fuse-ld=gold
 else
-	CFLAGS := -Og -g -Wall -Wextra -Wno-main -std=c11
+	CFLAGS := -Og -g -Wall -Wextra -Wno-main -std=c11 -fdata-sections -ffunction-sections -fuse-ld=gold
 endif
 ASFLAGS := --warn
 MFLAGS := -mfloat-abi=hard -mcpu=cortex-m4 -mthumb -mfpu=fpv4-sp-d16
-
-LINK_GROUP := -Wl,--start-group -lc -lgcc -lnosys -Wl,--end-group
 
 DOXYFILE := $(STARTDIR)/Doxyfile
 ifeq ($V,1)
@@ -46,13 +47,6 @@ else
 	SSH := ssh
 endif
 
-ifeq ($(DEBUG),0)
-	FLASH_TGT := $(BINDIR)/eurobot2k17.bin
-	FLASH_OFFSET := 0x08000000
-else
-	FLASH_TGT := $(BINDIR)/eurobot2k17.elf
-endif
-
 MKDIR_P := @mkdir -p
 
 # Rspberry Pi variables
@@ -66,4 +60,4 @@ else
 endif
 
 PI_FLASH_CMD := 'openocd -f interface/stlink-v2-1.cfg -f target/stm32f4x.cfg -c "reset_config srst_only separate srst_nogate srst_open_drain connect_assert_srst" -c "program $(PI_FLASH_TGT) verify reset exit $(FLASH_OFFSET)"'
-INCLUDES := -I$(SRCDIR) -I$(SRCDIR)/libs/STM32F4xx_HAL_Driver/Inc/ -I$(SRCDIR)/libs/CMSIS/Device/ST/STM32F4xx/Include/ -I$(SRCDIR)/libs/CMSIS/Include/ -I$(SRCDIR)/initialisation -I$(SRCDIR)/Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/ -I$(SRCDIR)/Middlewares/Third_Party/FreeRTOS/Source/include/ -I$(SRCDIR)/Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/
+INCLUDES := -I$(SRCDIR)/libs/STM32F4xx_HAL_Driver/Inc/ -I$(SRCDIR)/libs/CMSIS/Device/ST/STM32F4xx/Include/ -I$(SRCDIR)/libs/CMSIS/Include/ -I$(SRCDIR)/initialisation -I$(SRCDIR)/Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/ -I$(SRCDIR)/Middlewares/Third_Party/FreeRTOS/Source/include/ -I$(SRCDIR)/Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/
