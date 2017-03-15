@@ -67,6 +67,12 @@ help:
 	@echo ""
 	@echo For more information about these variables check the README.md
 
+pi-flash: bin
+	$(VECHO) "Copying executable to RPi"
+	$(SCP) $(FLASH_TGT) $(PI_USERNAME)@$(PI_IP):bin/
+	$(VECHO) "Flashing executable"
+	$(SSH) $(PI_USERNAME)@$(PI_IP) $(PI_FLASH_CMD)
+
 clean:
 	rm -rf $(DESTDIR)
 
@@ -77,4 +83,4 @@ clean-all:
 include $(STARTDIR)make_def_rules.mk
 -include $(DEPS)
 
-.PHONY: doc flash help assembly bin clean clean-all all
+.PHONY: doc flash help assembly bin clean clean-all all pi-flash

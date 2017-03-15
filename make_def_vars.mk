@@ -33,6 +33,9 @@ ifeq ($V,1)
 	CC := arm-none-eabi-gcc
 	AS := arm-none-eabi-as
 	VECHO := @true
+	RM := rm
+	SCP := scp
+	SSH := ssh
 else
 	DOXYGEN := @doxygen
 	OPENOCD := @openocd
@@ -40,6 +43,9 @@ else
 	CC := @arm-none-eabi-gcc
 	AS := @arm-none-eabi-as
 	VECHO := @echo
+	RM := @rm
+	SCP := scp
+	SSH := ssh
 endif
 
 ifeq ($(DEBUG),0)
@@ -50,3 +56,15 @@ else
 endif
 
 MKDIR_P := @mkdir -p
+
+# Rspberry Pi variables
+PI_USERNAME := pi
+PI_IP := 192.168.10.115
+
+ifeq ($(DEBUG),0)
+	PI_FLASH_TGT := bin/eurobot2k17.bin
+else
+	PI_FLASH_TGT := bin/eurobot2k17.elf
+endif
+
+PI_FLASH_CMD := 'openocd -f interface/stlink-v2-1.cfg -f target/stm32f4x.cfg -c "reset_config srst_only separate srst_nogate srst_open_drain connect_assert_srst" -c "program $(PI_FLASH_TGT) verify reset exit $(FLASH_OFFSET)"'
