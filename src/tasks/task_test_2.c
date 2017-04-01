@@ -5,6 +5,7 @@ task_arguments_t task_test_2_arguments;
 
 void test_task_2_run(task_arguments_t* argv){
 	debug("test_task_2_run");
+	osDelay(10000);
 	argv->state = TASK_BLOCKED;
 	argv->priority = 50;
 }
