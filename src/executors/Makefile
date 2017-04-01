@@ -4,3 +4,5 @@ SRC += executors/trunk/trunk.c
 SRC += executors/colour_shifter/colour_shifter.c
 SRC += executors/front_rollers/front_rollers.c
 SRC += executors/rocket/rocket.c
+SRC += executors/motion/motion.c 
+SRC += executors/common/common.c
