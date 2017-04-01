@@ -1,11 +1,11 @@
 #include "task_mngr.h"
 
 
-//this functions are inline because they are run only from task manager at one place.
-void run_systemtasks_preexecute(void);
-void run_systemtasks_postexecute(void);
-void run_calculate_priority(void);
-void run_usertasks(void);
+//this functions are in-line because they are run only from task manager at one place.
+inline void run_systemtasks_preexecute(void);
+inline void run_systemtasks_postexecute(void);
+inline void run_calculate_priority(void);
+inline void run_usertasks(void);
 task_t* find_next_task();
 
 task_t* task_user_active = NULL;
@@ -47,7 +47,7 @@ void task_mngr_run(){
 			run_systemtasks_postexecute();
 		}
 
-		for(int i = 0; i < 100000000; i++);
+//		for(int i = 0; i < 100000000; i++);
 	}
 }
 
