@@ -1,13 +1,11 @@
 STARTDIR := $(CURDIR)
+
 ifeq ($(DEBUG),0)
 	DESTDIR := $(STARTDIR)/build/release
-	FLASH_TGT := $(BINDIR)/eurobot2k17.bin
-	FLASH_OFFSET := 0x08000000
 else
 	DESTDIR := $(STARTDIR)/build/debug
-	FLASH_TGT := $(BINDIR)/eurobot2k17.elf
-endif
-
+endif 
+	
 OBJDIR := $(DESTDIR)/obj
 DOCDIR := $(DESTDIR)/doc
 BINDIR := $(DESTDIR)/bin
@@ -15,6 +13,13 @@ ASMDIR := $(DESTDIR)/asm
 DBGDIR := $(DESTDIR)/debug
 SRCDIR := $(STARTDIR)/src
 DEPDIR := $(DESTDIR)/dep
+
+ifeq ($(DEBUG),0)
+	FLASH_TGT := $(BINDIR)/eurobot2k17.bin
+	FLASH_OFFSET := 0x08000000
+else
+	FLASH_TGT := $(BINDIR)/eurobot2k17.elf
+endif
 
 ifeq ($(DEBUG),0)
 	CFLAGS := -Ofast -Wall -Wextra -Wno-main -std=c11 -fdata-sections -ffunction-sections -fuse-ld=gold
