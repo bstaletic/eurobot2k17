@@ -1,0 +1,11 @@
+#ifndef TASKS_TASKS_INIT_H
+#define TASKS_TASKS_INIT_H
+
+#include "task_test_1.h"
+#include "task_test_2.h"
+#include "idle.h"
+#include "time_update.h"
+
+void tasks_main(void);
+
+#endif // TASKS_TASKS_INIT_H
