@@ -1,97 +1,198 @@
 #include "logger.h"
+#include "cmsis_os.h"
 
+typedef struct log_one_t {
+	char text[LOGGER_BUFFER_ONE_LOG_SIZE];
+	int size;
+}log_one_t;
 
-char logger_buffer[] = {[0 ... (LOGGER_BUFFER_SIZE-1)] = '\0'};
-char logger_buffer_tmp[] = {[0 ... (LOGGER_BUFFER_SIZE-1)] = '\0'};
-int logger_buffer_couter = 0;
+typedef struct log_all_t {
+	log_one_t buffer[LOGGER_BUFFER_LOGS_SIZE];
+	int size;
+}log_all_t;
 
-static const char header_debug[] = { " [D] "};
-static const char header_info[] = {" [info] "};
-static const char header_error[] = {" [ERROR] "};
-static const int header_debug_size = 5;
-static const int header_info_size = 8;
-static const int header_error_size = 9;
+static log_all_t logs;
 
+osMutexDef(rw_mutex_def);
+osMutexId (rw_mutex);
 
-void clean_buffer(int _clean_size);
-void send_buffer_to_uart(int _buff_lenght);
+void main_send_to_uart(void);
+void main_error_light(void);
 
-void print_header(void){
-	send_buffer_to_uart(1);
-	send_buffer_to_uart(1);
-	send_buffer_to_uart(1);
-	send_buffer_to_uart(1);
+int print_header(void){
 
-	strncpy(logger_buffer,"  ____________",14);
-	send_buffer_to_uart(14);
-	strncpy(logger_buffer," /_  __/ ____/",14);
-	send_buffer_to_uart(14);
-	strncpy(logger_buffer,"  / / / __/",11);
-	send_buffer_to_uart(13);
-	strncpy(logger_buffer," / / / /___",11);
-	send_buffer_to_uart(12);
-	strncpy(logger_buffer,"/_/ /_____/ Team Engage Novi Sad",32);
-	send_buffer_to_uart(32);
-	strncpy(logger_buffer,"            Eurobot 2017",24);
-	send_buffer_to_uart(24);
+	if (osMutexWait(rw_mutex,LOGGER_MUTEX_WAIT_MS) == osOK){
 
-	send_buffer_to_uart(1);
+		logs.size++;
+		logs.size++;
+		logs.size++;
+		logs.size++;
+
+		strncpy(logs.buffer[logs.size].text,"\x1B[34m  ____________",19);
+		logs.buffer[logs.size++].size = 19;
+		strncpy(logs.buffer[logs.size].text," /_  __/ ____/",14);
+		logs.buffer[logs.size++].size = 14;
+		strncpy(logs.buffer[logs.size].text,"  / / / __/",13);
+		logs.buffer[logs.size++].size = 13;
+		strncpy(logs.buffer[logs.size].text," / / / /___",13);
+		logs.buffer[logs.size++].size = 13;
+		strncpy(logs.buffer[logs.size].text,"/_/ /_____/ Team Engage Novi Sad",32);
+		logs.buffer[logs.size++].size = 32;
+		strncpy(logs.buffer[logs.size].text,"            Eurobot 2017",24);
+		logs.buffer[logs.size++].size = 24;
+
+		logs.size++;
+		logs.size++;
+
+		osMutexRelease(rw_mutex);
+
+		osThreadYield();
+
+		return 0;
+	}else{
+		char error_mssg[35] = "ERROR LOGGER, CANT GET MUTEX!!!\n";
+		HAL_UART_Transmit(&huart3, (unsigned char *)error_mssg, 32, 1);
+
+		return -1;
+	}
 }
 
-
-
-void error(const char* format, ...){
+int error(const char* format, ...){
+#ifdef LOGGER_ERROR
 	va_list list;
-	int buffer_size;
 
-	va_start(list, format);
-	buffer_size = vsnprintf(0, 0, format, list);
-	vsprintf(logger_buffer+header_error_size, format, list);
+	if (osMutexWait(rw_mutex,LOGGER_MUTEX_WAIT_MS) == osOK){
 
-	memcpy(logger_buffer,header_error,header_error_size);
+		va_start(list, format);
 
-	send_buffer_to_uart(header_error_size+buffer_size);
-	va_end(list);
+		logs.buffer[logs.size].size = vsnprintf(0, 0, format, list) + HEADER_ERROR_SIZE;
+
+		vsprintf(logs.buffer[logs.size].text+HEADER_ERROR_SIZE, format, list);
+
+		memcpy(logs.buffer[logs.size].text, HEADER_ERROR_TEXT, HEADER_ERROR_SIZE);
+
+		logs.size++;
+
+		va_end(list);
+
+		osMutexRelease(rw_mutex);
+
+		osThreadYield();
+
+		return 0;
+	}else{
+		char error_mssg[35] = "ERROR LOGGER, CANT GET MUTEX!!!\n";
+		HAL_UART_Transmit(&huart3, (unsigned char *)error_mssg, 32, 1);
+
+		return -1;
+	}
+#endif
 }
 
-void debug(const char* format, ...){
+int debug(const char* format, ...){
+#ifdef LOGGER_DEBUG
 	va_list list;
-	int buffer_size;
 
-	va_start(list, format);
-	buffer_size = vsnprintf(0, 0, format, list);
+	if (osMutexWait(rw_mutex,LOGGER_MUTEX_WAIT_MS) == osOK){
 
-	vsprintf(logger_buffer+header_debug_size, format, list);
+		va_start(list, format);
 
-	memcpy(logger_buffer,header_debug,header_debug_size);
+		logs.buffer[logs.size].size = vsnprintf(0, 0, format, list) + HEADER_DEBUG_SIZE;
 
-	send_buffer_to_uart(buffer_size+header_debug_size);
-	va_end(list);
+		vsprintf(logs.buffer[logs.size].text+HEADER_DEBUG_SIZE, format, list);
+
+		memcpy(logs.buffer[logs.size].text, HEADER_DEBUG_TEXT, HEADER_DEBUG_SIZE);
+
+		logs.size++;
+
+		va_end(list);
+
+		osMutexRelease(rw_mutex);
+
+		osThreadYield();
+
+		return 0;
+	}else{
+		char error_mssg[35] = "ERROR LOGGER, CANT GET MUTEX!!!\n";
+		HAL_UART_Transmit(&huart3, (unsigned char *)error_mssg, 32, 1);
+
+		return -1;
+	}
+#endif
 }
 
-void info(const char* format, ...){
+int info(const char* format, ...){
+#ifdef LOGGER_INFO
 	va_list list;
-	int buffer_size;
 
-	va_start(list, format);
-	buffer_size = vsnprintf(0, 0, format, list);
-	vsprintf(logger_buffer+header_info_size, format, list);
+	if (osMutexWait(rw_mutex,LOGGER_MUTEX_WAIT_MS) == osOK){
 
-	memcpy(logger_buffer,header_info,header_info_size);
+		va_start(list, format);
 
-	send_buffer_to_uart(buffer_size+header_info_size);
-	va_end(list);
+		logs.buffer[logs.size].size = vsnprintf(0, 0, format, list) + HEADER_INFO_SIZE;
+
+		vsprintf(logs.buffer[logs.size].text+HEADER_INFO_SIZE, format, list);
+
+		memcpy(logs.buffer[logs.size].text, HEADER_INFO_TEXT, HEADER_INFO_SIZE);
+
+		logs.size++;
+
+		va_end(list);
+
+		osMutexRelease(rw_mutex);
+
+		osThreadYield();
+
+		return 0;
+	}else{
+		char error_mssg[35] = "ERROR LOGGER, CANT GET MUTEX!!!\n";
+		HAL_UART_Transmit(&huart3, (unsigned char *)error_mssg, 32, 1);
+
+		return -1;
+	}
+#endif
 }
 
+void logger_main(void){
 
-void clean_buffer(int _clean_size){
-	for (int i = 0; i < _clean_size+1; i++)
-		logger_buffer[i] = '\0';
+	if (osMutexWait(rw_mutex,LOGGER_MUTEX_WAIT_MS) == osOK){
+
+		for(int i = 0; i < logs.size; i++){
+			logs.buffer[i].text[++(logs.buffer[i].size)] = '\n';
+			HAL_UART_Transmit(&LOGGER_UART_PORT, (unsigned char *)logs.buffer[i].text, logs.buffer[i].size+1,logs.buffer[i].size);
+		}
+
+		logs.size = 0;
+
+		osMutexRelease(rw_mutex);
+
+		osThreadYield();
+	}else{
+		char error_mssg[35] = "ERROR LOGGER, CANT GET MUTEX!!!\n";
+		HAL_UART_Transmit(&huart3, (unsigned char *)error_mssg, 32, 1);
+	}
+
 }
 
+void logger_ctor(void){
 
-void send_buffer_to_uart(int _buff_lenght){
-	logger_buffer[++_buff_lenght] = '\n';
-	HAL_UART_Transmit(&huart3, (unsigned char *)logger_buffer, _buff_lenght, 0);
-	clean_buffer(_buff_lenght);
+	rw_mutex = osMutexCreate(osMutex(rw_mutex_def));
+
+	if(rw_mutex == NULL){
+		char error_mssg[35] = "ERROR LOGGER, CANT CREATE MUTEX!!!\n";
+		HAL_UART_Transmit(&huart3, (unsigned char *)error_mssg, 35, 1);
+	}else{
+		//		char error_mssg[50] = "MUTEX CREATED\n";
+		//		HAL_UART_Transmit(&huart3, (unsigned char *)error_mssg, 20, 1);
+	}
+
+	logs.size = 0;
+}
+
+void main_send_to_uart(void){
+
+}
+
+void main_error_light(void){
+
 }

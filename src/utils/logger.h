@@ -6,15 +6,56 @@
 #include <usart.h>
 #include <string.h>
 
+#define LOGGER_BUFFER_LOGS_SIZE 20 ///< size of "string" buffer
+#define LOGGER_BUFFER_ONE_LOG_SIZE 512 ///< size of one log "string"
 
-#define LOGGER_BUFFER_SIZE 512
+#define LOGGER_ERROR ///< if LOGGER_ERROR is defined logger will log error logs (log = send data to debug UART port)
+#define LOGGER_INFO  ///< if LOGGER_ERROR is defined logger will log info logs (log = send data to debug UART port)
+#define LOGGER_DEBUG ///< if LOGGER_ERROR is defined logger will log debug logs (log = send data to debug UART port)
+#define LOGGER_UART_PORT huart3 ///< UART port for logging
+#define LOGGER_MUTEX_WAIT_MS 2 ///< wait time of read write mutex to logs
+
+#define HEADER_DEBUG_TEXT "\x1B[0m [D] "
+#define HEADER_DEBUG_SIZE 9
+#define HEADER_INFO_TEXT "\x1B[32m [info]\x1B[0m "
+#define HEADER_INFO_SIZE 17
+#define HEADER_ERROR_TEXT "\x1B[31m [ERROR] "
+#define HEADER_ERROR_SIZE 14
+
+/**
+ * @brief print team info on debug UART. Thread safe function
+* @return -1 if log was unsuccessfully otherwise 0
+ */
+int print_header(void);
+
+/**
+ * @brief print error message on debug UART. Thread safe function
+ * @return -1 if log was unsuccessfully otherwise 0
+ */
+int error(const char* format, ...);
+
+/**
+ * @brief print debug message on debug UART. Thread safe function
+ * @return -1 if log was unsuccessfully otherwise 0
+ */
+int debug(const char* format, ...);
+
+/**
+ * @brief print info message on debug UART. Thread safe function
+ * @return -1 if log was unsuccessfully oterhwise 0
+ */
+int info(const char* format, ...);
 
 
-void print_header(void);
+/**
+ * @brief logger main function that should be run in one thread. It sends data got from all threads
+ */
+void logger_main(void);
 
-void error(const char* format, ...);
-void debug(const char* format, ...);
-void info(const char* format, ...);
+/**
+ * @brief logger constructor. Constructor has to be called before thread creation.
+ */
+void logger_ctor(void);
 
 
-#endif
+#endif //UTILS_LOGGER_H
