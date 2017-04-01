@@ -4,6 +4,7 @@
 #include <stm32f4xx_it.h>
 #include <cmsis_os.h>
 #include <stm32f4xx_hal.h>
+#include "../utils/logger.h"
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
