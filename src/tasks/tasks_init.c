@@ -4,6 +4,7 @@ void tasks_main(void){
 	// call constructors for all tasks
 	ctor_test_1();
 	ctor_test_2();
+	blinky_led_test();
 	ctor_task_idle();
 	ctor_time_update();
 
