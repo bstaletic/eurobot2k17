@@ -3,6 +3,7 @@
 
 #include "task_test_1.h"
 #include "task_test_2.h"
+#include "task_blinky_led.h"
 #include "idle.h"
 #include "time_update.h"
 

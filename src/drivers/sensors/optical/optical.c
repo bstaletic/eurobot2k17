@@ -1,14 +1,22 @@
 #include "optical.h"
 
+volatile uint8_t optical_sensor_1, optical_sensor_3, optical_sensor_5,
+optical_sensor_8, optical_sensor_10, optical_sensor_12;
+
 /**
 * @brief This function handles EXTI line0 interrupt.
 */
+
 void EXTI0_IRQHandler(void)
 {
   /* USER CODE BEGIN EXTI0_IRQn 0 */
+	if (HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_0)){
+		optical_sensor_1=1;
+	}
 
+	else optical_sensor_1=0;
   /* USER CODE END EXTI0_IRQn 0 */
-  HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_0);
+	HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_0);
   /* USER CODE BEGIN EXTI0_IRQn 1 */
 
   /* USER CODE END EXTI0_IRQn 1 */
@@ -20,6 +28,11 @@ void EXTI0_IRQHandler(void)
 void EXTI2_IRQHandler(void)
 {
   /* USER CODE BEGIN EXTI2_IRQn 0 */
+	if (HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_2)){
+			optical_sensor_3=1;
+	}
+
+	else optical_sensor_3=0;
 
   /* USER CODE END EXTI2_IRQn 0 */
   HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_2);
@@ -34,6 +47,12 @@ void EXTI2_IRQHandler(void)
 void EXTI9_5_IRQHandler(void)
 {
   /* USER CODE BEGIN EXTI9_5_IRQn 0 */
+
+	if (HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_8)){
+		optical_sensor_5=1;
+	}
+
+	else optical_sensor_5=0;
 
   /* USER CODE END EXTI9_5_IRQn 0 */
   HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_5);
@@ -51,6 +70,24 @@ void EXTI9_5_IRQHandler(void)
 void EXTI15_10_IRQHandler(void)
 {
   /* USER CODE BEGIN EXTI15_10_IRQn 0 */
+
+	if (HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_11)){
+		optical_sensor_8=1;
+	}
+
+	else optical_sensor_8=0;
+
+	if (HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_13)){
+		optical_sensor_10=1;
+	}
+
+	else optical_sensor_10=0;
+
+	if (HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_15)){
+		optical_sensor_12=1;
+	}
+
+	else optical_sensor_12=0;
 
   /* USER CODE END EXTI15_10_IRQn 0 */
   HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_10);
