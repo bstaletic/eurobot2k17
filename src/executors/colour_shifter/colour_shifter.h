@@ -1,8 +1,8 @@
 #ifndef COLOUR_SHIFTER
 #define COLOUR_SHIFTER
 
-#include "../../drivers/sensors/colour/colour.h"
-#include "../../drivers/actuators/ax12/ax12.h"
+#include "../drivers/sensors/colour/colour.h"
+#include "../drivers/actuators/ax12/ax12.h"
 
 #define COLOUR_SHIFTER_ID 5
 

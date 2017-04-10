@@ -3,7 +3,7 @@
 
 #include <tim.h>
 
-#include "../../../utils/timer_utils.h"
+#include "../utils/timer_utils.h"
 
 typedef struct {
 	uint8_t timer;

@@ -3,7 +3,7 @@
 
 #include <stdint.h>
 
-#include "../../drivers/actuators/ax12/ax12.h"
+#include "../drivers/actuators/ax12/ax12.h"
 
 #define AX12_NEXT_POSITION_INC 60
 #define REVOLVER_AX12_ID 1

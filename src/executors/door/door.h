@@ -1,7 +1,7 @@
 #ifndef DOOR_EXECUTOR
 #define DOOR_EXECUTOR
 
-#include "../../drivers/actuators/analog_servo/analog_servo.h"
+#include "../drivers/actuators/analog_servo/analog_servo.h"
 
 //one servo to open door
 #define SERVO_DOOR servo1

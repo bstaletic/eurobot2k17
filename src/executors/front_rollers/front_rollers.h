@@ -1,7 +1,7 @@
 #ifndef FRONT_ROLLERS_EXECUTOR
 #define FRONT_ROLLERS_EXECUTOR
 
-#include "../../drivers/actuators/dc_motor/dc_motor.h"
+#include "../drivers/actuators/dc_motor/dc_motor.h"
 
 /// \brief Turns rollers on
 void rollers_on(void);

@@ -3,7 +3,7 @@
 
 #include <stdint.h>
 
-#include "../../drivers/actuators/analog_servo/analog_servo.h"
+#include "../drivers/actuators/analog_servo/analog_servo.h"
 
 #define OPEN_TRUNK_TIMER 1
 #define OPEN_TRUNK_TIMER_CHANNEL TIM_CHANNEL_1

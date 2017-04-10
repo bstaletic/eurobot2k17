@@ -6,7 +6,7 @@
 #define ROCKET_LAUNCH_POSITION 2000
 
 
-#include "../../drivers/actuators/analog_servo/analog_servo.h"
+#include "../drivers/actuators/analog_servo/analog_servo.h"
 
 void rocket_init(void);
 
