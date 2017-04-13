@@ -3,9 +3,9 @@
 void dc_motor_switch(int8_t power)
 {
 	if (power)
-		timer_set_oc_value(DC_TIMER, DC_CHANNEL, DC_PWM);
+		set_pwm(DC_TIMER, DC_CHANNEL, DC_PWM);
 	else
-		timer_set_oc_value(DC_TIMER, DC_CHANNEL, 0);
+		set_pwm(DC_TIMER, DC_CHANNEL, 0);
 }
 
 void dc_motor_direction(dc_direction direction)

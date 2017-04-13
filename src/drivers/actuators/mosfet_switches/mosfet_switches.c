@@ -1,4 +1,4 @@
-#include <drivers/actuators/mosfet_switches/mosfet_switches.h>
+#include "mosfet_switches.h"
 
 void mosfet_set(uint8_t id)
 {
@@ -6,42 +6,42 @@ void mosfet_set(uint8_t id)
 
 		case 1:
 
-			gpio_set(GPIOD, GPIO3);
+			HAL_GPIO_WritePin(GPIOD, GPIO_PIN_3, GPIO_PIN_SET);
 			break;
 
 		case 2:
 
-			gpio_set(GPIOD, GPIO2);
+			HAL_GPIO_WritePin(GPIOD, GPIO_PIN_2, GPIO_PIN_SET);
 			break;
 
 		case 3:
 
-			gpio_set(GPIOD, GPIO1);
+			HAL_GPIO_WritePin(GPIOD, GPIO_PIN_1, GPIO_PIN_SET);
 			break;
 
 		case 4:
 
-			gpio_set(GPIOD, GPIO0);
+			HAL_GPIO_WritePin(GPIOD, GPIO_PIN_0, GPIO_PIN_SET);
 			break;
 
 		case 5:
 
-			gpio_set(GPIOC, GPIO11);
+			HAL_GPIO_WritePin(GPIOC, GPIO_PIN_11, GPIO_PIN_SET);
 			break;
 
 		case 6:
 
-			gpio_set(GPIOC, GPIO9);
+			HAL_GPIO_WritePin(GPIOC, GPIO_PIN_9, GPIO_PIN_SET);
 			break;
 
 		case 7:
 
-			gpio_set(GPIOC, GPIO8);
+			HAL_GPIO_WritePin(GPIOC, GPIO_PIN_8, GPIO_PIN_SET);
 			break;
 
 		case 8:
 
-			gpio_set(GPIOC, GPIO6);
+			HAL_GPIO_WritePin(GPIOC, GPIO_PIN_6, GPIO_PIN_SET);
 			break;
 
 		default:
@@ -49,7 +49,7 @@ void mosfet_set(uint8_t id)
 			;
 
 	}
-	
+
 }
 
 void mosfet_clear(uint8_t id)
@@ -58,50 +58,50 @@ void mosfet_clear(uint8_t id)
 
 		case 1:
 
-			gpio_clear(GPIOD, GPIO3);
+			HAL_GPIO_WritePin(GPIOD, GPIO_PIN_3, GPIO_PIN_RESET);
 			break;
 
 		case 2:
 
-			gpio_clear(GPIOD, GPIO2);
+			HAL_GPIO_WritePin(GPIOD, GPIO_PIN_2, GPIO_PIN_RESET);
 			break;
 
 		case 3:
 
-			gpio_clear(GPIOD, GPIO1);
+			HAL_GPIO_WritePin(GPIOD, GPIO_PIN_1, GPIO_PIN_RESET);
 			break;
 
 		case 4:
 
-			gpio_clear(GPIOD, GPIO0);
+			HAL_GPIO_WritePin(GPIOD, GPIO_PIN_0, GPIO_PIN_RESET);
 			break;
 
 		case 5:
 
-			gpio_clear(GPIOC, GPIO11);
+			HAL_GPIO_WritePin(GPIOC, GPIO_PIN_11, GPIO_PIN_RESET);
 			break;
 
 		case 6:
 
-			gpio_clear(GPIOC, GPIO9);
+			HAL_GPIO_WritePin(GPIOC, GPIO_PIN_9, GPIO_PIN_RESET);
 			break;
 
 		case 7:
 
-			gpio_clear(GPIOC, GPIO8);
+			HAL_GPIO_WritePin(GPIOC, GPIO_PIN_8, GPIO_PIN_RESET);
 			break;
 
 		case 8:
 
-			gpio_clear(GPIOC, GPIO6);
+			HAL_GPIO_WritePin(GPIOC, GPIO_PIN_6, GPIO_PIN_RESET);
 			break;
 
 		default:
 			/* Error handling */
 			;
-			
+
 	}
-	
+
 }
 
 void mosfet_toggle(uint8_t id)
@@ -110,48 +110,48 @@ void mosfet_toggle(uint8_t id)
 
 		case 1:
 
-			gpio_toggle(GPIOD, GPIO3);
+			HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_3);
 			break;
 
 		case 2:
 
-			gpio_toggle(GPIOD, GPIO2);
+			HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_2);
 			break;
 
 		case 3:
 
-			gpio_toggle(GPIOD, GPIO1);
+			HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_1);
 			break;
 
 		case 4:
 
-			gpio_toggle(GPIOD, GPIO0);
+			HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_0);
 			break;
 
 		case 5:
 
-			gpio_toggle(GPIOC, GPIO11);
+			HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_11);
 			break;
 
 		case 6:
 
-			gpio_toggle(GPIOC, GPIO9);
+			HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_9);
 			break;
 
 		case 7:
 
-			gpio_toggle(GPIOC, GPIO8);
+			HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_8);
 			break;
 
 		case 8:
 
-			gpio_toggle(GPIOC, GPIO6);
+			HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_6);
 			break;
 
 		default:
 			/* Error handling */
 			;
-			
+
 	}
-	
+
 }

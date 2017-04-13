@@ -2,13 +2,11 @@
 #define COLOUR_SENSOR
 
 #include <stdint.h>
-#include <libopencm3/stm32/gpio.h>
+#include <usart.h>
+#include <stm32f4xx_it.h>
+#include <tim.h>
 
-#include "../../../initialisation/timer_config.h"
-#include "../../actuators/mosfet_switches/mosfet_switches.h"
-
-typedef enum { BLUE, YELLOW, WHITE, UNKNOWN } colour_enum_t;
-typedef enum { RED_CHANNEL, GREEN_CHANNEL, BLUE_CHANNEL } colour_channel_enum_t;
+#include "../drivers/actuators/mosfet_switches/mosfet_switches.h"
 
 // Reading the sensor with blue LED selected
 #define BLUE_CHANNEL_BLUE_RANGE_START 7625 // Minimum frequency when reading blue colour
@@ -27,7 +25,7 @@ typedef enum { RED_CHANNEL, GREEN_CHANNEL, BLUE_CHANNEL } colour_channel_enum_t;
 #define GREEN_CHANNEL_YELLOW_RANGE_END 400
 
 // Reading the sensor with red LED selected
-#define RED_CHANNEL_BLUE_RANGE_START 0
+#define RED_CHANNEL_BLUE_RANGE_START 1
 #define RED_CHANNEL_BLUE_RANGE_END 1122
 #define RED_CHANNEL_WHITE_RANGE_START 400
 #define RED_CHANNEL_WHITE_RANGE_END 500
@@ -37,6 +35,9 @@ typedef enum { RED_CHANNEL, GREEN_CHANNEL, BLUE_CHANNEL } colour_channel_enum_t;
 extern volatile uint32_t colour_sensor_red_value, colour_sensor_green_value, colour_sensor_blue_value;
 extern volatile uint8_t colour_sensor_step, colour_sensor_value_ready;
 
+typedef enum { RED_CHANNEL, GREEN_CHANNEL, BLUE_CHANNEL } colour_channel_enum_t;
+typedef enum { BLUE, YELLOW, WHITE, UNKNOWN } colour_enum_t;
+
 /**
  * \fn colour_enum_t read_colour(void)
  * \brief Reads sensor and returns the approrpriate colour
@@ -44,5 +45,6 @@ extern volatile uint8_t colour_sensor_step, colour_sensor_value_ready;
  * Returns BLUE, YELLOW, WHITE or UNKNOWN
  */
 colour_enum_t read_colour(void);
+void TIM6_DAC_IRQHandler(void);
 
 #endif /* ifndef COLOUR_SENSOR */

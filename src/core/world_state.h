@@ -1,7 +1,7 @@
 #ifndef CORE_WORLD_STATE_H
 #define CORE_WORLD_STATE_H
 
-#include "utils/common_utils.h"
+#include "../utils/common_utils.h"
 
 typedef enum{
 	ELEMENT_ACTIVE,

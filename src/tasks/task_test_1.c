@@ -5,6 +5,7 @@ task_arguments_t task_test_1_arguments;
 
 void task_test_1_run(task_arguments_t* argv){
 	debug("task_test_1 run method ");
+	osDelay(1000);
 	argv->state = TASK_DONE;
 
 }

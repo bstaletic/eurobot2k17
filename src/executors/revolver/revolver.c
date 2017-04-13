@@ -2,8 +2,7 @@
 
 int8_t revolver_init(void)
 {
-	return ax12_move(REVOLVER_AX12_ID,
-                     revolver_position);
+	return ax12_move(REVOLVER_AX12_ID, revolver_position);
 }
 
 int8_t revolver_go_to_position(uint16_t tube_number)

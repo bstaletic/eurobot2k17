@@ -1,5 +1,9 @@
-include $(SRCDIR)executors/trunk/Makefile
-include $(SRCDIR)executors/revolver/Makefile
-include $(SRCDIR)executors/door/Makefile
-include $(SRCDIR)executors/front_rollers/Makefile
-include $(SRCDIR)executors/colour_shifter/Makefile
+SRC += executors/revolver/revolver.c
+SRC += executors/door/door.c
+SRC += executors/trunk/trunk.c
+SRC += executors/colour_shifter/colour_shifter.c
+SRC += executors/front_rollers/front_rollers.c
+SRC += executors/rocket/rocket.c
+SRC += executors/motion/motion.c
+SRC += executors/motion/motion_command.c
+SRC += executors/common/common.c

@@ -2,18 +2,22 @@
 #define MOTION
 
 #include <stdint.h>
-#include "../../../initialisation/uart_config.h"
-#include "../../../initialisation/timer_config.h"
+#include <usart.h>
+#include <tim.h>
+#include <stm32f4xx_it.h>
 
-
-#define MOTION_DRIVER UART4
+#define MOTION_DRIVER &huart4
 
 extern volatile uint16_t x_coordinate;
 extern volatile uint16_t y_coordinate;
 extern volatile uint16_t orientation;
 extern volatile char status;
 
-typedef enum { IDLE, STUCK, ROTATING, ERROR, MOVING } motion_status;
+typedef enum { MOTION_IDLE,
+               MOTION_STUCK,
+               MOTION_ROTATING,
+               MOTION_ERROR,
+               MOTION_MOVING } motion_status;
 
 typedef struct {
 	uint16_t x;
@@ -61,13 +65,12 @@ void set_position_and_orientation(int16_t  x, int16_t y, int16_t orientation);
  * 7. Orientation - only the lower 8 bits
  */
 void read_status_and_position(void);
-/** \fn move_forward(int16_t dist, int8_t end_speed)
+/** \fn move_forward(int16_t dist)
  * \brief Move the robot forward by `dist` millimeters
  *
  * @param dist [in] Distance to travel in millimeters
- * @param end_speed [in] Speed at which the movement is finished. Must be zero.
  */
-void move_forward(int16_t dist, int8_t end_speed);
+void move_forward(int16_t dist);
 /** \fn void rotate_for(int16_t angle)
  * \brief Rotate the robot for the desired angle
  *
@@ -80,17 +83,16 @@ void rotate_for(int16_t angle);
  * @param angle [in] Rotate to orientation specified by angle.
  */
 void rotate_to(int16_t angle);
-/** \fn void goto_xy(int16_t x, int16_t y, int8_t end_speed, int8_t direction)
+/** \fn void goto_xy(int16_t x, int16_t y, int8_t direction)
  * \brief Let the driver calculate how to get to coordinates (x,y)
  *
  * This works by driver rotating the robot so it faces the (x,y)
  * and moving forward to it.
  * @param x [in] X coordinate of the point where robot should go
  * @param y [in] Y coordinate of the point where robot should go
- * @param end_speed [in] Speed at which the movement is finished. Must be zero.
  * @param direction [in] If positive, move forwards, otherwise move backwards
  */
-void goto_xy(int16_t x, int16_t y, int8_t end_speed, int8_t direction);
+void goto_xy(int16_t x, int16_t y, int8_t direction);
 /** \fn void curve(int16_t x, int16_t y, int8_t angle, int8_t angle_direction, int8_t direction)
  * \brief Move along a curve
  *
@@ -133,5 +135,6 @@ void stuck_disable(void);
  *
  */
 void set_motion_speed(int8_t speed);
+void TIM7_IRQHandler(void);
 
 #endif /* ifndef MOTION */

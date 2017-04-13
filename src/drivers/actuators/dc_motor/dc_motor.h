@@ -2,11 +2,13 @@
 #define DC_MOTOR_H
 
 #include <stdint.h>
-#include "../../../initialisation/timer_config.h"
-#include "../mosfet_switches/mosfet_switches.h"
+#include <tim.h>
 
-#define DC_TIMER TIM2
-#define DC_CHANNEL TIM_OC1
+#include "../mosfet_switches/mosfet_switches.h"
+#include "../utils/timer_utils.h"
+
+#define DC_TIMER 2
+#define DC_CHANNEL TIM_CHANNEL_1
 
 /* Maximum PWM for DC motor 800 */
 #define DC_PWM 800

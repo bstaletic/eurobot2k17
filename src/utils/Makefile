@@ -1,1 +1,2 @@
-SRC += $(SRCDIR)utils/logger.c
+SRC += utils/logger.c
+SRC += utils/timer_utils.c
