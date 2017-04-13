@@ -3,6 +3,8 @@
 
 #include "../core/task_mngr.h"
 
+#include "cmsis_os.h"
+
 void ctor_test_2(void);
 
 #endif

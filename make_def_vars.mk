@@ -4,8 +4,8 @@ ifeq ($(DEBUG),0)
 	DESTDIR := $(STARTDIR)/build/release
 else
 	DESTDIR := $(STARTDIR)/build/debug
-endif 
-	
+endif
+
 OBJDIR := $(DESTDIR)/obj
 DOCDIR := $(DESTDIR)/doc
 BINDIR := $(DESTDIR)/bin

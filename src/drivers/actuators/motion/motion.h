@@ -8,10 +8,11 @@
 
 #define MOTION_DRIVER &huart4
 
-extern volatile uint16_t x_coordinate;
-extern volatile uint16_t y_coordinate;
-extern volatile uint16_t orientation;
+extern volatile int16_t x_coordinate;
+extern volatile int16_t y_coordinate;
+extern volatile int16_t orientation;
 extern volatile char status;
+extern volatile uint8_t state_refresh_needed;
 
 typedef enum { MOTION_IDLE,
                MOTION_STUCK,

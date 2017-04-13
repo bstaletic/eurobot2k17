@@ -32,6 +32,10 @@ void main(void)
 	MX_TIM10_Init();
 	MX_TIM12_Init();
 
+	HAL_TIM_Base_Start_IT(&htim7);
+
+	HAL_GPIO_WritePin(GPIOD,GPIO_PIN_15, GPIO_PIN_SET);
+
 	/* Call init function for freertos objects (in freertos.c) */
 	MX_FREERTOS_Init();
 

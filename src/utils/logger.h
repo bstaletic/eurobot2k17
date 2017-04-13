@@ -5,15 +5,16 @@
 #include <stdio.h>
 #include <usart.h>
 #include <string.h>
+#include "cmsis_os.h"
 
-#define LOGGER_BUFFER_LOGS_SIZE 20 ///< size of "string" buffer
+#define LOGGER_BUFFER_LOGS_SIZE 200 ///< size of "string" buffer
 #define LOGGER_BUFFER_ONE_LOG_SIZE 512 ///< size of one log "string"
 
 #define LOGGER_ERROR ///< if LOGGER_ERROR is defined logger will log error logs (log = send data to debug UART port)
 #define LOGGER_INFO  ///< if LOGGER_ERROR is defined logger will log info logs (log = send data to debug UART port)
 #define LOGGER_DEBUG ///< if LOGGER_ERROR is defined logger will log debug logs (log = send data to debug UART port)
 #define LOGGER_UART_PORT huart3 ///< UART port for logging
-#define LOGGER_MUTEX_WAIT_MS 2 ///< wait time of read write mutex to logs
+#define LOGGER_MUTEX_WAIT_MS 5 ///< wait time of read write mutex to logs
 
 #define HEADER_DEBUG_TEXT "\x1B[0m [D] "
 #define HEADER_DEBUG_SIZE 9

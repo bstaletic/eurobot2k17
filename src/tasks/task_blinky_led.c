@@ -5,12 +5,66 @@ task_arguments_t task_blinky_led_arguments;
 
 void task_blinky_led_run(task_arguments_t* argv){
 	debug("task_blinky_led run method ");
-	while(1){
-		osDelay(1000);
-		HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_13);
+//	debug("task_blinky_led run method ");
+//	while(1){
+		osDelay(200);
+		rotate_for_cmd(30);
+		rotate_for_cmd(30);
+		rotate_for_cmd(30);
+		rotate_for_cmd(30);
+		rotate_for_cmd(30);
+		rotate_for_cmd(30);
+		rotate_for_cmd(30);
+		rotate_for_cmd(30);
+		rotate_for_cmd(30);
+		rotate_for_cmd(30);
+		rotate_for_cmd(30);
+		rotate_for_cmd(30);
+		rotate_for_cmd(30);
+		rotate_for_cmd(30);
+		rotate_for_cmd(30);
+		rotate_for_cmd(30);
+		rotate_for_cmd(30);
+		rotate_for_cmd(30);
+		rotate_for_cmd(30);
+		rotate_for_cmd(30);
+		rotate_for_cmd(30);
+		rotate_for_cmd(30);
+		rotate_for_cmd(30);
+//		rotate_for_cmd(30);
+//		rotate_for_cmd(30);
+//		rotate_for_cmd(30);
+//		rotate_for_cmd(30);
+//		rotate_for_cmd(30);
+//		rotate_for_cmd(30);
+//		rotate_for_cmd(30);
+//		rotate_for_cmd(30);
+//		rotate_for_cmd(30);
+//		rotate_for_cmd(30);
+//		rotate_for_cmd(30);
+//		rotate_for_cmd(30);
+//		rotate_for_cmd(30);
+//		rotate_for_cmd(30);
+//		rotate_for_cmd(30);
+//		rotate_for_cmd(30);
+//		rotate_for_cmd(30);
+//		rotate_for_cmd(30);
+//		rotate_for_cmd(30);
+//		rotate_for_cmd(30);
+//		rotate_for_cmd(30);
+//		rotate_for_cmd(30);
+//		rotate_for_cmd(30);
+//		rotate_for_cmd(30);
+//		rotate_for_cmd(30);
+//		rotate_for_cmd(30);
+//		rotate_for_cmd(30);
+//		osDelay(5000);
+		info("done");
+		HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_14);
 		debug("task_blinky_led run method ");
-	}
-	argv->state = TASK_DONE;
+
+//	}
+//	argv->state = TASK_DONE;
 
 }
 void task_blinky_led_init(task_arguments_t* argv){
@@ -36,7 +90,7 @@ void blinky_led_test(void){
 	strncpy(task_blinky_led.task_name,"Test Task 1\0",12);
 
 	task_blinky_led_arguments.estimated_time = 50;
-	task_blinky_led_arguments.priority = 100;
+	task_blinky_led_arguments.priority = 200;
 	task_blinky_led_arguments.state = TASK_READY;
 
 	task_blinky_led.data = &task_blinky_led_arguments;

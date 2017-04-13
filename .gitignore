@@ -51,3 +51,9 @@ tags
 # Build
 build
 
+#qtcreator files
+*.includes
+*.files
+*.creator.user
+*.config
+*.creator

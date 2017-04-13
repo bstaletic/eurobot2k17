@@ -21,5 +21,5 @@ SRC += libs/CMSIS/Device/ST/STM32F4xx/Source/Templates/system_stm32f4xx.c
 $(ASMDIR)/libs/%.s: $(SRCDIR)/libs/%.c
 	$(VECHO) "Compiling $<"
 	@$(MKDIR_P) $(@D) $(subst asm,dep,$(@D))
-	$(CC) $(CFLAGS) -Wno-unused-parameter $(MFLAGS) -MD -MP -x c $(INCLUDES) -S $< -o $@
+	$(CC) $(CFLAGS) -w $(MFLAGS) -MD -MP -x c $(INCLUDES) -S $< -o $@
 	@mv $(subst .s,.d,$@) $(subst asm,dep,$(subst .s,.d,$@))

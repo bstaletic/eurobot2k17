@@ -50,7 +50,7 @@
 #include "../executors/motion/motion.h"
 #include "../executors/common/common.h"
 
-/* USER CODE BEGIN Includes */     
+/* USER CODE BEGIN Includes */
 
 /* USER CODE END Includes */
 
@@ -68,7 +68,7 @@ osThreadId commonThreadHandle;
 //void StartDefaultTask(void const * argument);
 extern void motion_main(void);
 extern void tasks_main(void);
-extern void common_main(void);
+//extern void common_main(void);
 
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
 
@@ -90,6 +90,7 @@ void MX_FREERTOS_Init(void) {
 	/* add mutexes, ... */
 
 	logger_ctor();
+	motion_ctor();
 	/* USER CODE END RTOS_MUTEX */
 
 	/* USER CODE BEGIN RTOS_SEMAPHORES */
