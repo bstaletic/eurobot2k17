@@ -10,7 +10,7 @@ optical_sensor_8, optical_sensor_10, optical_sensor_12;
 void EXTI0_IRQHandler(void)
 {
   /* USER CODE BEGIN EXTI0_IRQn 0 */
-  HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_0)? optical_sensor_1 = 1 : optical_sensor_1 = 0;
+  optical_sensor_1 = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_0)? 1: 0;
   /* USER CODE END EXTI0_IRQn 0 */
   HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_0);
   /* USER CODE BEGIN EXTI0_IRQn 1 */
@@ -24,7 +24,7 @@ void EXTI0_IRQHandler(void)
 void EXTI2_IRQHandler(void)
 {
   /* USER CODE BEGIN EXTI2_IRQn 0 */
-  HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_2)? optical_sensor_3 = 1 : optical_sensor_3 = 0;
+  optical_sensor_3 = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_2)? 1: 0;
   /* USER CODE END EXTI2_IRQn 0 */
   HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_2);
   /* USER CODE BEGIN EXTI2_IRQn 1 */
@@ -38,7 +38,7 @@ void EXTI2_IRQHandler(void)
 void EXTI9_5_IRQHandler(void)
 {
   /* USER CODE BEGIN EXTI9_5_IRQn 0 */
-  HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_8)? optical_sensor_5 = 1 : optical_sensor_5 = 0;
+  optical_sensor_5 = HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_8)? 1: 0;
   /* USER CODE END EXTI9_5_IRQn 0 */
   HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_5);
   HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_7);
@@ -55,9 +55,9 @@ void EXTI9_5_IRQHandler(void)
 void EXTI15_10_IRQHandler(void)
 {
   /* USER CODE BEGIN EXTI15_10_IRQn 0 */
-  HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_11)? optical_sensor_8 = 1 : optical_sensor_8 = 0;
-  HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_13)? optical_sensor_10 = 1 : optical_sensor_10 = 0;
-  HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_15)? optical_sensor_12 = 1 : optical_sensor_12 = 0;
+  optical_sensor_8 = HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_11)? 1: 0;
+  optical_sensor_10 = HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_13)? 1: 0;
+  optical_sensor_12 = HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_15)? 1: 0;
   /* USER CODE END EXTI15_10_IRQn 0 */
   HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_10);
   HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_11);

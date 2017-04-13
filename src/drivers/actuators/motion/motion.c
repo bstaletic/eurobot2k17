@@ -67,14 +67,14 @@ void set_motion_speed(int8_t speed)
 	HAL_UART_Transmit(MOTION_DRIVER, out_data, 2, 0);
 }
 
-void move_forward(int16_t dist, int8_t end_speed)
+void move_forward(int16_t dist)
 {
 	uint8_t out_data[4];
 
 	out_data[0] = 'D';
 	out_data[1] = dist>>8;
 	out_data[2] = dist&0xff;
-	out_data[3] = end_speed;
+	out_data[3] = 0;
 
 	HAL_UART_Transmit(MOTION_DRIVER, out_data, 4, 0);
 }
@@ -101,7 +101,7 @@ void rotate_to(int16_t angle)
 	HAL_UART_Transmit(MOTION_DRIVER, out_data, 3, 0);
 }
 
-void goto_xy(int16_t x, int16_t y, int8_t end_speed, int8_t direction)
+void goto_xy(int16_t x, int16_t y, int8_t direction)
 {
 	uint8_t out_data[7];
 
@@ -110,7 +110,7 @@ void goto_xy(int16_t x, int16_t y, int8_t end_speed, int8_t direction)
 	out_data[2] = x&0xff;
 	out_data[3] = y>>8;
 	out_data[4] = y&0xff;
-	out_data[5] = end_speed;
+	out_data[5] = 0;
 	out_data[6] = direction;
 
 	HAL_UART_Transmit(MOTION_DRIVER, out_data, 7, 0);
