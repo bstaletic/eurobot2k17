@@ -7,7 +7,7 @@ void collect_rocket_modules_home_run(task_arguments_t* argv){
 	debug("||**********|collect_rocket_modules_home run method|**********||");
 	osDelay(1000);
 
-	//first task in order
+	//TASK 3
 	//going to collect_rocket_modules our collour
 	set_motion_speed_cmd(50);
 	goto_xy_cmd(1150, 265, 1, 0);
@@ -35,9 +35,7 @@ void collect_rocket_modules_home_run(task_arguments_t* argv){
 void collect_rocket_modules_home_init(task_arguments_t* argv){
 	debug("collect_rocket_modules_home_init");
 
-	//putting co-or sys in table corner
-	set_xy_cmd(175, 935, 0);
-	//making sure revolver is in initial position
+	revolver_init();
 	revolver_init();
 	poke_init();
 }

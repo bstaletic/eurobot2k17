@@ -8,22 +8,7 @@ void dropping_modules_side_notch_run(task_arguments_t* argv){
 	osDelay(1000);
 
     //after collect_rocket_modules_home task
-    //go collect first common module on path
-    set_motion_speed_cmd(50);
-    goto_xy_cmd(595, 995, 1, 0);
-    rollers_reverse();
-    rollers_on();
-    set_motion_speed_cmd(50);
-    move_forward_cmd(50);
-    osDelay(250);
-    revolver_next();
-    //go collect second common module on path
-    goto_xy_cmd(1095, 495, 1, 0);
-    set_motion_speed_cmd(50);
-    move_forward_cmd(50);
-    osDelay(250);
-    rollers_off();
-    //revolver_next(); //to position right modules for dropout ??????
+
 
     //go drop home modules on side notch
     set_motion_speed_cmd(50);
@@ -48,7 +33,8 @@ void dropping_modules_side_notch_run(task_arguments_t* argv){
 void dropping_modules_side_notch_init(task_arguments_t* argv){
 	debug("dropping_modules_side_notch_init");
 
-    revolver_go_to_position(5); //make sure revolver is in position 5
+	set_motion_speed_cmd(50);
+    revolver_go_to_position(5); //make sure revolver is in position *5
     poke_init();
 }
 void dropping_modules_side_notch_finish(task_arguments_t* argv){

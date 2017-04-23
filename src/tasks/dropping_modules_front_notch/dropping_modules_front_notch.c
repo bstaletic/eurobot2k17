@@ -7,17 +7,20 @@ void dropping_modules_front_notch_run(task_arguments_t* argv){
 	debug("||**********|dropping_modules_front_notch run method|**********||");
 	osDelay(1000);
 
-	//after collect_rocket_modules_common task
-	goto_xy_cmd(1350, 710, 1, 0);
-	rotate_to_cmd(45); //you are now aprox. where you should be to stick it to notch BUKVALNO! six itmes (dont be perv pls)
+	//TASK2
+	//AFTER collect_rocket_modules_common TASK
+	goto_xy_cmd(740, 1200, 1, 0);
+	rotate_to_cmd(45);
+	rollers_on();
+	move_forward_cmd(50);
+	//you are now aprox. where you should be to stick it to the notch six itmes BUKVALNO! (dont be perv pls)
+	osDelay(1000);
+
 
 	rollers_forward();
 	for(int8_t i = 0; i <=5 ; i++){
 
 		colour_shift(BLUE);
-
-		if(i = 0)
-			rollers_on();
 
 		poke_module(SERVO_FRONT);
 		osDelay(2000); //make sure module is out
@@ -33,7 +36,8 @@ void dropping_modules_front_notch_run(task_arguments_t* argv){
 void dropping_modules_front_notch_init(task_arguments_t* argv){
 	debug("dropping_modules_front_notch_init");
 
-	revolver_go_to_position(6); //there are 6 modules now to take out
+	set_motion_speed_cmd(50);
+	revolver_go_to_position(7); //there are 6 modules in robot and 7th needs too get in
 	poke_init();
 }
 void dropping_modules_front_notch_finish(task_arguments_t* argv){
