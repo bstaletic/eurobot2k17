@@ -20,7 +20,6 @@ int task_system_postexecute_couter = 0;
 int task_user_backproc_couter = 0;
 
 void task_mngr_run(){
-	print_header();
 
 	if(task_user_couter == 0 &&
 			task_system_postexecute_couter == 0 &&

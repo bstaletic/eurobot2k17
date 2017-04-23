@@ -24,10 +24,10 @@
 #define HEADER_ERROR_SIZE 14
 
 /**
- * @brief print team info on debug UART. Thread safe function
+ * @brief print team info on debug UART. Not thread safe
 * @return -1 if log was unsuccessfully otherwise 0
  */
-int print_header(void);
+void print_header(void);
 
 /**
  * @brief print error message on debug UART. Thread safe function

@@ -19,9 +19,7 @@ osMutexId (rw_mutex);
 void main_send_to_uart(void);
 void main_error_light(void);
 
-int print_header(void){
-
-	if (osMutexWait(rw_mutex,LOGGER_MUTEX_WAIT_MS) == osOK){
+void print_header(void){
 
 		logs.size++;
 		logs.size++;
@@ -43,18 +41,6 @@ int print_header(void){
 
 		logs.size++;
 		logs.size++;
-
-		osMutexRelease(rw_mutex);
-
-		osThreadYield();
-
-		return 0;
-	}else{
-		char error_mssg[35] = "ERROR LOGGER, CANT GET MUTEX!!!\n";
-		HAL_UART_Transmit(&huart3, (unsigned char *)error_mssg, 32, 32);
-
-		return -1;
-	}
 }
 
 int error(const char* format, ...){
@@ -188,6 +174,7 @@ void logger_ctor(void){
 	}
 
 	logs.size = 0;
+	print_header();
 }
 
 void main_send_to_uart(void){
