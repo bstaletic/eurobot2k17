@@ -34,6 +34,8 @@ void main(void)
 	HAL_TIM_Base_Start_IT(&htim7);
 	HAL_TIM_Base_Start(&htim9);
 
+	MX_RTC_Init();
+
 	HAL_GPIO_WritePin(GPIOD,GPIO_PIN_15, GPIO_PIN_SET);
 
 	/* Call init function for freertos objects (in freertos.c) */

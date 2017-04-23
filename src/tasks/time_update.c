@@ -3,17 +3,19 @@
 int counter = 0;
 task_t task;
 task_arguments_t arguments;
+RTC_TimeTypeDef stime;
+uint32_t time;
 
-void run_ck(task_arguments_t* argv){
-//	argv->time = 10;
-	counter++;
 
-//	if(counter > 10){
-		debug("time update, time %d", argv->time);
-//		counter = 0;
-		argv->time ++;
+static void run_ck(task_arguments_t* argv){
+	HAL_RTC_GetTime(&hrtc,&stime,RTC_FORMAT_BCD);
 
-//	}
+	int time = (stime.Minutes * 60) + stime.Seconds;
+
+	if(argv->time != (uint32_t)time){
+		argv->time = time;
+		info("time update: %d ", time);
+	}
 }
 
 void ctor_time_update(void){
