@@ -31,6 +31,7 @@ osMutexDef(motion_mutex_def);
 osMutexId (motion_mutex);
 
 void motion_main(void){
+	int shouldStop = 0;
 	debug("Motion executor started");
 	debug("Resetting motion command");
 	motion_command_reset();
