@@ -14,7 +14,8 @@ colour_enum_t read_colour(void)
 	HAL_NVIC_EnableIRQ(TIM6_DAC_IRQn);
 	HAL_TIM_Base_Start_IT(&htim6);
 	while(!colour_sensor_value_ready);
-
+	if (colour_sensor_value_ready)
+		debug("Red = %d\tGreen = %d\tBlue = %d", colour_sensor_red_value, colour_sensor_green_value, colour_sensor_blue_value);
 	// Disable TIM6 interrupt
 	HAL_NVIC_DisableIRQ(TIM6_DAC_IRQn);
 	HAL_TIM_Base_Stop_IT(&htim6);
@@ -62,27 +63,27 @@ void TIM6_DAC_IRQHandler(void)
   		switch(colour_sensor_step) {
 
   			case 0:
-  				__HAL_TIM_SetCounter(&htim6, 0);
+  				__HAL_TIM_SetCounter(&htim9, 0);
   				set_channel(RED_CHANNEL);
   				colour_sensor_step++;
   				break;
 
   			case 1:
-  				colour_sensor_red_value  =  __HAL_TIM_GET_COUNTER(&htim6);
-  				__HAL_TIM_SetCounter(&htim6, 0);
+  				colour_sensor_red_value  =  __HAL_TIM_GetCounter(&htim9);
+  				__HAL_TIM_SetCounter(&htim9, 0);
   				set_channel(GREEN_CHANNEL);
   				colour_sensor_step++;
   				break;
 
   			case 2:
-  				colour_sensor_green_value = __HAL_TIM_GET_COUNTER(&htim6);
-  				__HAL_TIM_SetCounter(&htim6, 0);
+  				colour_sensor_green_value = __HAL_TIM_GetCounter(&htim9);
+  				__HAL_TIM_SetCounter(&htim9, 0);
   				set_channel(BLUE_CHANNEL);
   				colour_sensor_step++;
   				break;
 
   			case 3:
-  				colour_sensor_blue_value = __HAL_TIM_GET_COUNTER(&htim6);
+  				colour_sensor_blue_value = __HAL_TIM_GET_COUNTER(&htim9);
   				colour_sensor_step = 0;
   				colour_sensor_value_ready = 1;
   				break;

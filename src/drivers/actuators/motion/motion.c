@@ -163,43 +163,16 @@ void stuck_disable(void)
 */
 void TIM7_IRQHandler(void)
 {
-  /* USER CODE BEGIN TIM7_IRQn 0 */
-//	uint8_t temp[7];
-  	if (__HAL_TIM_GET_FLAG(&htim7, TIM_FLAG_UPDATE) != RESET) {
+	/* USER CODE BEGIN TIM7_IRQn 0 */
+	if (__HAL_TIM_GET_FLAG(&htim7, TIM_FLAG_UPDATE) != RESET) {
+		state_refresh_needed = 1;
+		/* Clear overflow interrupt flag. */
+		__HAL_TIM_CLEAR_IT(&htim7, TIM_IT_UPDATE);
+	}
 
-//  			HAL_UART_Transmit(MOTION_DRIVER, (unsigned char *)"P", 1, 1);
-//			HAL_UART_Receive(MOTION_DRIVER, temp, 7, 1);
-//			switch (temp[0])
-//			{
-//				case 'I':
-//					state.status = MOTION_IDLE;
-//					break;
-//				case 'M':
-//					state.status = MOTION_MOVING;
-//					break;
-//				case 'R':
-//					state.status = MOTION_ROTATING;
-//					break;
-//				case 'S':
-//					state.status = MOTION_STUCK;
-//					break;
-//				case 'E':
-//					state.status = MOTION_ERROR;
-//					break;
-//
-//			}
-//  			state.x = (temp[1] << 8 ) | (temp[2] & 0xff);
-//  			state.y = (temp[3] << 8 ) | (temp[4] & 0xff);
-//  			state.orientation = (temp[5] << 8) | (temp[6] & 0xff);
-//  			HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_15);
-			state_refresh_needed = 1;
-  			/* Clear overflow interrupt flag. */
-  			__HAL_TIM_CLEAR_IT(&htim7, TIM_IT_UPDATE);
-  	}
+	/* USER CODE END TIM7_IRQn 0 */
+	HAL_TIM_IRQHandler(&htim7);
+	/* USER CODE BEGIN TIM7_IRQn 1 */
 
-  /* USER CODE END TIM7_IRQn 0 */
-  HAL_TIM_IRQHandler(&htim7);
-  /* USER CODE BEGIN TIM7_IRQn 1 */
-
-  /* USER CODE END TIM7_IRQn 1 */
+	/* USER CODE END TIM7_IRQn 1 */
 }

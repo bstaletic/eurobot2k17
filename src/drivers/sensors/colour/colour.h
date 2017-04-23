@@ -7,6 +7,7 @@
 #include <tim.h>
 
 #include "../drivers/actuators/mosfet_switches/mosfet_switches.h"
+#include "../utils/logger.h"
 
 // Reading the sensor with blue LED selected
 #define BLUE_CHANNEL_BLUE_RANGE_START 7625 // Minimum frequency when reading blue colour
