@@ -68,7 +68,6 @@ void MX_RTC_Init(void)
   {
     Error_Handler();
   }
-
 }
 
 void HAL_RTC_MspInit(RTC_HandleTypeDef* rtcHandle)
@@ -77,7 +76,12 @@ void HAL_RTC_MspInit(RTC_HandleTypeDef* rtcHandle)
   if(rtcHandle->Instance==RTC)
   {
   /* USER CODE BEGIN RTC_MspInit 0 */
+	  RTC_TimeTypeDef stime;
 
+	  stime.Hours = 0;
+	  stime.Minutes = 0;
+	  stime.Seconds = 0;
+	  HAL_RTC_SetTime(&hrtc, &stime, RTC_FORMAT_BCD);
   /* USER CODE END RTC_MspInit 0 */
     /* Peripheral clock enable */
     __HAL_RCC_RTC_ENABLE();
