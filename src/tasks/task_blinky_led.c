@@ -5,66 +5,12 @@ task_arguments_t task_blinky_led_arguments;
 
 void task_blinky_led_run(task_arguments_t* argv){
 	debug("task_blinky_led run method ");
-//	debug("task_blinky_led run method ");
-//	while(1){
-		osDelay(200);
-		rotate_for_cmd(30);
-		rotate_for_cmd(30);
-		rotate_for_cmd(30);
-		rotate_for_cmd(30);
-		rotate_for_cmd(30);
-		rotate_for_cmd(30);
-		rotate_for_cmd(30);
-		rotate_for_cmd(30);
-		rotate_for_cmd(30);
-		rotate_for_cmd(30);
-		rotate_for_cmd(30);
-		rotate_for_cmd(30);
-		rotate_for_cmd(30);
-		rotate_for_cmd(30);
-		rotate_for_cmd(30);
-		rotate_for_cmd(30);
-		rotate_for_cmd(30);
-		rotate_for_cmd(30);
-		rotate_for_cmd(30);
-		rotate_for_cmd(30);
-		rotate_for_cmd(30);
-		rotate_for_cmd(30);
-		rotate_for_cmd(30);
-//		rotate_for_cmd(30);
-//		rotate_for_cmd(30);
-//		rotate_for_cmd(30);
-//		rotate_for_cmd(30);
-//		rotate_for_cmd(30);
-//		rotate_for_cmd(30);
-//		rotate_for_cmd(30);
-//		rotate_for_cmd(30);
-//		rotate_for_cmd(30);
-//		rotate_for_cmd(30);
-//		rotate_for_cmd(30);
-//		rotate_for_cmd(30);
-//		rotate_for_cmd(30);
-//		rotate_for_cmd(30);
-//		rotate_for_cmd(30);
-//		rotate_for_cmd(30);
-//		rotate_for_cmd(30);
-//		rotate_for_cmd(30);
-//		rotate_for_cmd(30);
-//		rotate_for_cmd(30);
-//		rotate_for_cmd(30);
-//		rotate_for_cmd(30);
-//		rotate_for_cmd(30);
-//		rotate_for_cmd(30);
-//		rotate_for_cmd(30);
-//		rotate_for_cmd(30);
-//		rotate_for_cmd(30);
-//		osDelay(5000);
-		info("done");
-		HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_14);
-		debug("task_blinky_led run method ");
+	osDelay(200);
+	info("done");
+	HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_14);
+	debug("task_blinky_led run method ");
 
-//	}
-//	argv->state = TASK_DONE;
+	argv->state = TASK_DONE;
 
 }
 void task_blinky_led_init(task_arguments_t* argv){

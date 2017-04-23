@@ -1,10 +1,11 @@
-#include <gpio.h>
-#include <usart.h>
-#include <tim.h>
-#include <stm32f4xx_it.h>
-#include <cmsis_os.h>
-#include <stm32f4xx_hal.h>
+#include "gpio.h"
+#include "usart.h"
+#include "tim.h"
+#include "stm32f4xx_it.h"
+#include "cmsis_os.h"
+#include "stm32f4xx_hal.h"
 #include "../utils/logger.h"
+#include "../drivers/sensors/colour/colour.h"
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
@@ -23,16 +24,15 @@ void main(void)
 	MX_USART3_UART_Init();
 
 	MX_TIM1_Init();
-	MX_TIM2_Init();
-	MX_TIM3_Init();
-	MX_TIM4_Init();
 	MX_TIM6_Init();
 	MX_TIM7_Init();
 	MX_TIM9_Init();
-	MX_TIM10_Init();
-	MX_TIM12_Init();
 
+	HAL_TIM_Base_Start(&htim1);
+	HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
+	HAL_TIM_Base_Start_IT(&htim6);
 	HAL_TIM_Base_Start_IT(&htim7);
+	HAL_TIM_Base_Start(&htim9);
 
 	HAL_GPIO_WritePin(GPIOD,GPIO_PIN_15, GPIO_PIN_SET);
 
