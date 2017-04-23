@@ -1,11 +1,13 @@
+from subprocess import check_output
+
 def FlagsForFile( filename, **kwargs ):
     return { 'flags': [
     '-xc',
     '-Wall',
     '-Wextra',
     '-std=c11',
-    '-isystem/usr/lib/gcc/arm-none-eabi/6.3.1/include',
-    '-isystem/usr/lib/gcc/arm-none-eabi/6.3.1/include-fixed',
+    '-isystem/usr/lib/gcc/arm-none-eabi/' + check_output(["arm-none-eabi-gcc", "-dumpversion"])[0:-1].decode("utf-8") + '/include',
+    '-isystem/usr/lib/gcc/arm-none-eabi/' + check_output(["arm-none-eabi-gcc", "-dumpversion"])[0:-1].decode("utf-8") + '/include-fixed',
     '-isystem/usr/arm-none-eabi/include',
     '-Isrc/libs/STM32F4xx_HAL_Driver/Inc/',
     '-Isrc/libs/CMSIS/Device/ST/STM32F4xx/Include/',

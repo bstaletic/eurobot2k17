@@ -2,6 +2,7 @@
 #define MOTION_COMMAND_H
 
 #include <stdint.h>
+#include <stdlib.h>
 
 #include "cmsis_os.h"
 #include "usart.h"

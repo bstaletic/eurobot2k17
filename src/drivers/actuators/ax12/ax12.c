@@ -19,7 +19,7 @@ uint8_t ax12_move(uint8_t id, uint16_t position)
 	out_data[8] = checksum;
 
 	// Send data to AX12
-	HAL_UART_Transmit(AX12_UART, out_data, 9, 0);
+	HAL_UART_Transmit(AX12_UART, out_data, 9, 9);
 	return ax12_read_response();
 }
 
@@ -45,7 +45,7 @@ uint8_t ax12_move_speed(uint8_t id, uint16_t position, uint16_t speed)
 	out_data[10] = checksum;
 
 	// Send data to AX12
-	HAL_UART_Transmit(AX12_UART, out_data, 11, 0);
+	HAL_UART_Transmit(AX12_UART, out_data, 11, 11);
 	return ax12_read_response();
 }
 
@@ -79,7 +79,7 @@ uint8_t ax12_factory_reset(uint8_t id)
 	out_data[4] = AX12_RESET;
 	out_data[5] = checksum;
 
-	HAL_UART_Transmit(AX12_UART, out_data, 6, 0);
+	HAL_UART_Transmit(AX12_UART, out_data, 6, 6);
 	return ax12_read_response();
 }
 
@@ -96,7 +96,7 @@ uint8_t ax12_set_baudrate(uint8_t id, uint32_t baudrate)
 	out_data[6] = (2000000/baudrate)-1;
 	out_data[7] = checksum;
 
-	HAL_UART_Transmit(AX12_UART, out_data, 8, 0);
+	HAL_UART_Transmit(AX12_UART, out_data, 8, 8);
 	return ax12_read_response();
 }
 
@@ -113,7 +113,7 @@ uint8_t ax12_set_id(uint8_t id, uint8_t new_id)
 	out_data[6] = new_id;
 	out_data[7] = checksum;
 
-	HAL_UART_Transmit(AX12_UART, out_data, 8, 0);
+	HAL_UART_Transmit(AX12_UART, out_data, 8, 8);
 	return ax12_read_response();
 }
 
@@ -135,7 +135,7 @@ uint8_t ax12_set_angle_limit(uint8_t id, uint16_t cw_limit, uint16_t ccw_limit)
 	out_data[9]  = ccw_limit>>8;
 	out_data[10] = checksum;
 
-	HAL_UART_Transmit(AX12_UART, out_data, 11, 0);
+	HAL_UART_Transmit(AX12_UART, out_data, 11, 11);
 	return ax12_read_response();
 }
 
@@ -152,7 +152,7 @@ uint8_t ax12_read_moving_status(uint8_t id)
 	out_data[6] = AX12_BYTE_READ;
 	out_data[7] = checksum;
 
-	HAL_UART_Transmit(AX12_UART, out_data, 8, 0);
+	HAL_UART_Transmit(AX12_UART, out_data, 8, 8);
 	return ax12_read_response();
 }
 
@@ -161,17 +161,17 @@ uint8_t ax12_read_response(void)
 	uint8_t data[4];
 	uint8_t error, length;
 
-	HAL_UART_Receive(AX12_UART, data, 4, 0);
+	HAL_UART_Receive(AX12_UART, data, 4, 4);
 
 	if (data[0] != 0xff)
 		return 0;
 
 	length = data[3];
 
-	HAL_UART_Receive(AX12_UART, &error, 1, 0);
+	HAL_UART_Receive(AX12_UART, &error, 1, 1);
 	unsigned char temp;
 	for (uint8_t i = 0; i < length - 1; ++i) {
-		HAL_UART_Receive(AX12_UART, &temp, 1, 0);
+		HAL_UART_Receive(AX12_UART, &temp, 1, 1);
 	}
 
 	return error;

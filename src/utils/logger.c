@@ -1,5 +1,5 @@
 #include "logger.h"
-#include "cmsis_os.h"
+
 
 typedef struct log_one_t {
 	char text[LOGGER_BUFFER_ONE_LOG_SIZE];
@@ -51,7 +51,7 @@ int print_header(void){
 		return 0;
 	}else{
 		char error_mssg[35] = "ERROR LOGGER, CANT GET MUTEX!!!\n";
-		HAL_UART_Transmit(&huart3, (unsigned char *)error_mssg, 32, 1);
+		HAL_UART_Transmit(&huart3, (unsigned char *)error_mssg, 32, 32);
 
 		return -1;
 	}
@@ -82,7 +82,7 @@ int error(const char* format, ...){
 		return 0;
 	}else{
 		char error_mssg[35] = "ERROR LOGGER, CANT GET MUTEX!!!\n";
-		HAL_UART_Transmit(&huart3, (unsigned char *)error_mssg, 32, 1);
+		HAL_UART_Transmit(&huart3, (unsigned char *)error_mssg, 32, 32);
 
 		return -1;
 	}
@@ -114,7 +114,7 @@ int debug(const char* format, ...){
 		return 0;
 	}else{
 		char error_mssg[35] = "ERROR LOGGER, CANT GET MUTEX!!!\n";
-		HAL_UART_Transmit(&huart3, (unsigned char *)error_mssg, 32, 1);
+		HAL_UART_Transmit(&huart3, (unsigned char *)error_mssg, 32, 32);
 
 		return -1;
 	}
@@ -146,7 +146,7 @@ int info(const char* format, ...){
 		return 0;
 	}else{
 		char error_mssg[35] = "ERROR LOGGER, CANT GET MUTEX!!!\n";
-		HAL_UART_Transmit(&huart3, (unsigned char *)error_mssg, 32, 1);
+		HAL_UART_Transmit(&huart3, (unsigned char *)error_mssg, 32, 32);
 
 		return -1;
 	}
@@ -158,8 +158,9 @@ void logger_main(void){
 	if (osMutexWait(rw_mutex,LOGGER_MUTEX_WAIT_MS) == osOK){
 
 		for(int i = 0; i < logs.size; i++){
-			logs.buffer[i].text[++(logs.buffer[i].size)] = '\n';
-			HAL_UART_Transmit(&LOGGER_UART_PORT, (unsigned char *)logs.buffer[i].text, logs.buffer[i].size+1,logs.buffer[i].size);
+			int s = logs.buffer[i].size++;
+			logs.buffer[i].text[s++] = '\n';
+			HAL_UART_Transmit(&LOGGER_UART_PORT, (unsigned char *)logs.buffer[i].text, s, s);
 		}
 
 		logs.size = 0;
@@ -180,7 +181,7 @@ void logger_ctor(void){
 
 	if(rw_mutex == NULL){
 		char error_mssg[35] = "ERROR LOGGER, CANT CREATE MUTEX!!!\n";
-		HAL_UART_Transmit(&huart3, (unsigned char *)error_mssg, 35, 1);
+		HAL_UART_Transmit(&huart3, (unsigned char *)error_mssg, 35, 32);
 	}else{
 		//		char error_mssg[50] = "MUTEX CREATED\n";
 		//		HAL_UART_Transmit(&huart3, (unsigned char *)error_mssg, 20, 1);

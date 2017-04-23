@@ -4,6 +4,7 @@
 #include "task.h"
 #include <stddef.h>
 #include "../utils/logger.h"
+#include "cmsis_os.h"
 
 #define TASK_USER_LIST_SIZE 50
 #define TASK_SYSTEM_PREEXECUTE_LIST_SIZE 20
