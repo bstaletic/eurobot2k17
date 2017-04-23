@@ -1,22 +1,20 @@
 #ifndef DOOR_EXECUTOR
 #define DOOR_EXECUTOR
 
-#include "../drivers/actuators/analog_servo/analog_servo.h"
+#include "../drivers/actuators/ax12/ax12.h"
 
-//one servo to open door
-#define SERVO_DOOR servo8
-#define DOOR_CLOSED_POSITION 1000
-#define DOOR_OPEN_POSITION 2000
-
-//second servo to "poke" lunar module and get it off the revolver
-#define SERVO_POKE servo8
+///servos to "poke" lunar module and get it off the revolver
+#define SERVO_TOP 5
+#define SERVO_FRONT 6
 #define POKE_INIT_POSITION 1000
-#define POKE_MODULE_POSITION 2000
+#define POKE_MODULE_POSITION_TOP 2000
+#define POKE_MODULE_POSITION_FRONT 2000
+
 
 void door_close(void);
 void door_open(void);
 
 void poke_init(void);
-void poke_module(void);
+void poke_module(uint8_t servo_id);
 
 #endif /* ifndef DOOR_EXECUTOR */

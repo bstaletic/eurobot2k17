@@ -1,21 +1,21 @@
 #include "door.h"
 
-void door_close(void)
-{
-    analog_servo_move(SERVO_DOOR, DOOR_CLOSED_POSITION);
+///used for initializing function in task
+void poke_init(void){
+    ax12_move(SERVO_TOP, POKE_INIT_POSITION);
+    ax12_move(SERVO_FRONT, POKE_INIT_POSITION);
 }
 
-void door_open(void)
-{
-    analog_servo_move(SERVO_DOOR, DOOR_OPEN_POSITION);
+///used to get module out of robot
+void poke_module(uint8_t servo_id){
+
+    if(servo_id == SERVO_TOP)
+        ax12_move(servo_id, POKE_MODULE_POSITION_TOP);
+    else
+        ax12_move(servo_id, POKE_MODULE_POSITION_FRONT);
 }
 
-void poke_init(void)
-{
-    analog_servo_move(SERVO_POKE, POKE_INIT_POSITION);
-}
-
-void poke_module(void)
-{
-    analog_servo_move(SERVO_POKE, POKE_MODULE_POSITION);
+///used forused to initialize one servo to init position
+void poke_return(uint8_t servo_id){
+    ax12_move(servo_id, POKE_INIT_POSITION);
 }

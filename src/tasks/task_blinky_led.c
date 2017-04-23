@@ -36,7 +36,7 @@ void blinky_led_test(void){
 	strncpy(task_blinky_led.task_name,"Test Task 1\0",12);
 
 	task_blinky_led_arguments.estimated_time = 50;
-	task_blinky_led_arguments.priority = 200;
+	task_blinky_led_arguments.priority = 999;
 	task_blinky_led_arguments.state = TASK_READY;
 
 	task_blinky_led.data = &task_blinky_led_arguments;
