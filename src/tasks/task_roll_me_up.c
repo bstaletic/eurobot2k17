@@ -8,13 +8,14 @@ void task_roll_me_up_run(task_arguments_t* argv){
 	debug("NOW YOU WAIT ONE SEC");
 	osDelay(1000);
 
-    rollers_on();
+    rollers_forward();
 	debug("ROLLERS ARE ON");
     osDelay(1500); //1
     revolver_next();
 
     osDelay(1500); //2
     revolver_next();
+
 
     // osDelay(1500); //3
     // revolver_next();
@@ -37,7 +38,7 @@ void task_roll_me_up_run(task_arguments_t* argv){
 void task_roll_me_up_init(task_arguments_t* argv){
 	debug("task_roll_me_up_init");
 
-    rollers_reverse();
+	revolver_init();
 }
 void task_roll_me_up_finish(task_arguments_t* argv){
 	debug("task_roll_me_up_finish");

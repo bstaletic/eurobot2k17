@@ -3,8 +3,6 @@
 
 #include "../drivers/actuators/dc_motor/dc_motor.h"
 
-/// \brief Turns rollers on
-void rollers_on(void);
 /// \brief Turns rollers off
 void rollers_off(void);
 

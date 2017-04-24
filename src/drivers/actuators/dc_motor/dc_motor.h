@@ -26,7 +26,7 @@ typedef enum { DC_FORWARD, DC_REVERSE } dc_direction;
  * \fn void dc_motor_move(dc_motor dc, int16_t speed);
  * \brief Set dc motor speed
  */
-void dc_motor_switch(int8_t speed);
+void dc_motor_switch_off(void);
 
 /**
  * \fn void dc_motor_direction(dc_motor dc, int8_t direction);
