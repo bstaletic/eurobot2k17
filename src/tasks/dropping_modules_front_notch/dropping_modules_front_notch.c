@@ -9,6 +9,7 @@ void dropping_modules_front_notch_run(task_arguments_t* argv){
 
 	//TASK2
 	//AFTER collect_rocket_modules_common TASK
+	//go collect COMMON_TABLE_MODULE_3
 	goto_xy_cmd(740, 1200, 1, 0);
 	rotate_to_cmd(45);
 	rollers_on();
@@ -53,7 +54,7 @@ void dropping_modules_front_notch_calculate_priority(task_arguments_t* argv){
 
 void ctor_test_1(void){
 
-	debug("test 1 ctor");
+	debug("dropping_modules_front_notch ctor");
 
 	dropping_modules_front_notch.run = (task_callback)&dropping_modules_front_notch_run;
 	dropping_modules_front_notch.init = (task_callback)&dropping_modules_front_notch_init;

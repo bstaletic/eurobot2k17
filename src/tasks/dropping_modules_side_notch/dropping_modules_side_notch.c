@@ -7,14 +7,15 @@ void dropping_modules_side_notch_run(task_arguments_t* argv){
 	debug("||**********|dropping_modules_side_notch run method|**********||");
 	osDelay(1000);
 
-    //after collect_rocket_modules_home task
-
-
+	//LAST TASK (TASK4)
+    //AFTER collect_rocket_modules_home TASK
     //go drop home modules on side notch
     set_motion_speed_cmd(50);
-    goto_xy_cmd(215, 975, 1, 0);
-    rotate_for_cmd(90);
-    //move_forward_cmd(); //to modify dropping position
+
+    goto_xy_cmd(1150, 900, 1, 0);
+	goto_xy_cmd(240, 870, 1, 0);
+    rotate_for_cmd(90); //you are now aprox. in position to drop modules to side notch
+    //move_forward_cmd(-10); //to modify dropping position
 
     //now dropping modules
     set_motion_speed_cmd(50);
@@ -48,7 +49,7 @@ void dropping_modules_side_notch_calculate_priority(task_arguments_t* argv){
 
 void ctor_test_1(void){
 
-	debug("test 1 ctor");
+	debug("dropping_modules_front_notch ctor");
 
 	dropping_modules_side_notch.run = (task_callback)&dropping_modules_side_notch_run;
 	dropping_modules_side_notch.init = (task_callback)&dropping_modules_side_notch_init;

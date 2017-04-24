@@ -70,7 +70,7 @@ void collect_rocket_modules_common_calculate_priority(task_arguments_t* argv){
 
 void ctor_test_1(void){
 
-	debug("test 1 ctor");
+	debug("collect_rocket_modules_common ctor");
 
 	collect_rocket_modules_common.run = (task_callback)&collect_rocket_modules_common_run;
 	collect_rocket_modules_common.init = (task_callback)&collect_rocket_modules_common_init;

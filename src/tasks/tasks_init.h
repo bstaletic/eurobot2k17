@@ -6,6 +6,7 @@
 #include "task_blinky_led.h"
 #include "idle.h"
 #include "time_update.h"
+#include "task_roll_me_up.h"
 
 void tasks_main(void);
 

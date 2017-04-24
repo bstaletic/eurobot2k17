@@ -36,7 +36,6 @@ void collect_rocket_modules_home_init(task_arguments_t* argv){
 	debug("collect_rocket_modules_home_init");
 
 	revolver_init();
-	revolver_init();
 	poke_init();
 }
 void collect_rocket_modules_home_finish(task_arguments_t* argv){

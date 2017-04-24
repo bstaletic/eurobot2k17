@@ -1,5 +1,7 @@
 #include "revolver.h"
 
+int16_t revolver_position  = 0;
+
 int8_t revolver_init(void)
 {
 	return ax12_move(REVOLVER_AX12_ID, revolver_position);
