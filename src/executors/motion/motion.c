@@ -180,7 +180,9 @@ void* motion_queue_pull(void)
 		if (osMutexWait(motion_mutex, MOTION_MUTEX_WAIT_MS) == osOK)
 		{
 			command = motion_queue[0];
-			memmove(motion_queue, motion_queue + 1, commands_in_queue - 1);
+			//memmove(motion_queue, motion_queue + 1, commands_in_queue - 1);
+			for (int i = 0; i < commands_in_queue - 1; ++i)
+				motion_queue[i] = motion_queue[i + 1];
 			commands_in_queue--;
 			motion_queue[commands_in_queue] = NULL;
 
