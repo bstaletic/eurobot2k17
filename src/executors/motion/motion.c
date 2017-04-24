@@ -287,9 +287,9 @@ static void process_motion_command(void)
 		can_use_pf = 0;
 		current_destination.x = state.x;
 		current_destination.y = state.y;
-		HAL_TIM_Base_Stop_IT(&htim7);
+		// HAL_TIM_Base_Stop_IT(&htim7);
 		rotate_for(cmd->angle);
-		HAL_TIM_Base_Start_IT(&htim7);
+		// HAL_TIM_Base_Start_IT(&htim7);
 		vPortFree(cmd);
 		break;
 	}

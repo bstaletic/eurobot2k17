@@ -8,6 +8,7 @@ void tasks_main(void){
 	ctor_roll_me_up();
 	ctor_task_idle();
 	ctor_time_update();
+	ctor_let_me_pass();
 
 	// run task manager
 	task_mngr_run();

@@ -7,6 +7,7 @@
 #include "idle.h"
 #include "time_update.h"
 #include "task_roll_me_up.h"
+#include "let_me_pass.h"
 
 void tasks_main(void);
 

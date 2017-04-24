@@ -6,12 +6,10 @@ task_arguments_t task_blinky_led_arguments;
 void task_blinky_led_run(task_arguments_t* argv){
 	debug("task_blinky_led run method ");
 
-
 		HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_14);
-//		debug("task_blinky_led run method ");
 
-//	}
-//	argv->state = TASK_DONE;
+	argv->state = TASK_DONE;
+
 }
 void task_blinky_led_init(task_arguments_t* argv){
 	debug("task_blinky_led_init");
