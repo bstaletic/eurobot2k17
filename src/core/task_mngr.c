@@ -57,6 +57,9 @@ void run_usertasks(void){
 
 	if(task_user_active == NULL){
 		task_user_active = find_next_task();
+		//run init of  task
+		task_user_active->init(task_user_active->data);
+		//set task to active
 		task_user_active->data->state = TASK_ACTIVE;
 	}
 
@@ -72,6 +75,8 @@ void run_usertasks(void){
 
 		// find next task that will be executed
 		task_user_active = find_next_task();
+		// run init of task
+		task_user_active->init(task_user_active->data);
 		// set status of task to active
 		task_user_active->data->state = TASK_ACTIVE;
 
