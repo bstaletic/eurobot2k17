@@ -26,7 +26,7 @@ typedef enum{
 /// task functions get this struct as argument
 typedef struct {
 	void* world_state; ///< @todo todo edit when world state is completed
-	uint32_t time; ///< time to end of the match;
+	uint32_t* time; ///< time to end of the match;
 	uint32_t priority; ///< priority
 	uint32_t estimated_time; ///< estimated time of execution
 	task_states_t state; ///< task state, for more @see task_types_t

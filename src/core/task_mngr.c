@@ -14,10 +14,13 @@ task_t* task_system_preexecute[] = {[0 ... (TASK_SYSTEM_PREEXECUTE_LIST_SIZE-1)]
 task_t* task_system_postexecute[]= {[0 ... (TASK_SYSTEM_POSTEXECUTE_LIST_SIZE-1)] = NULL};
 task_t* task_user_backproc[] = {[0 ... (TASK_USER_BACKPROC_LIST_SIZE-1)] = NULL};
 
-int task_user_couter = 0;
-int task_system_preexecute_couter = 0;
-int task_system_postexecute_couter = 0;
-int task_user_backproc_couter = 0;
+static int task_user_couter = 0;
+static int task_system_preexecute_couter = 0;
+static int task_system_postexecute_couter = 0;
+static int task_user_backproc_couter = 0;
+
+static int time;
+// workd state;
 
 void task_mngr_run(){
 
@@ -131,6 +134,9 @@ void set_start_task(task_t *_task){
  */
 void add_task(task_t *_task){
 
+	//set pointer to time in every task to same int time
+
+	_task->data->time = &time;
 
 	if(_task->type == TASK_USER){
 		if(task_user_couter < TASK_USER_LIST_SIZE){
