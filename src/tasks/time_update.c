@@ -12,9 +12,9 @@ static void run_ck(task_arguments_t* argv){
 
 	int time = (stime.Minutes * 60) + stime.Seconds;
 
-	if(argv->time != (uint32_t)time){
-		argv->time = time;
-		info("time update: %d ", time);
+	if(*(argv->time) != (uint32_t)time){
+		*(argv->time) = time;
+		info("time update: %d ", *argv->time);
 	}
 }
 
