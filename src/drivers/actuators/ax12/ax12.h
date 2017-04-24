@@ -32,49 +32,49 @@
  * AX12_UART function
  */
 
-/** \fn uint8_t ax12_move(uint8_t id, uint16_t position)
+/** \fn void ax12_move(uint8_t id, uint16_t position)
  * \brief Rotates AX12_UART to specified position
  *
  * @param id [in] Uniquely identifies the AX12_UART. Possible values are [0,254] If id is 254 the command is broadcasted to all AX12 servo motors
  * @param position [in] Desired position of AX12_UART Possible values are [0,1023]
  */
-uint8_t ax12_move(uint8_t id, uint16_t position);
-/** \fn uint8_t ax12_move_speed(uint8_t id, uint16_t position, uint16_t speed)
+void ax12_move(uint8_t id, uint16_t position);
+/** \fn void ax12_move_speed(uint8_t id, uint16_t position, uint16_t speed)
  * \brief Rotates AX12_UART to specified position at the specified speed
  *
  * @param id [in] Uniquely identifies the AX12_UART. Possible values are [0,254] If id is 254 the command is broadcasted to all AX12 servo motors
  * @param position [in] Desired position of AX12_UART Possible values are [0,1023]
  * @param speed [in] Rotate at desired speed Possible values are [0,255]
  */
-uint8_t ax12_move_speed(uint8_t id, uint16_t position, uint16_t speed);
-/** \fn uint8_t ax12_set_speed(uint8_t id, uint16_t speed)
+void ax12_move_speed(uint8_t id, uint16_t position, uint16_t speed);
+/** \fn void ax12_set_speed(uint8_t id, uint16_t speed)
  * \brief Sets the speed of AX12_UART for future use
  *
  * @param id [in] Uniquely identifies the AX12_UART. Possible values are [0,254] If id is 254 the command is broadcasted to all AX12 servo motors
  * @param speed [in] Rotate at desired speed Possible values are [0,255]
  */
-uint8_t ax12_set_speed(uint8_t id, uint16_t speed);
-/** \fn uint8_t ax12_factory_reset(uint8_t id)
+void ax12_set_speed(uint8_t id, uint16_t speed);
+/** \fn void ax12_factory_reset(uint8_t id)
  * \brief Restes the AX12_UART to factory defaults
  *
  * @param id [in] Uniquely identifies the AX12_UART. Possible values are [0,254] If id is 254 the command is broadcasted to all AX12 servo motors
  */
-uint8_t ax12_factory_reset(uint8_t id);
-/** \fn uint8_t ax12_set_id(uint8_t id, uint8_t new_id)
+void ax12_factory_reset(uint8_t id);
+/** \fn void ax12_set_id(uint8_t id, uint8_t new_id)
  * \brief Sets the id of AX12_UART for future use
  *
  * @param id [in] Uniquely identifies the AX12_UART. Possible values are [0,254] If id is 254 the command is broadcasted to all AX12 servo motors
  * @param new_id [in] The desired new id of AX12_UART.
  */
-uint8_t ax12_set_id(uint8_t id, uint8_t new_id);
-/** \fn uint8_t ax12_set_baudrate(uint8_t id, uint32_t baudrate)
+void ax12_set_id(uint8_t id, uint8_t new_id);
+/** \fn void ax12_set_baudrate(uint8_t id, uint32_t baudrate)
  * \brief Sets the baudrate of AX12_UART for future use
  *
  * @param id [in] Uniquely identifies the AX12_UART. Possible values are [0,254] If id is 254 the command is broadcasted to all AX12 servo motors
  * @param baudrate [in] Specifies the baudrate at which the AX12_UART communicates
  */
-uint8_t ax12_set_baudrate(uint8_t id, uint32_t baudrate);
-/** \fn uint8_t ax12_set_angle_limit(uint8_t id, uint16_t cw_limit, uint16_t ccw_limit)
+void ax12_set_baudrate(uint8_t id, uint32_t baudrate);
+/** \fn void ax12_set_angle_limit(uint8_t id, uint16_t cw_limit, uint16_t ccw_limit)
  * \brief Sets the angle limits for rotating both clockwise and counter clockwise
  *
  * @param id [in] Uniquely identifies the AX12_UART. Possible values are [0,254] If id is 254 the command is broadcasted to all AX12 servo motors
@@ -83,13 +83,13 @@ uint8_t ax12_set_baudrate(uint8_t id, uint32_t baudrate);
  *
  * If both angle limits are set to 0 AX12_UART is being used in wheel mode
  */
-uint8_t ax12_set_angle_limit(uint8_t id, uint16_t cw_limit, uint16_t ccw_limit);
-/** \fn uint8_t ax12_read_moving_status(uint8_t id)
+void ax12_set_angle_limit(uint8_t id, uint16_t cw_limit, uint16_t ccw_limit);
+/** \fn void ax12_read_moving_status(uint8_t id)
  * \brief Read whether AX12_UART has finished moving
  *
  * @param id [in] Uniquely identifies the AX12_UART. Possible values are [0,254] If id is 254 the command is broadcasted to all AX12 servo motors
  */
-uint8_t ax12_read_moving_status(uint8_t id);
+void ax12_read_moving_status(uint8_t id);
 /** \fn uint8_t ax12_read_response(void)
  * \brief Read response after sending a command to AX12
  */
