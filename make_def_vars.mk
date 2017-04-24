@@ -22,7 +22,7 @@ else
 endif
 
 ifeq ($(DEBUG),0)
-	CFLAGS := -Ofast -Wall -Wextra -Wno-main -std=c11 -fdata-sections -ffunction-sections -fuse-ld=gold
+	CFLAGS := -Ofast -Wall -Wextra -Wno-main -std=c11 -fdata-sections -ffunction-sections -fuse-ld=gold -DNDEBUG
 else
 	CFLAGS := -Og -g -Wall -Wextra -Wno-main -std=c11 -fdata-sections -ffunction-sections -fuse-ld=gold
 endif
