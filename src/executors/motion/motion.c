@@ -431,3 +431,8 @@ void refresh_state(void)
 
 	state_refresh_needed = 0;
 }
+
+void wait_for_motion(void)
+{
+	while(motion_queue[0] != NULL);
+}

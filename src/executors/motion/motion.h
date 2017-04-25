@@ -30,6 +30,7 @@
 void motion_queue_push(void* command);
 void* motion_queue_pull(void);
 
+void wait_for_motion(void);
 
 /**
  * @brief motion main function. It runs in own thread
