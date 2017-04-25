@@ -1,6 +1,6 @@
 #include "revolver.h"
 
-int16_t revolver_position  = 1023;
+int16_t revolver_position  = 1010;
 
 int8_t revolver_init(void)
 {

@@ -9,6 +9,7 @@ void let_me_pass_run(task_arguments_t* argv){
 
     info("||*****|RUNNING HOMOLOGATION|*****||");
 
+    set_xy_cmd(0, 0, 180); //setting where is robot
     info("Going to x: 1150 y: 540");
     goto_xy_cmd(1150, 540, -1, 0);
 
@@ -32,19 +33,19 @@ void let_me_pass_run(task_arguments_t* argv){
         switch (i) {
 
             case 1:
-                revolver_go_to_position(800); //POSITION_TAKE_1
+                revolver_go_to_position(POSITION_1); //POSITION_TAKE_1
                 break;
 
             case 2:
-                revolver_go_to_position(600); //POSITION_TAKE_2
+                revolver_go_to_position(POSITION_2); //POSITION_TAKE_2
                 break;
 
             case 3:
-                revolver_go_to_position(400); //POSITION_TAKE_3
+                revolver_go_to_position(POSITION_3); //POSITION_TAKE_3
                 break;
 
             case 4:
-                revolver_go_to_position(200); //POSITION_TAKE_4
+                revolver_go_to_position(POSITION_4); //POSITION_TAKE_4
                 break;
 
             default:
@@ -81,19 +82,19 @@ void let_me_pass_run(task_arguments_t* argv){
         switch (i) {
 
             case 1:
-                revolver_go_to_position(800); //POSITION_TAKE_4
+                revolver_go_to_position(POSITION_4); //POSITION_TAKE_4
                 break;
 
             case 2:
-                revolver_go_to_position(600); //POSITION_TAKE_3
+                revolver_go_to_position(POSITION_3); //POSITION_TAKE_3
                 break;
 
             case 3:
-                revolver_go_to_position(400); //POSITION_TAKE_2
+                revolver_go_to_position(POSITION_2); //POSITION_TAKE_2
                 break;
 
             case 4:
-                revolver_go_to_position(200); //POSITION_TAKE_1
+                revolver_go_to_position(POSITION_1); //POSITION_TAKE_1
                 break;
 
             default:
@@ -157,15 +158,13 @@ void let_me_pass_run(task_arguments_t* argv){
 void let_me_pass_init(task_arguments_t* argv){
 	debug("Starting let_me_pass initialsation");
 
-    set_xy_cmd(0, 0, 180); //setting where is robot
+    // set_xy_cmd(0, 0, 180); //setting where is robot
     //set_motion_speed_cmd(50); //seting speed
 
     debug("Initialisation done");
 }
 void let_me_pass_finish(task_arguments_t* argv){
 	debug("Starting let_me_pass finish");
-
-
 
     debug("HOMOLOGATION IS DONE");
 }

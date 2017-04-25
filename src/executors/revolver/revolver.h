@@ -5,8 +5,18 @@
 
 #include "../drivers/actuators/ax12/ax12.h"
 
-#define AX12_NEXT_POSITION_INC 200
 #define REVOLVER_AX12_ID 3
+
+#define AX12_NEXT_POSITION_INC 200
+
+#define POSITION_1 1010
+#define POSITION_2 865
+#define POSITION_3 725
+#define POSITION_4 585
+#define POSITION_5 435
+#define POSITION_6 290
+#define POSITION_7 150
+#define POSITION_8 10
 
 extern int16_t revolver_position;
 int16_t position;
