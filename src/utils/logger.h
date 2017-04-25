@@ -12,7 +12,10 @@
 
 #define LOGGER_ERROR ///< if LOGGER_ERROR is defined logger will log error logs (log = send data to debug UART port)
 #define LOGGER_INFO  ///< if LOGGER_ERROR is defined logger will log info logs (log = send data to debug UART port)
-#define LOGGER_DEBUG ///< if LOGGER_ERROR is defined logger will log debug logs (log = send data to debug UART port)
+#ifndef NDEBUG
+	#define LOGGER_DEBUG ///< if LOGGER_ERROR is defined logger will log debug logs (log = send data to debug UART port)
+#define NDEBUG
+#endif /* ifndef NDEBUG */
 #define LOGGER_UART_PORT huart3 ///< UART port for logging
 #define LOGGER_MUTEX_WAIT_MS 5 ///< wait time of read write mutex to logs
 
