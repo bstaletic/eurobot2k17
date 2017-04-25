@@ -435,5 +435,10 @@ void refresh_state(void)
 
 void wait_for_motion(void)
 {
-	while(motion_queue[0] != NULL);
+	uint8_t motion_free;
+	do
+	{
+		motion_free = motion_queue[0] == NULL && state.status == MOTION_IDLE;
+	}
+	while(!motion_free);
 }

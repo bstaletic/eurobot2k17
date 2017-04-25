@@ -9,6 +9,7 @@
 #include "../executors/door/door.h"
 #include "../executors/front_rollers/front_rollers.h"
 #include "../executors/motion/motion_command.h"
+#include "../executors/motion/motion.h"
 #include "../executors/revolver/revolver.h"
 #include "../executors/rocket/rocket.h"
 #include "../executors/trunk/trunk.h"
