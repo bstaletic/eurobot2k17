@@ -57,3 +57,6 @@ build
 *.creator.user
 *.config
 *.creator
+
+#other
+STM32F407G-DISC1.xml
