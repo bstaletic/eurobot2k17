@@ -1,17 +1,18 @@
 #include "idle.h"
 
-task_t task;
-task_arguments_t arguments;
+static task_t task;
+static task_arguments_t arguments;
 
 void idle_run(task_arguments_t* argv){
-	error("running IDLE task, time %d", argv->time);
+	error("running IDLE task, time %d", *argv->time);
 	osThreadYield();
+	argv->state = TASK_DONE;
 }
 void idle_init(task_arguments_t* argv){
 	argv->estimated_time = 200;
 }
 void idle_finish(task_arguments_t* argv){
-	error("finishing IDLE task, time %d", argv->time);
+	error("finishing IDLE task, time %d", *argv->time);
 }
 
 void idle_cp(task_arguments_t* argv){
