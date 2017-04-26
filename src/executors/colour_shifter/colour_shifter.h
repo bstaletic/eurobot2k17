@@ -3,6 +3,7 @@
 
 #include "../drivers/sensors/colour/colour.h"
 #include "../drivers/actuators/ax12/ax12.h"
+#include "../drivers/misc/jumper_and_colour_switch.h"
 
 #define COLOUR_SHIFTER_ID 5
 
@@ -18,6 +19,6 @@
  * at the top of the cilinder is the same colour as the team's colour.
  *
  */
-void colour_shift(colour_enum_t colour);
+void colour_shift(void);
 
 #endif /* ifndef COLOUR_SHIFTER */

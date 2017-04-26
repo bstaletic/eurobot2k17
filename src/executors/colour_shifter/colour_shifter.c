@@ -1,19 +1,8 @@
 #include "colour_shifter.h"
 
-void colour_shift(colour_enum_t colour)
+void colour_shift(void)
 {
-	if (colour == BLUE)
-	{
-		while (read_colour() != YELLOW)
-		{
-			ax12_set_speed(COLOUR_SHIFTER_ID, 100);
-		}
-	}
-	else if (colour == YELLOW)
-	{
-		while (read_colour() != BLUE)
-		{
-			ax12_set_speed(COLOUR_SHIFTER_ID, 100);
-		}
-	}
+	while (read_colour() != colour_switch)
+		ax12_set_speed(COLOUR_SHIFTER_ID, 100);
+	ax12_set_speed(COLOUR_SHIFTER_ID, 0);
 }

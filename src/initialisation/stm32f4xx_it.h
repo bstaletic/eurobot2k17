@@ -47,6 +47,8 @@
 /* Exported macro ------------------------------------------------------------*/
 /* Exported functions ------------------------------------------------------- */
 
+extern volatile uint8_t system_time;
+
 void SysTick_Handler(void);
 void TIM5_IRQHandler(void);
 
