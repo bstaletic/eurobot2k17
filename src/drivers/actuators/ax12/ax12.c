@@ -67,7 +67,7 @@ uint8_t ax12_set_speed(uint8_t id, uint16_t speed)
 	out_data[7] = speed>>8;
 	out_data[8] = checksum;
 
-	HAL_UART_Transmit(AX12_UART, out_data, 9, 0);
+	HAL_UART_Transmit(AX12_UART, out_data, 9, 9);
 	return ax12_read_response();
 }
 

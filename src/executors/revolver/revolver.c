@@ -4,7 +4,8 @@ int16_t revolver_position  = 1010;
 
 int8_t revolver_init(void)
 {
-	return ax12_move(REVOLVER_AX12_ID, revolver_position);
+	ax12_set_speed(REVOLVER_AX12_ID, 80);
+	return ax12_move(REVOLVER_AX12_ID, POSITION_1);
 }
 
 int8_t revolver_go_to_position(uint16_t position)

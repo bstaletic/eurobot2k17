@@ -35,7 +35,9 @@ void main(void)
 	HAL_TIM_Base_Start(&htim9);
 
 	MX_RTC_Init();
-
+	reset_driver();
+	HAL_Delay(1000);
+	set_motion_speed(50);
 	HAL_GPIO_WritePin(GPIOD,GPIO_PIN_15, GPIO_PIN_SET);
 
 	/* Call init function for freertos objects (in freertos.c) */

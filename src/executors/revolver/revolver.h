@@ -9,12 +9,12 @@
 
 #define AX12_NEXT_POSITION_INC 200
 
-#define POSITION_1 1010
-#define POSITION_2 865
-#define POSITION_3 725
-#define POSITION_4 585
-#define POSITION_5 435
-#define POSITION_6 290
+#define POSITION_1 920
+#define POSITION_2 780
+#define POSITION_3 630
+#define POSITION_4 475
+#define POSITION_5 335
+#define POSITION_6 200
 #define POSITION_7 150
 #define POSITION_8 10
 
