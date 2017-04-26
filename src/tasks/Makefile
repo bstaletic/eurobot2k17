@@ -7,3 +7,4 @@ SRC += tasks/idle.c
 SRC += tasks/tasks_init.c
 SRC += tasks/time_update.c
 SRC += tasks/start_task.c
+SRC += tasks/funny_action_task/funny_action_task.c

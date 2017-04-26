@@ -6,8 +6,9 @@ task_arguments_t funny_action_task_arguments;
 //wating for rtc to be figured out
 
 void funny_action_task_run(task_arguments_t* argv){
-	debug("funny_action_task run method ");
-	osDelay(1000);
+	rocket_launch();
+	soft_stop_cmd();
+	reset_driver();
 	argv->state = TASK_DONE;
 
 }
@@ -19,11 +20,15 @@ void funny_action_task_finish(task_arguments_t* argv){
 }
 
 void funny_action_task_calculate_priority(task_arguments_t* argv){
-	debug("funny_action_task_calc_pri");
+//	debug("funny_action_task_calc_pri");
+	if(*argv->time > 80){
+		debug("IT IS TIME FOR FUNNY ACTION");
+		argv->priority = 999;
+	}
 }
 
 
-void ctor_test_1(void){
+void ctor_funny_action_task(void){
 
 	debug("funny_action_task ctor");
 

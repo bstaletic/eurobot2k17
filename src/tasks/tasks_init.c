@@ -10,6 +10,7 @@ void tasks_main(void){
 	ctor_task_idle();
 	ctor_time_update();
 	ctor_let_me_pass();
+	ctor_funny_action_task();
 
 	// run task manager
 	task_mngr_run();

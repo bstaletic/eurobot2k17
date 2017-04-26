@@ -10,6 +10,7 @@
 #include "time_update.h"
 #include "let_me_pass.h"
 #include "start_task.h"
+#include "funny_action_task/funny_action_task.h"
 
 void tasks_main(void);
 
