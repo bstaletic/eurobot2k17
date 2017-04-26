@@ -6,6 +6,7 @@
 #include "stm32f4xx_hal.h"
 
 extern RTC_HandleTypeDef hrtc;
+extern volatile uint32_t system_time;
 
 void ctor_time_update(void);
 

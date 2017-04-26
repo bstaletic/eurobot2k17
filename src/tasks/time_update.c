@@ -4,17 +4,18 @@ int counter = 0;
 task_t task;
 task_arguments_t arguments;
 RTC_TimeTypeDef stime;
-uint32_t time;
+uint32_t test_time = 0;
 
 
 static void run_ck(task_arguments_t* argv){
-	HAL_RTC_GetTime(&hrtc,&stime,RTC_FORMAT_BCD);
+//	HAL_RTC_GetTime(&hrtc,&stime,RTC_FORMAT_BCD);
 
-	int time = (stime.Minutes * 60) + stime.Seconds;
+//	int time = (stime.Minutes * 60) + stime.Seconds;
+//	info("time update: %d ", system_time);
 
-	if(*(argv->time) != (uint32_t)time){
-		*(argv->time) = time;
-		info("time update: %d ", *argv->time);
+	if(test_time != system_time){
+		test_time = system_time;
+		info("time update: %d ", test_time);
 	}
 }
 

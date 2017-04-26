@@ -4,6 +4,7 @@ void tasks_main(void){
 	// call constructors for all tasks
 	// ctor_test_1();
 	// ctor_test_2();
+	ctor_start_task();
 	// blinky_led_test();
 	// ctor_roll_me_up();
 	ctor_task_idle();
