@@ -5,6 +5,8 @@
 #include <stddef.h>
 #include "../utils/logger.h"
 #include "cmsis_os.h"
+#include "stdint.h"
+#include "../drivers/misc/jumper_and_colour_switch.h"
 
 #define TASK_USER_LIST_SIZE 50
 #define TASK_SYSTEM_PREEXECUTE_LIST_SIZE 20

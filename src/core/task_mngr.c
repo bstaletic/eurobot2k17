@@ -18,9 +18,9 @@ static int task_user_couter = 0;
 static int task_system_preexecute_couter = 0;
 static int task_system_postexecute_couter = 0;
 static int task_user_backproc_couter = 0;
+static uint8_t tasks_ready_boolean = 1;
 
-static int time;
-// workd state;
+extern volatile uint32_t system_time;// workd state;
 
 void task_mngr_run(){
 
@@ -40,7 +40,7 @@ void task_mngr_run(){
 		}
 
 		// 2. run currently active task. If there is no active task chose one with biggest priority.
-		if(task_user_couter > 0){
+		if(task_user_couter > 0 && tasks_ready_boolean == 1){
 			run_usertasks();
 		}
 
@@ -49,7 +49,7 @@ void task_mngr_run(){
 			run_systemtasks_postexecute();
 		}
 
-//		for(int i = 0; i < 100000000; i++);
+		//		for(int i = 0; i < 100000000; i++);
 		taskYIELD();
 	}
 }
@@ -60,6 +60,8 @@ void run_usertasks(void){
 
 	if(task_user_active == NULL){
 		task_user_active = find_next_task();
+		// if task is NULL then there is no active tasks
+		if(task_user_active == NULL)return;
 		//run init of  task
 		task_user_active->init(task_user_active->data);
 		//set task to active
@@ -78,17 +80,24 @@ void run_usertasks(void){
 
 		// find next task that will be executed
 		task_user_active = find_next_task();
+		// if task is NULL then there is no active tasks
+		if(task_user_active == NULL)return;
 		// run init of task
 		task_user_active->init(task_user_active->data);
 		// set status of task to active
 		task_user_active->data->state = TASK_ACTIVE;
 
 	}else{
-
-		task_user_active->finish(task_user_active->data);
+		if(task_user_active->finish != NULL){
+			task_user_active->finish(task_user_active->data);
+		}else{
+			error("task %s, has no finish task", task_user_active->task_name);
+		}
 
 		// find next task that will be executed
 		task_user_active = find_next_task();
+		// if task is NULL then there is no active tasks
+		if(task_user_active == NULL)return;
 		// set status of task to active
 		task_user_active->data->state = TASK_ACTIVE;
 	}
@@ -125,6 +134,7 @@ void run_calculate_priority(void){
  * @param _task to be set as active
  */
 void set_start_task(task_t *_task){
+	task_user_active->data->state = TASK_ACTIVE;
 	task_user_active = _task;
 }
 
@@ -136,7 +146,8 @@ void add_task(task_t *_task){
 
 	//set pointer to time in every task to same int time
 
-	_task->data->time = &time;
+	_task->data->time = &system_time;
+	_task->data->colour = colour_switch;
 
 	if(_task->type == TASK_USER){
 		if(task_user_couter < TASK_USER_LIST_SIZE){
@@ -201,6 +212,7 @@ task_t* find_next_task(void){
 		info("Starting task: %s, by priority: %d",_task->task_name, _task->data->priority);
 	}else{
 		error("No Ready task in list ! exiting");
+		tasks_ready_boolean = 0;
 	}
 	return _task;
 }

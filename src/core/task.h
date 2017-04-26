@@ -2,6 +2,7 @@
 #define CORE_TASK_H
 
 #include <stdint-gcc.h>
+#include "../drivers/misc/jumper_and_colour_switch.h"
 
 /// status of task
 typedef enum{
@@ -27,6 +28,7 @@ typedef enum{
 typedef struct {
 	void* world_state; ///< @todo todo edit when world state is completed
 	uint32_t* time; ///< time to end of the match;
+	colour_enum_t colour;
 	uint32_t priority; ///< priority
 	uint32_t estimated_time; ///< estimated time of execution
 	task_states_t state; ///< task state, for more @see task_types_t
