@@ -5,3 +5,4 @@ SRC += drivers/actuators/dc_motor/dc_motor.c
 SRC += drivers/actuators/analog_servo/analog_servo.c
 SRC += drivers/sensors/colour/colour.c
 SRC += drivers/sensors/optical/optical.c
+SRC += drivers/misc/jumper_and_colour_switch.c
