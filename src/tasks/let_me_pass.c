@@ -84,7 +84,6 @@ rotate_to_cmd(45);
 set_motion_speed_cmd(50);
     wait_for_motion();
 osDelay(500);
-rollers_reverse();
 
 info("Starting to drop modules");
 
@@ -93,38 +92,49 @@ osDelay(10);
 revolver_go_to_position(POSITION_4);
 move_forward_cmd(105);
 set_motion_speed_cmd(50);
+    wait_for_motion();
+rollers_reverse();
 move_forward_cmd(-40);
 set_motion_speed_cmd(50);
     wait_for_motion();
 osDelay(1000);
+rollers_off();
 revolver_go_to_position(POSITION_3);
 osDelay(10);
 revolver_go_to_position(POSITION_3);
 
 move_forward_cmd(35);
 set_motion_speed_cmd(50);
+    wait_for_motion();
+rollers_reverse();
 move_forward_cmd(-35);
 set_motion_speed_cmd(50);
     wait_for_motion();
 osDelay(1000);
+rollers_off();
 revolver_go_to_position(POSITION_2);
 osDelay(10);
 revolver_go_to_position(POSITION_2);
 
 move_forward_cmd(35);
 set_motion_speed_cmd(50);
+    wait_for_motion();
+rollers_reverse();
 move_forward_cmd(-35);
 set_motion_speed_cmd(50);
     wait_for_motion();
 osDelay(1000);
+rollers_off();
 revolver_go_to_position(POSITION_1);
 osDelay(10);
 revolver_go_to_position(POSITION_1);
 
 move_forward_cmd(35);
 set_motion_speed_cmd(50);
+    wait_for_motion();
+rollers_reverse();
 move_forward_cmd(-35);
-set_motion_speed_cmd(120);
+set_motion_speed_cmd(50);
     wait_for_motion();
 osDelay(1000);
 rollers_off();
@@ -213,7 +223,6 @@ goto_xy_cmd(945, 225, 1, 0);
 set_motion_speed_cmd(50);
 rotate_to_cmd(-44);
 wait_for_motion();
-// rollers_reverse();
 
 info("Starting to drop modules");
 
