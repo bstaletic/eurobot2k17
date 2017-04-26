@@ -37,7 +37,7 @@
 #include "cmsis_os.h"
 
 /* USER CODE BEGIN 0 */
-volatile uint8_t system_time = 0;
+volatile uint32_t system_time = 0;
 /* USER CODE END 0 */
 
 /* External variables --------------------------------------------------------*/

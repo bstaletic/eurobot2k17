@@ -47,10 +47,11 @@
 /* Exported macro ------------------------------------------------------------*/
 /* Exported functions ------------------------------------------------------- */
 
-extern volatile uint8_t system_time;
+extern volatile uint32_t system_time;
 
 void SysTick_Handler(void);
 void TIM5_IRQHandler(void);
+void TIM1_TRG_COM_TIM11_IRQHandler(void);
 
 #ifdef __cplusplus
 }
