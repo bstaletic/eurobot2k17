@@ -55,7 +55,4 @@ void ctor_funny_action_task(void){
 
 	add_task(&funny_action_task);
 
-
-	debug("MOVING SERVO");
-	rocket_init();
 }

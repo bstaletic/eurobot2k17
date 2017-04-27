@@ -9,14 +9,15 @@
 
 #define AX12_NEXT_POSITION_INC 200
 
-#define POSITION_1 920
-#define POSITION_2 780
-#define POSITION_3 630
-#define POSITION_4 475
-#define POSITION_5 335
-#define POSITION_6 200
-#define POSITION_7 150
-#define POSITION_8 10
+#define POSITION_1 1023
+#define POSITION_2 885
+#define POSITION_3 740
+#define POSITION_4 580
+#define POSITION_5 445
+#define POSITION_6 310
+#define POSITION_7 160
+#define POSITION_8 15
+// #define POSITION_8 10
 
 extern int16_t revolver_position;
 int16_t position;

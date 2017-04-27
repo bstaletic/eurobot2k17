@@ -11,6 +11,35 @@ void let_me_pass_run(task_arguments_t* argv){
 
     info("||*****|RUNNING HOMOLOGATION|*****||");
     revolver_init();
+	osDelay(10);
+	revolver_init();
+	rocket_init();
+	osDelay(10);
+	rocket_init();
+
+	// revolver_go_to_position(POSITION_1);
+	// osDelay(2000);
+	//
+	// revolver_go_to_position(POSITION_2);
+	// osDelay(2000);
+	//
+	// revolver_go_to_position(POSITION_3);
+	// osDelay(2000);
+	//
+	// revolver_go_to_position(POSITION_4);
+	// osDelay(2000);
+	//
+	// revolver_go_to_position(POSITION_5);
+	// osDelay(2000);
+	//
+	// revolver_go_to_position(POSITION_6);
+	// osDelay(2000);
+	//
+	// revolver_go_to_position(POSITION_7);
+	// osDelay(2000);
+	//
+	// revolver_go_to_position(POSITION_8);
+	// osDelay(2000);
 //////////////////////////PLAVA STRANA///////////////////////////////////////////
 /*    set_motion_speed_cmd(120);
     goto_xy_cmd(400, 243, -1, 0);
@@ -211,25 +240,106 @@ revolver_go_to_position(POSITION_5);
 
 rollers_off();
 
-
 info("Modules should be collected");
 
-goto_xy_cmd(450, -233, -1, 0);
+goto_xy_cmd(650, -233, -1, 0);
 set_motion_speed_cmd(100);
+
+info("Going for module 1 on the table");
+
+goto_xy_cmd(700, 190, 1, 0);
+set_motion_speed_cmd(50);
+	wait_for_motion();
+rollers_forward();
+goto_xy_cmd(460, 540, 1, 0);
+set_motion_speed_cmd(50);
+	wait_for_motion();
+move_forward_cmd(40);
+set_motion_speed_cmd(50);
+	wait_for_motion();
+osDelay(1000);
+move_forward_cmd(10);
+set_motion_speed_cmd(50);
+	wait_for_motion();
+rollers_off();
+ax12_set_speed(REVOLVER_AX12_ID, 120);
+revolver_go_to_position(POSITION_6);
+osDelay(10);
+revolver_go_to_position(POSITION_6);
+
+info("Module 1 from table should be collected");
+
+goto_xy_cmd(1000, 340, -1, 0);
+set_motion_speed_cmd(50);
+	wait_for_motion();
+rollers_forward();
+goto_xy_cmd(1440, 180, 1, 0);
+set_motion_speed_cmd(50);
+	wait_for_motion();
+osDelay(2000);
+	wait_for_motion();
+	osDelay(5);
+	wait_for_motion();
+move_forward_cmd(-200);
+move_forward_cmd(100);
+	wait_for_motion();
+osDelay(1000);
+revolver_go_to_position(POSITION_7);
+osDelay(10);
+revolver_go_to_position(POSITION_7);
+
+info("Module 2 should be collected from the table");
+
+// rotate_to_cmd(-45);
+goto_xy_cmd(1235, 380, -1, 0);
+set_motion_speed_cmd(50);
+goto_xy_cmd(950, 0, 1, 0);
+set_motion_speed_cmd(50);
 
 info("Nearing front notch");
 
-goto_xy_cmd(945, 225, 1, 0);
+goto_xy_cmd(940, 235, -1, 0);
 set_motion_speed_cmd(50);
-rotate_to_cmd(-44);
-wait_for_motion();
+rotate_to_cmd(-45);
+	wait_for_motion();
+// rollers_reverse();
 
 info("Starting to drop modules");
 
+revolver_go_to_position(POSITION_6);
+osDelay(10);
+revolver_go_to_position(POSITION_6);
+move_forward_cmd(130);
+set_motion_speed_cmd(50);
+    wait_for_motion();
+rollers_reverse();
+osDelay(1000);
+move_forward_cmd(-35);
+set_motion_speed_cmd(50);
+    wait_for_motion();
+osDelay(1000);
+rollers_off();
+revolver_go_to_position(POSITION_5);
+osDelay(10);
+revolver_go_to_position(POSITION_5);
+ax12_set_speed(REVOLVER_AX12_ID, 100);
+
+set_motion_speed_cmd(50);
+move_forward_cmd(35);
+set_motion_speed_cmd(50);
+    wait_for_motion();
+rollers_reverse();
+move_forward_cmd(-35);
+set_motion_speed_cmd(50);
+    wait_for_motion();
+osDelay(1000);
+rollers_off();
 revolver_go_to_position(POSITION_4);
 osDelay(10);
 revolver_go_to_position(POSITION_4);
-move_forward_cmd(139);
+
+set_motion_speed_cmd(50);
+move_forward_cmd(35);
 set_motion_speed_cmd(50);
     wait_for_motion();
 rollers_reverse();

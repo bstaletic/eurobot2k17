@@ -19,10 +19,13 @@ uint8_t ax12_move(uint8_t id, uint16_t position)
 	out_data[8] = checksum;
 
 	// Send data to AX12
-	do{
-		HAL_UART_Transmit(AX12_UART, out_data, 9, 18);
-
-	}while(ax12_read_response());
+	// do{
+	// 	HAL_UART_Transmit(AX12_UART, out_data, 9, 18);
+	// 	HAL_UART_Transmit(AX12_UART, out_data, 9, 18);
+	//
+	// }while(ax12_read_response());
+	HAL_UART_Transmit(AX12_UART, out_data, 9, 18);
+	return ax12_read_response();
 }
 
 uint8_t ax12_move_speed(uint8_t id, uint16_t position, uint16_t speed)
