@@ -1,12 +1,12 @@
 #ifndef ROCKET_EXECUTOR
 #define ROCKET_EXECUTOR
 
-#define SERVO_ROCKET servo8
-#define ROCKET_INIT_POSITION 1000
-#define ROCKET_LAUNCH_POSITION 2000
+#define SERVO_ROCKET 4
+#define ROCKET_INIT_POSITION 450
+#define ROCKET_LAUNCH_POSITION 200
 
 
-#include "../drivers/actuators/analog_servo/analog_servo.h"
+#include "../drivers/actuators/ax12/ax12.h"
 
 void rocket_init(void);
 

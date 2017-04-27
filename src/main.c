@@ -16,7 +16,6 @@ void main(void)
 {
 	HAL_Init();
 	SystemClock_Config();
-	//_disable_interrupts();
 	MX_GPIO_Init();
 
 	MX_UART4_Init();
@@ -35,7 +34,6 @@ void main(void)
 	HAL_TIM_Base_Start_IT(&htim7);
 	HAL_TIM_Base_Start(&htim9);
 
-	MX_RTC_Init();
 	reset_driver();
 	HAL_Delay(1000);
 	set_motion_speed(50);
