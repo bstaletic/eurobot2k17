@@ -6,11 +6,16 @@ static task_arguments_t funny_action_task_arguments;
 //wating for rtc to be figured out
 
 void funny_action_task_run(task_arguments_t* argv){
-	debug("IT IS GONNA FLY ");
-	rocket_launch();
-	soft_stop_cmd();
-	reset_driver();
-	argv->state = TASK_DONE;
+
+	if(*argv->time > 90){
+		debug("IT IS GONNA FLY ");
+		soft_stop_cmd();
+		reset_driver_cmd();
+		rocket_launch();
+		argv->state = TASK_DONE;
+	}else{
+		taskYIELD();
+	}
 
 }
 void funny_action_task_init(task_arguments_t* argv){
@@ -22,8 +27,8 @@ void funny_action_task_finish(task_arguments_t* argv){
 }
 
 void funny_action_task_calculate_priority(task_arguments_t* argv){
-//	debug("funny_action_task_calc_pri");
-	if(*argv->time > 80){
+	//	debug("funny_action_task_calc_pri");
+	if(*argv->time > 89){
 		debug("IT IS TIME FOR FUNNY ACTION");
 		argv->priority = 999;
 	}
