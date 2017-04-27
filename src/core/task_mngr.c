@@ -176,7 +176,7 @@ void add_task(task_t *_task){
 	}else{
 		error("Task manager: adding task: unknown task type");
 	}
-
+	taskYIELD();
 }
 
 /*
