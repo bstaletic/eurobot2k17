@@ -1,8 +1,8 @@
 #include "time_update.h"
 
 int counter = 0;
-task_t task;
-task_arguments_t arguments;
+static task_t task_time_update;
+static task_arguments_t arguments_task_time_update;
 RTC_TimeTypeDef stime;
 uint32_t test_time = 0;
 
@@ -21,14 +21,14 @@ static void run_ck(task_arguments_t* argv){
 
 void ctor_time_update(void){
 
-	task.run = (task_callback)&run_ck;
-	task.type = TASK_SYSTEM_PREEXECUTE;
-	strncpy(task.task_name,"time update\0",12);
+	task_time_update.run = (task_callback)&run_ck;
+	task_time_update.type = TASK_SYSTEM_PREEXECUTE;
+	strncpy(task_time_update.task_name,"time update\0",12);
 
-	arguments.time = 0;
+	arguments_task_time_update.time = 0;
 
 
-	task.data = &arguments;
+	task_time_update.data = &arguments_task_time_update;
 
-	add_task(&task);
+	add_task(&task_time_update);
 }

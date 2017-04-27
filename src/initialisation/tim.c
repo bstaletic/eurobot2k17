@@ -83,7 +83,7 @@ void MX_TIM1_Init(void)
   }
 
   sConfigOC.OCMode = TIM_OCMODE_PWM1;
-  sConfigOC.Pulse = 10000/3;
+  sConfigOC.Pulse = 1600;
   sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
   sConfigOC.OCNPolarity = TIM_OCNPOLARITY_HIGH;
   sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
@@ -183,9 +183,9 @@ void MX_TIM11_Init(void)
 {
 
   htim11.Instance = TIM11;
-  htim11.Init.Prescaler = 50000;
+  htim11.Init.Prescaler = 16800;
   htim11.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim11.Init.Period = 8399;
+  htim11.Init.Period = 10000;
   htim11.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   if (HAL_TIM_Base_Init(&htim11) != HAL_OK)
   {
