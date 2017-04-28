@@ -101,8 +101,68 @@ void let_me_pass_run(task_arguments_t* argv){
 
 info("Modules should be collected");
 
-goto_xy_cmd(450, 243, -1, 0);
-set_motion_speed_cmd(120);
+goto_xy_cmd(650, 233, -1, 0);
+set_motion_speed_cmd(100);
+
+	wait_for_motion();
+rollers_reverse();
+osDelay(500);
+rollers_off();
+
+info("Going for module 1 on the table");
+
+goto_xy_cmd(700, -190, 1, 0);
+set_motion_speed_cmd(50);
+	wait_for_motion();
+rollers_forward();
+goto_xy_cmd(460, -540, 1, 0);
+set_motion_speed_cmd(50);
+	wait_for_motion();
+move_forward_cmd(40);
+set_motion_speed_cmd(50);
+	wait_for_motion();
+osDelay(1000);
+move_forward_cmd(15);
+set_motion_speed_cmd(50);
+// move_forward_cmd(-100);
+// set_motion_speed_cmd(50);
+// move_forward_cmd(75);
+// set_motion_speed_cmd(50);
+	wait_for_motion();
+rollers_off();
+ax12_set_speed(REVOLVER_AX12_ID, 120);
+revolver_go_to_position(POSITION_6);
+osDelay(10);
+revolver_go_to_position(POSITION_6);
+
+info("Module 1 from table should be collected");
+
+goto_xy_cmd(1000, -340, -1, 0);
+set_motion_speed_cmd(50);
+	wait_for_motion();
+rollers_forward();
+goto_xy_cmd(1435, -200, 1, 0);
+set_motion_speed_cmd(50);
+	wait_for_motion();
+osDelay(1000);
+	wait_for_motion();
+	osDelay(5);
+	wait_for_motion();
+move_forward_cmd(-200);
+move_forward_cmd(100);
+	wait_for_motion();
+osDelay(1000);
+revolver_go_to_position(POSITION_7);
+osDelay(10);
+revolver_go_to_position(POSITION_7);
+
+info("Module 2 should be collected from the table");
+
+// rotate_to_cmd(-45);
+goto_xy_cmd(1250, 370, -1, 0);
+set_motion_speed_cmd(50);
+goto_xy_cmd(900, 80, 1, 0);
+set_motion_speed_cmd(50);
 
 info("Nearing front notch");
 
@@ -195,22 +255,22 @@ move_forward_cmd(200);
 set_motion_speed_cmd(50);
 	wait_for_motion();
 osDelay(500);
-move_forward_cmd(-230);
+move_forward_cmd(-220);
 set_motion_speed_cmd(50);
-move_forward_cmd(125);
+move_forward_cmd(110);
     wait_for_motion();
 osDelay(1000);
 revolver_go_to_position(POSITION_2);
 osDelay(10);
 revolver_go_to_position(POSITION_2);
 
-move_forward_cmd(125);
+move_forward_cmd(110);
 set_motion_speed_cmd(50);
 	wait_for_motion();
 osDelay(500);
-move_forward_cmd(-230);
+move_forward_cmd(-220);
 set_motion_speed_cmd(50);
-move_forward_cmd(115);
+move_forward_cmd(110);
     wait_for_motion();
 osDelay(1000);
 revolver_go_to_position(POSITION_3);
@@ -218,13 +278,13 @@ osDelay(10);
 revolver_go_to_position(POSITION_3);
 
 
-move_forward_cmd(115);
+move_forward_cmd(110);
 set_motion_speed_cmd(50);
 	wait_for_motion();
 osDelay(500);
-move_forward_cmd(-230);
+move_forward_cmd(-220);
 set_motion_speed_cmd(50);
-move_forward_cmd(125);
+move_forward_cmd(120);
     wait_for_motion();
 osDelay(1000);
 revolver_go_to_position(POSITION_4);
@@ -232,14 +292,14 @@ osDelay(10);
 revolver_go_to_position(POSITION_4);
 
 
-move_forward_cmd(125);
+move_forward_cmd(120);
 set_motion_speed_cmd(50);
 	wait_for_motion();
 osDelay(500);
-move_forward_cmd(-230);
+move_forward_cmd(-220);
 set_motion_speed_cmd(50);
 	wait_for_motion();
-move_forward_cmd(125);
+move_forward_cmd(120);
     wait_for_motion();
 osDelay(1000);
 revolver_go_to_position(POSITION_5);
@@ -271,11 +331,11 @@ move_forward_cmd(40);
 set_motion_speed_cmd(50);
 	wait_for_motion();
 osDelay(1000);
-move_forward_cmd(15);
+// move_forward_cmd(15);
+// set_motion_speed_cmd(50);
+move_forward_cmd(-100);
 set_motion_speed_cmd(50);
-move_forward_cmd(-70);
-set_motion_speed_cmd(50);
-move_forward_cmd(50);
+move_forward_cmd(75);
 set_motion_speed_cmd(50);
 	wait_for_motion();
 rollers_off();
@@ -410,6 +470,10 @@ move_forward_cmd(-150);
 set_motion_speed_cmd(120);
 rotate_for_cmd(180);
 	wait_for_motion();
+	set_motion_speed_cmd(50);
+	osDelay(5);
+	wait_for_motion();
+	set_motion_speed_cmd(50);
 	osDelay(5);
 	wait_for_motion();
 set_motion_speed_cmd(120);
