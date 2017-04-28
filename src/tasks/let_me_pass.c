@@ -525,7 +525,56 @@ move_forward_cmd(150);
 
 
 info("Modules should be droped");
-*/
+
+/////////////////////////////////////////////////////////////////////////////////
+///////////////////////POINT TO POINT METHOD/////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////
+   // goto_xy_cmd(-5, -233, 1, 0);
+   // set_motion_speed_cmd(50);
+   // goto_xy_cmd(50, -233, -1, 0);
+   // set_motion_speed_cmd(50);
+   // wait_for_motion();
+   // osDelay(2000);
+   //
+   // revolver_go_to_position(POSITION_2);
+   //
+   //  goto_xy_cmd(-5, -233, 1, 0);
+   //  set_motion_speed_cmd(50);
+   //  goto_xy_cmd(50, -233, -1, 0);
+   //  set_motion_speed_cmd(50);
+   //  wait_for_motion();
+   //  osDelay(2000);
+   //  revolver_go_to_position(POSITION_3);
+   //
+   //     goto_xy_cmd(-5, -233, 1, 0);
+   //     set_motion_speed_cmd(50);
+   //     goto_xy_cmd(50, -233, -1, 0);
+   //     set_motion_speed_cmd(50);
+   //     wait_for_motion();
+   //     osDelay(2000);
+   //     revolver_go_to_position(POSITION_4);
+   //
+   //          	goto_xy_cmd(-5, -233, 1, 0);
+   //              set_motion_speed_cmd(50);
+   //              goto_xy_cmd(50, -233, -1, 0);
+   //              set_motion_speed_cmd(100);
+   //              wait_for_motion();
+   //              osDelay(2000);
+   //
+   //                  goto_xy_cmd(450,-233, -1, 0);
+//
+// goto_xy_cmd(940, 230, 1, 0);
+// goto_xy_cmd(1015, 155, 1, 0);
+// osDelay(500);
+// rollers_forward();
+//     goto_xy_cmd(940, 230, -1, 0);
+//     goto_xy_cmd(1015, 155, 1, 0);
+//     osDelay(500);
+//         goto_xy_cmd(940, 230, -1, 0);
+//         goto_xy_cmd(1015, 155, 1, 0);
+//         osDelay(500);
+//             goto_xy_cmd(940, 230, -1, 0);
+//             goto_xy_cmd(1015, 155, 1, 0);
 
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////THIS IS ELEGANT SOLUTION AND WE DONT NEED THAT//////////////
@@ -674,8 +723,6 @@ info("Modules should be droped");
      //     info("Module %d should be dropped", i);
      // }
     debug("TASK IS DONE");
-	argv->state = TASK_DONE;
-	argv->state = TASK_DONE;
 	argv->state = TASK_DONE;
 
 }

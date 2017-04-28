@@ -9,8 +9,18 @@ void funny_action_task_run(task_arguments_t* argv){
 
 	if(*argv->time > 90){
 		debug("IT IS GONNA FLY ");
-		soft_stop_cmd();
 		reset_driver_cmd();
+		debug("MOTION DRIVER RESET");
+		wait_for_motion();
+		osDelay(2);
+		soft_stop_cmd();
+		wait_for_motion();
+		osDelay(2);
+		soft_stop_cmd();
+		wait_for_motion();
+		osDelay(2);
+		soft_stop_cmd();
+		debug("SOOOOOOOOOOOOOOOFT STOOOOOOOOOOOOOOOOOOOOP!");
 		rocket_launch();
 		argv->state = TASK_DONE;
 	}else{
