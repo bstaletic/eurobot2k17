@@ -7,7 +7,7 @@
 
 extern volatile uint8_t jumper;
 extern volatile colour_enum_t colour_switch;
-
+extern volatile uint8_t check_colour;
 
 void EXTI15_10_IRQHandler(void);
 

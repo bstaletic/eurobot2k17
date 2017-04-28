@@ -131,12 +131,8 @@ static uint8_t enemy_detected(motion_state state)
 			FRONT_RIGHT_SENSOR)) ||
 			(direction == BACKWARD && !BACK_SENSOR))
 		return 0;
-	point_t enemy;
-	enemy.x = state.x + CENTER_TO_CENTER * cos(to_radian(state.orientation));
-	enemy.y = state.y + CENTER_TO_CENTER * sin(to_radian(state.orientation));;
-	if (is_in_field(enemy))
-		return 1;
-	return 0;
+
+	return 1;
 }
 
 void motion_queue_push(void* command)

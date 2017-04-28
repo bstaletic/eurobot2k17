@@ -7,7 +7,7 @@ static void start_match(task_arguments_t* argv)
 {
 	// Wait for jumper to be unplugged
 	info("Waiting jumper");
-//	while(jumper);
+	while(jumper);
 	//start TIM11
 	HAL_TIM_Base_Start(&htim11);
 	HAL_TIM_Base_Start_IT(&htim11);
