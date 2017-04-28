@@ -40,7 +40,7 @@ void let_me_pass_run(task_arguments_t* argv){
 	// revolver_go_to_position(POSITION_8);
 	// osDelay(2000);
 //////////////////////////PLAVA STRANA///////////////////////////////////////////
-/*    set_motion_speed_cmd(120);
+    set_motion_speed_cmd(120);
     goto_xy_cmd(400, 243, -1, 0);
     set_motion_speed_cmd(120);
 
@@ -53,6 +53,8 @@ void let_me_pass_run(task_arguments_t* argv){
 
     move_forward_cmd(200);
     set_motion_speed_cmd(50);
+		wait_for_motion();
+	osDelay(500);
     move_forward_cmd(-200);
     set_motion_speed_cmd(50);
     move_forward_cmd(100);
@@ -64,6 +66,8 @@ void let_me_pass_run(task_arguments_t* argv){
 
     move_forward_cmd(95);
     set_motion_speed_cmd(50);
+		wait_for_motion();
+	osDelay(500);
     move_forward_cmd(-200);
     set_motion_speed_cmd(50);
     move_forward_cmd(100);
@@ -76,9 +80,11 @@ void let_me_pass_run(task_arguments_t* argv){
 
     move_forward_cmd(95);
     set_motion_speed_cmd(50);
-    move_forward_cmd(-200);
+		wait_for_motion();
+	osDelay(500);
+    move_forward_cmd(-205);
     set_motion_speed_cmd(50);
-    move_forward_cmd(100);
+    move_forward_cmd(110);
         wait_for_motion();
     osDelay(1000);
     revolver_go_to_position(POSITION_4);
@@ -88,9 +94,11 @@ void let_me_pass_run(task_arguments_t* argv){
 
     move_forward_cmd(95);
     set_motion_speed_cmd(50);
-    move_forward_cmd(-200);
+		wait_for_motion();
+	osDelay(500);
+    move_forward_cmd(-205);
     set_motion_speed_cmd(50);
-    move_forward_cmd(100);
+    move_forward_cmd(120);
         wait_for_motion();
     osDelay(1000);
     revolver_go_to_position(POSITION_5);
@@ -122,12 +130,12 @@ move_forward_cmd(40);
 set_motion_speed_cmd(50);
 	wait_for_motion();
 osDelay(1000);
-move_forward_cmd(15);
+// move_forward_cmd(15);
+// set_motion_speed_cmd(50);
+move_forward_cmd(-100);
 set_motion_speed_cmd(50);
-// move_forward_cmd(-100);
-// set_motion_speed_cmd(50);
-// move_forward_cmd(75);
-// set_motion_speed_cmd(50);
+move_forward_cmd(75);
+set_motion_speed_cmd(50);
 	wait_for_motion();
 rollers_off();
 ax12_set_speed(REVOLVER_AX12_ID, 120);
@@ -141,7 +149,7 @@ goto_xy_cmd(1000, -340, -1, 0);
 set_motion_speed_cmd(50);
 	wait_for_motion();
 rollers_forward();
-goto_xy_cmd(1435, -200, 1, 0);
+goto_xy_cmd(1440, -170, 1, 0);
 set_motion_speed_cmd(50);
 	wait_for_motion();
 osDelay(1000);
@@ -149,40 +157,72 @@ osDelay(1000);
 	osDelay(5);
 	wait_for_motion();
 move_forward_cmd(-200);
-move_forward_cmd(100);
+move_forward_cmd(120);
 	wait_for_motion();
 osDelay(1000);
 revolver_go_to_position(POSITION_7);
 osDelay(10);
 revolver_go_to_position(POSITION_7);
+rollers_off();
 
 info("Module 2 should be collected from the table");
 
 // rotate_to_cmd(-45);
-goto_xy_cmd(1250, 370, -1, 0);
+goto_xy_cmd(1250, -36, -1, 0);
 set_motion_speed_cmd(50);
+	wait_for_motion();
+	osDelay(5);
+	wait_for_motion();
+	set_motion_speed_cmd(50);
 goto_xy_cmd(900, 80, 1, 0);
 set_motion_speed_cmd(50);
 
 info("Nearing front notch");
 
-goto_xy_cmd(940, -190, 1, 0);
+goto_xy_cmd(998, -210, -1, 0);
 set_motion_speed_cmd(120);
-rotate_to_cmd(45);
+rotate_to_cmd(54);
 set_motion_speed_cmd(50);
     wait_for_motion();
 osDelay(500);
 
 info("Starting to drop modules");
 
-revolver_go_to_position(POSITION_4);
+revolver_go_to_position(POSITION_6);
 osDelay(10);
-revolver_go_to_position(POSITION_4);
-move_forward_cmd(105);
+revolver_go_to_position(POSITION_6);
+move_forward_cmd(96);
 set_motion_speed_cmd(50);
     wait_for_motion();
 rollers_reverse();
 move_forward_cmd(-40);
+set_motion_speed_cmd(50);
+    wait_for_motion();
+osDelay(1000);
+rollers_off();
+revolver_go_to_position(POSITION_5);
+osDelay(10);
+revolver_go_to_position(POSITION_5);
+ax12_set_speed(REVOLVER_AX12_ID, 100);
+
+move_forward_cmd(35);
+set_motion_speed_cmd(50);
+    wait_for_motion();
+rollers_reverse();
+move_forward_cmd(-35);
+set_motion_speed_cmd(50);
+    wait_for_motion();
+osDelay(1000);
+rollers_off();
+revolver_go_to_position(POSITION_4);
+osDelay(10);
+revolver_go_to_position(POSITION_4);
+
+move_forward_cmd(35);
+set_motion_speed_cmd(50);
+    wait_for_motion();
+rollers_reverse();
+move_forward_cmd(-35);
 set_motion_speed_cmd(50);
     wait_for_motion();
 osDelay(1000);
@@ -235,11 +275,13 @@ set_motion_speed_cmd(120);
 move_forward_cmd(-300);
 set_motion_speed_cmd(120);
 move_forward_cmd(150);
+	wait_for_motion();
+	wait_for_motion();
 
 info("Modules should be droped");
-*/
-///////////////////////////////ZUTA STRANA///////////////////////////////////////
 
+///////////////////////////////ZUTA STRANA///////////////////////////////////////
+/*
 set_motion_speed_cmd(120);
 goto_xy_cmd(400, -233, -1, 0);
 set_motion_speed_cmd(120);
@@ -483,56 +525,7 @@ move_forward_cmd(150);
 
 
 info("Modules should be droped");
-
-/////////////////////////////////////////////////////////////////////////////////
-///////////////////////POINT TO POINT METHOD/////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////
-   // goto_xy_cmd(-5, -233, 1, 0);
-   // set_motion_speed_cmd(50);
-   // goto_xy_cmd(50, -233, -1, 0);
-   // set_motion_speed_cmd(50);
-   // wait_for_motion();
-   // osDelay(2000);
-   //
-   // revolver_go_to_position(POSITION_2);
-   //
-   //  goto_xy_cmd(-5, -233, 1, 0);
-   //  set_motion_speed_cmd(50);
-   //  goto_xy_cmd(50, -233, -1, 0);
-   //  set_motion_speed_cmd(50);
-   //  wait_for_motion();
-   //  osDelay(2000);
-   //  revolver_go_to_position(POSITION_3);
-   //
-   //     goto_xy_cmd(-5, -233, 1, 0);
-   //     set_motion_speed_cmd(50);
-   //     goto_xy_cmd(50, -233, -1, 0);
-   //     set_motion_speed_cmd(50);
-   //     wait_for_motion();
-   //     osDelay(2000);
-   //     revolver_go_to_position(POSITION_4);
-   //
-   //          	goto_xy_cmd(-5, -233, 1, 0);
-   //              set_motion_speed_cmd(50);
-   //              goto_xy_cmd(50, -233, -1, 0);
-   //              set_motion_speed_cmd(100);
-   //              wait_for_motion();
-   //              osDelay(2000);
-   //
-   //                  goto_xy_cmd(450,-233, -1, 0);
-//
-// goto_xy_cmd(940, 230, 1, 0);
-// goto_xy_cmd(1015, 155, 1, 0);
-// osDelay(500);
-// rollers_forward();
-//     goto_xy_cmd(940, 230, -1, 0);
-//     goto_xy_cmd(1015, 155, 1, 0);
-//     osDelay(500);
-//         goto_xy_cmd(940, 230, -1, 0);
-//         goto_xy_cmd(1015, 155, 1, 0);
-//         osDelay(500);
-//             goto_xy_cmd(940, 230, -1, 0);
-//             goto_xy_cmd(1015, 155, 1, 0);
+*/
 
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////THIS IS ELEGANT SOLUTION AND WE DONT NEED THAT//////////////
@@ -681,6 +674,8 @@ info("Modules should be droped");
      //     info("Module %d should be dropped", i);
      // }
     debug("TASK IS DONE");
+	argv->state = TASK_DONE;
+	argv->state = TASK_DONE;
 	argv->state = TASK_DONE;
 
 }
