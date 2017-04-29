@@ -44,64 +44,72 @@ void let_me_pass_run(task_arguments_t* argv){
 //////////////////////////PLAVA STRANA///////////////////////////////////////////
 if (colour_switch == BLUE)
 {
-		set_motion_speed_cmd(120);
-		goto_xy_cmd(400, 243, -1, 0);
-		set_motion_speed_cmd(120);
+	set_motion_speed_cmd(120);
+	    goto_xy_cmd(400, 243, -1, 0);
+	    set_motion_speed_cmd(120);
 
-		goto_xy_cmd(200, 243, 1, 0);
-		set_motion_speed_cmd(50);
+	    goto_xy_cmd(200, 243, 1, 0);
+	    set_motion_speed_cmd(50);
+	        wait_for_motion();
+	    rollers_forward();
+
+	    info("Starting to collect home modules");
+
+	    move_forward_cmd(200);
+	    set_motion_speed_cmd(50);
 			wait_for_motion();
-		rollers_forward();
+		osDelay(500);
+	    move_forward_cmd(-200);
+	    set_motion_speed_cmd(50);
+	    move_forward_cmd(100);
+	        wait_for_motion();
+	    osDelay(1000);
+	    revolver_go_to_position(POSITION_2);
+	    osDelay(10);
+	    revolver_go_to_position(POSITION_2);
 
-		info("Starting to collect home modules");
-
-		move_forward_cmd(200);
-		set_motion_speed_cmd(50);
-		move_forward_cmd(-200);
-		set_motion_speed_cmd(50);
-		move_forward_cmd(100);
+	    move_forward_cmd(95);
+	    set_motion_speed_cmd(50);
 			wait_for_motion();
-		osDelay(1000);
-		revolver_go_to_position(POSITION_2);
-		osDelay(10);
-		revolver_go_to_position(POSITION_2);
+		osDelay(500);
+	    move_forward_cmd(-200);
+	    set_motion_speed_cmd(50);
+	    move_forward_cmd(100);
+	        wait_for_motion();
+	    osDelay(1000);
+	    revolver_go_to_position(POSITION_3);
+	    osDelay(10);
+	    revolver_go_to_position(POSITION_3);
 
-		move_forward_cmd(95);
-		set_motion_speed_cmd(50);
-		move_forward_cmd(-200);
-		set_motion_speed_cmd(50);
-		move_forward_cmd(100);
+
+	    move_forward_cmd(95);
+	    set_motion_speed_cmd(50);
 			wait_for_motion();
-		osDelay(1000);
-		revolver_go_to_position(POSITION_3);
-		osDelay(10);
-		revolver_go_to_position(POSITION_3);
+		osDelay(500);
+	    move_forward_cmd(-205);
+	    set_motion_speed_cmd(50);
+	    move_forward_cmd(110);
+	        wait_for_motion();
+	    osDelay(1000);
+	    revolver_go_to_position(POSITION_4);
+	    osDelay(10);
+	    revolver_go_to_position(POSITION_4);
 
 
-		move_forward_cmd(95);
-		set_motion_speed_cmd(50);
-		move_forward_cmd(-200);
-		set_motion_speed_cmd(50);
-		move_forward_cmd(100);
+	    move_forward_cmd(95);
+	    set_motion_speed_cmd(50);
 			wait_for_motion();
-		osDelay(1000);
-		revolver_go_to_position(POSITION_4);
-		osDelay(10);
-		revolver_go_to_position(POSITION_4);
+		osDelay(500);
+	    move_forward_cmd(-205);
+	    set_motion_speed_cmd(50);
+	    move_forward_cmd(120);
+	        wait_for_motion();
+	    osDelay(1000);
+	    revolver_go_to_position(POSITION_5);
+	    osDelay(10);
+	    revolver_go_to_position(POSITION_5);
 
-
-		move_forward_cmd(95);
-		set_motion_speed_cmd(50);
-		move_forward_cmd(-200);
-		set_motion_speed_cmd(50);
-		move_forward_cmd(100);
-			wait_for_motion();
-		osDelay(1000);
-		revolver_go_to_position(POSITION_5);
-		osDelay(10);
-		revolver_go_to_position(POSITION_5);
-
-		rollers_off();
+	    rollers_off();
 
 	info("Modules should be collected");
 
@@ -126,12 +134,12 @@ if (colour_switch == BLUE)
 	set_motion_speed_cmd(50);
 		wait_for_motion();
 	osDelay(1000);
-	move_forward_cmd(15);
+	// move_forward_cmd(15);
+	// set_motion_speed_cmd(50);
+	move_forward_cmd(-100);
 	set_motion_speed_cmd(50);
-	// move_forward_cmd(-100);
-	// set_motion_speed_cmd(50);
-	// move_forward_cmd(75);
-	// set_motion_speed_cmd(50);
+	move_forward_cmd(75);
+	set_motion_speed_cmd(50);
 		wait_for_motion();
 	rollers_off();
 	ax12_set_speed(REVOLVER_AX12_ID, 120);
@@ -145,7 +153,7 @@ if (colour_switch == BLUE)
 	set_motion_speed_cmd(50);
 		wait_for_motion();
 	rollers_forward();
-	goto_xy_cmd(1435, -200, 1, 0);
+	goto_xy_cmd(1440, -170, 1, 0);
 	set_motion_speed_cmd(50);
 		wait_for_motion();
 	osDelay(1000);
@@ -153,42 +161,74 @@ if (colour_switch == BLUE)
 		osDelay(5);
 		wait_for_motion();
 	move_forward_cmd(-200);
-	move_forward_cmd(100);
+	move_forward_cmd(120);
 		wait_for_motion();
 	osDelay(1000);
 	revolver_go_to_position(POSITION_7);
 	osDelay(10);
 	revolver_go_to_position(POSITION_7);
+	rollers_off();
 
 	info("Module 2 should be collected from the table");
 
 	// rotate_to_cmd(-45);
-	goto_xy_cmd(1250, 370, -1, 0);
+	goto_xy_cmd(1250, -36, -1, 0);
 	set_motion_speed_cmd(50);
+		wait_for_motion();
+		osDelay(5);
+		wait_for_motion();
+		set_motion_speed_cmd(50);
 	goto_xy_cmd(900, 80, 1, 0);
 	set_motion_speed_cmd(50);
 
 	info("Nearing front notch");
 
-	goto_xy_cmd(940, -190, 1, 0);
+	goto_xy_cmd(998, -210, -1, 0);
 	set_motion_speed_cmd(120);
-	rotate_to_cmd(45);
+	rotate_to_cmd(54);
 	set_motion_speed_cmd(50);
-		wait_for_motion();
+	    wait_for_motion();
 	osDelay(500);
 
 	info("Starting to drop modules");
 
-	revolver_go_to_position(POSITION_4);
+	revolver_go_to_position(POSITION_6);
 	osDelay(10);
-	revolver_go_to_position(POSITION_4);
-	move_forward_cmd(105);
+	revolver_go_to_position(POSITION_6);
+	move_forward_cmd(96);
 	set_motion_speed_cmd(50);
-		wait_for_motion();
+	    wait_for_motion();
 	rollers_reverse();
 	move_forward_cmd(-40);
 	set_motion_speed_cmd(50);
-		wait_for_motion();
+	    wait_for_motion();
+	osDelay(1000);
+	rollers_off();
+	revolver_go_to_position(POSITION_5);
+	osDelay(10);
+	revolver_go_to_position(POSITION_5);
+	ax12_set_speed(REVOLVER_AX12_ID, 100);
+
+	move_forward_cmd(35);
+	set_motion_speed_cmd(50);
+	    wait_for_motion();
+	rollers_reverse();
+	move_forward_cmd(-35);
+	set_motion_speed_cmd(50);
+	    wait_for_motion();
+	osDelay(1000);
+	rollers_off();
+	revolver_go_to_position(POSITION_4);
+	osDelay(10);
+	revolver_go_to_position(POSITION_4);
+
+	move_forward_cmd(35);
+	set_motion_speed_cmd(50);
+	    wait_for_motion();
+	rollers_reverse();
+	move_forward_cmd(-35);
+	set_motion_speed_cmd(50);
+	    wait_for_motion();
 	osDelay(1000);
 	rollers_off();
 	revolver_go_to_position(POSITION_3);
@@ -197,11 +237,11 @@ if (colour_switch == BLUE)
 
 	move_forward_cmd(35);
 	set_motion_speed_cmd(50);
-		wait_for_motion();
+	    wait_for_motion();
 	rollers_reverse();
 	move_forward_cmd(-35);
 	set_motion_speed_cmd(50);
-		wait_for_motion();
+	    wait_for_motion();
 	osDelay(1000);
 	rollers_off();
 	revolver_go_to_position(POSITION_2);
@@ -210,11 +250,11 @@ if (colour_switch == BLUE)
 
 	move_forward_cmd(35);
 	set_motion_speed_cmd(50);
-		wait_for_motion();
+	    wait_for_motion();
 	rollers_reverse();
 	move_forward_cmd(-35);
 	set_motion_speed_cmd(50);
-		wait_for_motion();
+	    wait_for_motion();
 	osDelay(1000);
 	rollers_off();
 	revolver_go_to_position(POSITION_1);
@@ -223,11 +263,11 @@ if (colour_switch == BLUE)
 
 	move_forward_cmd(35);
 	set_motion_speed_cmd(50);
-		wait_for_motion();
+	    wait_for_motion();
 	rollers_reverse();
 	move_forward_cmd(-35);
 	set_motion_speed_cmd(50);
-		wait_for_motion();
+	    wait_for_motion();
 	osDelay(1000);
 	rollers_off();
 
@@ -239,6 +279,8 @@ if (colour_switch == BLUE)
 	move_forward_cmd(-300);
 	set_motion_speed_cmd(120);
 	move_forward_cmd(150);
+		wait_for_motion();
+		wait_for_motion();
 
 	info("Modules should be droped");
 }

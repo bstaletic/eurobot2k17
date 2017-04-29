@@ -13,13 +13,13 @@ void funny_action_task_run(task_arguments_t* argv){
 		debug("MOTION DRIVER RESET");
 		wait_for_motion();
 		osDelay(2);
-		soft_stop_cmd();
+		soft_stop();
 		wait_for_motion();
 		osDelay(2);
-		soft_stop_cmd();
+		soft_stop();
 		wait_for_motion();
 		osDelay(2);
-		soft_stop_cmd();
+		soft_stop();
 		debug("SOOOOOOOOOOOOOOOFT STOOOOOOOOOOOOOOOOOOOOP!");
 		rocket_launch();
 		argv->state = TASK_DONE;

@@ -7,6 +7,8 @@
 #include "cmsis_os.h"
 #include "stm32f4xx_hal.h"
 
+#include "task_headers.h"
+
 void ctor_start_task(void);
 
 #endif /* ifndef START_TASK */
