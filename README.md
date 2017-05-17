@@ -1,5 +1,7 @@
 # eurobot2k17
 
+[![Join the chat at https://gitter.im/eurobot2k17/Lobby](https://badges.gitter.im/eurobot2k17/Lobby.svg)](https://gitter.im/eurobot2k17/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 This repo is going to be used for hosting the code for the upcoming Eurobot 2017 competition. The code is GPL3 licensed.
 
 ### Hardware being utilised
